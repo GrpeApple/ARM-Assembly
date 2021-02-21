@@ -13,7 +13,7 @@ All my ARM Assembly programs
 		<td>
 			<code>E.S</code>
 		</td>
-    		<td>Output 'E' Infinitely</td>
+    		<td>Output 'E' infinitely</td>
 	</tr>
 	<tr>
 		<td>
@@ -55,7 +55,7 @@ All my ARM Assembly programs
 		<td>
 			<code>no.S</code>
 		</td>
-		<td>Output 'no' in an infinitely</td>
+		<td>Output 'no' infinitely</td>
 	</tr>
 	<tr>
 		<td>
