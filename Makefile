@@ -1,80 +1,78 @@
-.PHONY: help
-help:
-	@echo "Make something."
-E : E.S
-	as -o E.o E.S
-	ld -o E E.o
-arguments : arguments.S
-	as -o arguments.o arguments.S
-	ld -o arguments arguments.o
-bitwise_shift : bitwise_shift.S
-	as -o bitwise_shift.o bitwise_shift.S
-	ld -o bitwise_shift bitwise_shift.o
-cmdline : cmdline.S
-	as -o cmdline.o cmdline.S
-	ld -o cmdline cmdline.o
-fork : fork.S
-	as -o fork.o fork.S
-	ld -o fork fork.o
-haha_ARM : haha_ARM.S
-	as -o haha_ARM.o haha_ARM.S
-	ld -o haha_ARM haha_ARM.o
-hello : hello.S
-	as -o hello.o hello.S
-	ld -o hello hello.o
-looping : looping.S
-	as -o looping.o looping.S
-	ld -o looping looping.o
-mkdir : mkdir.S
-	as -o mkdir.o mkdir.S
-	ld -o mkdir mkdir.o
-no : no.S
-	as -o no.o no.S
-	ld -o no no.o
-rm : rm.S
-	as -o rm.o rm.S
-	ld -o rm rm.o
-uppercase : uppercase.S
-	as -o uppercase.o uppercase.S
-	ld -o uppercase uppercase.o
+# To anyone reading this Makefile, good luck.
+
+# Source Directory
+SD=src
+# Build Directory
+BUD=build
+# Binary Directory
+BID=bin
+
+E : $(SD)/E.S
+	mkdir -p $(BUD) $(BID)
+	as -o $(BUD)/E.o $(SD)/E.S
+	ld -o $(BID)/E $(BUD)/E.o
+arguments : $(SD)/arguments.S
+	mkdir -p $(BUD) $(BID)
+	as -o $(BUD)/arguments.o $(SD)/arguments.S
+	ld -o $(BID)/arguments $(BUD)/arguments.o
+bitwise_shift : $(SD)/bitwise_shift.S
+	mkdir -p $(BUD) $(BID)
+	as -o $(BUD)/bitwise_shift.o $(SD)/bitwise_shift.S
+	ld -o $(BID)/bitwise_shift $(BUD)/bitwise_shift.o
+fork : $(SD)/fork.S
+	mkdir -p $(BUD) $(BID)
+	as -o $(BUD)/fork.o $(SD)/fork.S
+	ld -o $(BID)/fork $(BUD)/fork.o
+haha_ARM : $(SD)/haha_ARM.S
+	mkdir -p $(BUD) $(BID)
+	as -o $(BUD)/haha_ARM.o $(SD)/haha_ARM.S
+	ld -o $(BID)/haha_ARM $(BUD)/haha_ARM.o
+looping : $(SD)/looping.S
+	mkdir -p $(BUD) $(BID)
+	as -o $(BUD)/looping.o $(SD)/looping.S
+	ld -o $(BID)/looping $(BUD)/looping.o
+mkdir -p : $(SD)/mkdir.S
+	mkdir -p $(BUD) $(BID)
+	as -o $(BUD)/mkdir -p.o $(SD)/mkdir.S
+	ld -o $(BID)/mkdir -p $(BUD)/mkdir.o
+no : $(SD)/no.S
+	mkdir -p $(BUD) $(BID)
+	as -o $(BUD)/no.o $(SD)/no.S
+	ld -o $(BID)/no $(BUD)/no.o
+rm : $(SD)/rm.S
+	mkdir -p $(BUD) $(BID)
+	as -o $(BUD)/rm.o $(SD)/rm.S
+	ld -o $(BID)/rm $(BUD)/rm.o
+uppercase : $(SD)/uppercase.S
+	mkdir -p $(BUD) $(BID)
+	as -o $(BUD)/uppercase.o $(SD)/uppercase.S
+	ld -o $(BID)/uppercase $(BUD)/uppercase.o
 .PHONY: all
 all:
-	@echo "Assembling..."
-	as -o E.o E.S
-	as -o arguments.o arguments.S
-	as -o bitwise_shift.o bitwise_shift.S
-	as -o cmdline.o cmdline.S
-	as -o fork.o fork.S
-	as -o haha_ARM.o haha_ARM.S
-	as -o hello.o hello.S
-	as -o looping.o looping.S
-	as -o mkdir.o mkdir.S
-	as -o no.o no.S
-	as -o rm.o rm.S
-	as -o uppercase.o uppercase.S
-	@echo "Linking..."
-	ld -o E E.o
-	ld -o arguments arguments.o
-	ld -o bitwise_shift bitwise_shift.o
-	ld -o cmdline cmdline.o
-	ld -o fork fork.o
-	ld -o haha_ARM haha_ARM.o
-	ld -o hello hello.o
-	ld -o looping looping.o
-	ld -o mkdir mkdir.o
-	ld -o no no.o
-	ld -o rm rm.o
-	ld -o uppercase uppercase.o
-	@echo "Done."
+	mkdir -p $(BUD) $(BID)
+	as -o $(BUD)/E.o $(SD)/E.S
+	as -o $(BUD)/arguments.o $(SD)/arguments.S
+	as -o $(BUD)/bitwise_shift.o $(SD)/bitwise_shift.S
+	as -o $(BUD)/fork.o $(SD)/fork.S
+	as -o $(BUD)/haha_ARM.o $(SD)/haha_ARM.S
+	as -o $(BUD)/looping.o $(SD)/looping.S
+	as -o $(BUD)/mkdir -p.o $(SD)/mkdir.S
+	as -o $(BUD)/no.o $(SD)/no.S
+	as -o $(BUD)/rm.o $(SD)/rm.S
+	as -o $(BUD)/uppercase.o $(SD)/uppercase.S
+	ld -o $(BID)/E $(BUD)/E.o
+	ld -o $(BID)/arguments $(BUD)/arguments.o
+	ld -o $(BID)/bitwise_shift $(BUD)/bitwise_shift.o
+	ld -o $(BID)/fork $(BUD)/fork.o
+	ld -o $(BID)/haha_ARM $(BUD)/haha_ARM.o
+	ld -o $(BID)/looping $(BUD)/looping.o
+	ld -o $(BID)/mkdir -p $(BUD)/mkdir.o
+	ld -o $(BID)/no $(BUD)/no.o
+	ld -o $(BID)/rm $(BUD)/rm.o
+	ld -o $(BID)/uppercase $(BUD)/uppercase.o
 .PHONY: clean
 clean:
-	@echo "Removing assembled files..."
-	rm -f *.o
-	@echo "Done."
+	rm -rf $(BUD)
 .PHONY: cleanall
 cleanall:
-	@echo "Removing assembled files..."
-	rm -f *.o
-	@echo "Removing linked files..."
-	rm -f E arguments bitwise_shift cmdline fork haha_ARM hello looping mkdir no rm uppercase
-	@echo "Done."
+	rm -rf $(BUD) $(BID)
