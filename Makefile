@@ -43,6 +43,10 @@ rm : $(SD)/rm.S
 	mkdir -p $(BUD) $(BID)
 	as -o $(BUD)/rm.o $(SD)/rm.S
 	ld -o $(BID)/rm $(BUD)/rm.o
+rmdir : $(SD)/rmdir.S
+	mkdir -p $(BUD) $(BID)
+	as -o $(BUD)/rmdir.o $(SD)/rmdir.S
+	ld -o $(BID)/rmdir $(BUD)/rmdir.o
 uppercase : $(SD)/uppercase.S
 	mkdir -p $(BUD) $(BID)
 	as -o $(BUD)/uppercase.o $(SD)/uppercase.S
@@ -59,6 +63,7 @@ all:
 	as -o $(BUD)/mkdir -p.o $(SD)/mkdir.S
 	as -o $(BUD)/no.o $(SD)/no.S
 	as -o $(BUD)/rm.o $(SD)/rm.S
+	as -o $(BUD)/rmdir.o $(SD)/rmdir.S
 	as -o $(BUD)/uppercase.o $(SD)/uppercase.S
 	ld -o $(BID)/E $(BUD)/E.o
 	ld -o $(BID)/arguments $(BUD)/arguments.o
@@ -69,6 +74,7 @@ all:
 	ld -o $(BID)/mkdir -p $(BUD)/mkdir.o
 	ld -o $(BID)/no $(BUD)/no.o
 	ld -o $(BID)/rm $(BUD)/rm.o
+	ld -o $(BID)/rmdir $(BUD)/rmdir.o
 	ld -o $(BID)/uppercase $(BUD)/uppercase.o
 .PHONY: clean
 clean:
