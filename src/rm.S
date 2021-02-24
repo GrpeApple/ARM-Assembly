@@ -1,6 +1,6 @@
 .section .data
 	file:
-		.asciz "rm_this_file"
+		.asciz "file"
 .global _start
 .section .text
 _start:
