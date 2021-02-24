@@ -65,6 +65,12 @@ All my ARM Assembly programs
 	</tr>
 	<tr>
 		<td>
+			<code>rmdir.S</code>
+		</td>
+		<td>Remove directories (non-recursively)</td>
+	</tr>
+	<tr>
+		<td>
 			<code>uppercase.S</code>
 		</td>
 		<td>Uppercases characters</td>
