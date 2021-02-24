@@ -1,6 +1,6 @@
 .data
 	dir:
-		.asciz "rm_this_dir"
+		.asciz "dir"
 .global _start
 .text
 _start:
