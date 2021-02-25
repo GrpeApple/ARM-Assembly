@@ -90,6 +90,16 @@ Build multiple programs
 make <program> <program1> <program2> ... .. .
 ```
 
+Build all programs
+```bash
+make all
+```
+
+Build all programs with debug
+```bash
+make debugall
+```
+
 Clean assembled objects
 ```bash
 make clean
@@ -122,4 +132,11 @@ ld -o <program> \
 <program3> \
 <program4> \
 <program5>
+```
+
+Build with debug
+```bash
+as -go <program>.o <program>.S
+ld -o <program> <program>.o
+gdb ./<program>
 ```
