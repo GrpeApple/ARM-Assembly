@@ -13,7 +13,7 @@
 	
 	_mkdir:
 		mov r7, #0x27 // mkdir syscall
-		ldr r0, =directory
+		ldr r0, =dir
 		mov r1, #500 // UNIX permissions
 		swi 0 // execute syscall
 	
