@@ -53,10 +53,6 @@ no : $(SD)/no.S
 	mkdir -p $(BUD) $(BID)
 	$(AS) -o $(BUD)/no.o $(SD)/no.S $(AS_FLAGS)
 	$(LD) -o $(BID)/no$(EXT) $(BUD)/no.o $(LD_FLAGS)
-rm-r : $(SD)/rm-r.S
-	mkdir -p $(BUD) $(BID)
-	$(AS) -o $(BUD)/rm-r.o $(SD)/rm-r.S $(AS_FLAGS)
-	$(LD) -o $(BID)/rm-r$(EXT) $(BUD)/rm-r.o $(LD_FLAGS)
 rm : $(SD)/rm.S
 	mkdir -p $(BUD) $(BID)
 	$(AS) -o $(BUD)/rm.o $(SD)/rm.S $(AS_FLAGS)
