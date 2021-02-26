@@ -17,9 +17,10 @@ BID=bin
 # File extension
 #EXT=.bin
 EXT=
-# C Compiler
-CC=gcc
-
+# C Compiler, if empty use gcc
+CC?=gcc
+# C Flags
+CFLAGS=
 
 E : $(SD)/E.S
 	mkdir -p $(BUD) $(BID)
