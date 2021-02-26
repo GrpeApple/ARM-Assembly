@@ -35,6 +35,11 @@ C_FLAGS=
 ## File extension
 ###EXT=.bin
 EXT=
+## Sources
+### Find everything in Source Directory with matching file extension .S and remove it.
+PROGRAMS:=$(find $(SD) -type f -iname "*.S" -print | tr -d ".S")
+TARGET_PROGRAM:=$(shell echo $(SOURCE) | sed 's/.*\///')
+
 
 E : $(SD)/E.S
 	$(MKDIR) $(BUD) $(BID)
