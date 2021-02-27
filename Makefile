@@ -26,19 +26,18 @@ BID=bin
 
 ## Flags
 ### Assembler Flags
-ASFLAGS=
+ASFLAGS:=
 ### Linker Flags
-LDFLAGS=
+LDFLAGS:=
 ### C Flags
-CFLAGS=
+CFLAGS:=
 
 ## Other
 ### File extension
 ####EXT=.bin
 EXT=
 ### Sources
-PROGRAM=E arguments bitwise_shift fork haha_ARM looping mkdir no rm rmdir stack uppercase
-
+PROGRAM:=$(shell find src -type f -iname "*.S" -print | tr -d ".S" | sed 's/.*\///')
 
 $(PROGRAM): %: $(SD)/%.S
 	mkdir -p $(BUD) $(BID)
