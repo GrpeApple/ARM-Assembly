@@ -3,148 +3,54 @@
 # Phony
 .PHONY: all debugall runall clean cleanall 
 
-# Commands
-## Assembler, change this if you are on another platform
+# Variables
+## Commands
+### Assembler, change this if you are on another platform
 AS=as
-## Linker, change this if you are on another platform
+### Linker, change this if you are on another platform
 LD=ld
-## C Compiler, if empty use gcc
+### C Compiler, if empty use gcc
 CC?=gcc
-## Create directories
+### Create directories
 MKDIR=mkdir -p
-## Remove
+### Remove
 RM=rm -rf
 
-# Directories
-## Source Directory
+## Directories
+### Source Directory
 SD=src
-## Build Directory
+### Build Directory
 BUD=build
-## Binary Directory
+### Binary Directory
 BID=bin
 
-# Flags
-## Assembler Flags
-AS_FLAGS=
-## Linker Flags
-LD_FLAGS=
-## C Flags
-C_FLAGS=
+## Flags
+### Assembler Flags
+ASFLAGS=
+### Linker Flags
+LDFLAGS=
+### C Flags
+CFLAGS=
 
-# Other
-## File extension
-###EXT=.bin
+## Other
+### File extension
+####EXT=.bin
 EXT=
-## Sources
-### Find everything in Source Directory with matching file extension .S and remove it.
-PROGRAMS:=$(find $(SD) -type f -iname "*.S" -print | tr -d ".S")
-TARGET_PROGRAM:=$(shell echo $(SOURCE) | sed 's/.*\///')
+### Sources
+PROGRAM=E arguments bitwise_shift fork haha_ARM looping mkdir no rm rmdir stack uppercase
 
 
-E : $(SD)/E.S
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/E.o $(SD)/E.S $(AS_FLAGS)
-	$(LD) -o $(BID)/E$(EXT) $(BUD)/E.o $(LD_FLAGS)
-arguments : $(SD)/arguments.S
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/arguments.o $(SD)/arguments.S $(AS_FLAGS)
-	$(LD) -o $(BID)/argumentis$(EXT) $(BUD)/arguments.o $(LD_FLAGS)
-bitwise_shift : $(SD)/bitwise_shift.S
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/bitwise_shift.o $(SD)/bitwise_shift.S $(AS_FLAGS)
-	$(LD) -o $(BID)/bitwise_shift$(EXT) $(BUD)/bitwise_shift.o $(LD_FLAGS)
-fork : $(SD)/fork.S
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/fork.o $(SD)/fork.S $(AS_FLAGS)
-	$(LD) -o $(BID)/fork$(EXT) $(BUD)/fork.o $(LD_FLAGS)
-haha_ARM : $(SD)/haha_ARM.S
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/haha_ARM.o $(SD)/haha_ARM.S $(AS_FLAGS)
-	$(LD) -o $(BID)/haha_ARM$(EXT) $(BUD)/haha_ARM.o $(LD_FLAGS)
-looping : $(SD)/looping.S
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/looping.o $(SD)/looping.S $(AS_FLAGS)
-	$(LD) -o $(BID)/looping$(EXT) $(BUD)/looping.o $(LD_FLAGS)
-mkdir: $(SD)/mkdir.S
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/mkdir.o $(SD)/mkdir.S $(AS_FLAGS)
-	$(LD) -o $(BID)/mkdir$(EXT) $(BUD)/mkdir.o $(LD_FLAGS)
-no : $(SD)/no.S
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/no.o $(SD)/no.S $(AS_FLAGS)
-	$(LD) -o $(BID)/no$(EXT) $(BUD)/no.o $(LD_FLAGS)
-rm : $(SD)/rm.S
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/rm.o $(SD)/rm.S $(AS_FLAGS)
-	$(LD) -o $(BID)/rm$(EXT) $(BUD)/rm.o $(LD_FLAGS)
-rmdir : $(SD)/rmdir.S
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/rmdir.o $(SD)/rmdir.S $(AS_FLAGS)
-	$(LD) -o $(BID)/rmdir$(EXT) $(BUD)/rmdir.o $(LD_FLAGS)
-stack : $(SD)/stack.S
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/stack.o $(SD)/stack.S $(AS_FLAGS)
-	$(LD) -o $(BID)/stack$(EXT) $(BUD)/stack.o $(LD_FLAGS)
-uppercase : $(SD)/uppercase.S
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/uppercase.o $(SD)/uppercase.S $(AS_FLAGS)
-	$(LD) -o $(BID)/uppercase$(EXT) $(BUD)/uppercase.o $(LD_FLAGS)
-
-# Phony
-all:
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/E.o $(SD)/E.S $(AS_FLAGS)
-	$(AS) -o $(BUD)/arguments.o $(SD)/arguments.S $(AS_FLAGS)
-	$(AS) -o $(BUD)/bitwise_shift.o $(SD)/bitwise_shift.S $(AS_FLAGS)
-	$(AS) -o $(BUD)/fork.o $(SD)/fork.S $(AS_FLAGS)
-	$(AS) -o $(BUD)/haha_ARM.o $(SD)/haha_ARM.S $(AS_FLAGS)
-	$(AS) -o $(BUD)/looping.o $(SD)/looping.S $(AS_FLAGS)
-	$(AS) -o $(BUD)/mkdir.o $(SD)/mkdir.S $(AS_FLAGS)
-	$(AS) -o $(BUD)/no.o $(SD)/no.S $(AS_FLAGS)
-	$(AS) -o $(BUD)/rm.o $(SD)/rm.S $(AS_FLAGS)
-	$(AS) -o $(BUD)/rmdir.o $(SD)/rmdir.S $(AS_FLAGS)
-	$(AS) -o $(BUD)/stack.o $(SD)/stack.S $(AS_FLAGS)
-	$(AS) -o $(BUD)/uppercase.o $(SD)/uppercase.S $(AS_FLAGS)
-	$(LD) -o $(BID)/E$(EXT) $(BUD)/E.o $(LD_FLAGS)
-	$(LD) -o $(BID)/arguments$(EXT) $(BUD)/arguments.o $(LD_FLAGS)
-	$(LD) -o $(BID)/bitwise_shift$(EXT) $(BUD)/bitwise_shift.o $(LD_FLAGS)
-	$(LD) -o $(BID)/fork$(EXT) $(BUD)/fork.o $(LD_FLAGS)
-	$(LD) -o $(BID)/haha_ARM$(EXT) $(BUD)/haha_ARM.o $(LD_FLAGS)
-	$(LD) -o $(BID)/looping$(EXT) $(BUD)/looping.o $(LD_FLAGS)
-	$(LD) -o $(BID)/mkdir$(EXT) $(BUD)/mkdir.o $(LD_FLAGS)
-	$(LD) -o $(BID)/no$(EXT) $(BUD)/no.o $(LD_FLAGS)
-	$(LD) -o $(BID)/rm$(EXT) $(BUD)/rm.o $(LD_FLAGS)
-	$(LD) -o $(BID)/rmdir$(EXT) $(BUD)/rmdir.o $(LD_FLAGS)
-	$(LD) -o $(BID)/stack$(EXT) $(BUD)/stack.o $(LD_FLAGS)
-	$(LD) -o $(BID)/uppercase$(EXT) $(BUD)/uppercase.o $(LD_FLAGS)
-debugall: # enable -g option
-	$(MKDIR) $(BUD) $(BID)
-	$(AS) -o $(BUD)/E.o $(SD)/E.S -g $(AS_FLAGS)
-	$(AS) -o $(BUD)/arguments.o $(SD)/arguments.S -g $(AS_FLAGS)
-	$(AS) -o $(BUD)/bitwise_shift.o $(SD)/bitwise_shift.S -g $(AS_FLAGS)
-	$(AS) -o $(BUD)/fork.o $(SD)/fork.S -g $(AS_FLAGS)
-	$(AS) -o $(BUD)/haha_ARM.o $(SD)/haha_ARM.S -g $(AS_FLAGS)
-	$(AS) -o $(BUD)/looping.o $(SD)/looping.S -g $(AS_FLAGS)
-	$(AS) -o $(BUD)/mkdir.o $(SD)/mkdir.S -g $(AS_FLAGS)
-	$(AS) -o $(BUD)/no.o $(SD)/no.S -g $(AS_FLAGS)
-	$(AS) -o $(BUD)/rm.o $(SD)/rm.S -g $(AS_FLAGS)
-	$(AS) -o $(BUD)/rmdir.o $(SD)/rmdir.S -g $(AS_FLAGS)
-	$(AS) -o $(BUD)/stack.o $(SD)/stack.S -g $(AS_FLAGS)
-	$(AS) -o $(BUD)/uppercase.o $(SD)/uppercase.S -g $(AS_FLAGS)
-	$(LD) -o $(BID)/E$(EXT) $(BUD)/E.o $(LD_FLAGS)
-	$(LD) -o $(BID)/arguments$(EXT) $(BUD)/arguments.o $(LD_FLAGS)
-	$(LD) -o $(BID)/bitwise_shift$(EXT) $(BUD)/bitwise_shift.o $(LD_FLAGS)
-	$(LD) -o $(BID)/fork$(EXT) $(BUD)/fork.o $(LD_FLAGS)
-	$(LD) -o $(BID)/haha_ARM$(EXT) $(BUD)/haha_ARM.o $(LD_FLAGS)
-	$(LD) -o $(BID)/looping$(EXT) $(BUD)/looping.o $(LD_FLAGS)
-	$(LD) -o $(BID)/mkdir$(EXT) $(BUD)/mkdir.o $(LD_FLAGS)
-	$(LD) -o $(BID)/no$(EXT) $(BUD)/no.o $(LD_FLAGS)
-	$(LD) -o $(BID)/rm$(EXT) $(BUD)/rm.o $(LD_FLAGS)
-	$(LD) -o $(BID)/rmdir$(EXT) $(BUD)/rmdir.o $(LD_FLAGS)
-	$(LD) -o $(BID)/stack$(EXT) $(BUD)/stack.o $(LD_FLAGS)
-	$(LD) -o $(BID)/uppercase$(EXT) $(BUD)/uppercase.o $(LD_FLAGS)
-runall:
-
+$(PROGRAM): %: $(SD)/%.S
+	mkdir -p $(BUD) $(BID)
+	$(AS) $(ASFLAGS) -o $(BUD)/$@.o $<
+	$(LD) $(LDFLAGS) -o $(BID)/$@$(EXT) $(BUD)/$@.o
+all: $(PROGRAM)
+debugall: debug $(PROGRAM)
+debug:
+	$(eval ASFLAGS:=$(ASFLAGS) -g)
+debugall: $(PROGRAM)
+runall: # do not do with dangerous programs
+	$(BID)/*
 clean:
 	$(RM) $(BUD)
 cleanall:
