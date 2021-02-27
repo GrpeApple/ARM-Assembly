@@ -32,7 +32,9 @@ All my ARM Assembly programs
 		<td>
 			<code>fork.S</code>
 		</td>
-		<td>Forkbomb (Rabbit Virus) your system</td>
+		<td>
+			Forkbomb (Rabbit Virus) your system.<br>Do not worry, for I have added a warning and a confirmation. (y and Y fork bombs and anything otherwise)<br> So you do not have to be that <em>worried</em>.
+		</td>
 	</tr>
 	<tr>
 		<td>
