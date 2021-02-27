@@ -12,9 +12,7 @@
 	.balign 4
 	exit_len = . - exit
 	.balign 4
-	confirm_input: .asciz " "
-	.balign 4
-	confirm_char: .asciz "y"
+	confirm_input: .word 0
 
 .section .text
 
@@ -34,15 +32,14 @@
 		swi 0
 	
 	_check:
-		ldr r3, addr_confirm_input
-		ldr r4, addr_confirm_char
-		ldr r1, [r3]
-		ldr r2, [r4]
+		ldr r1, addr_confirm_input
+		ldr r1, [r1]
+		mov r2, #0b1111001 // y
 		cmp r1, r2
-		beq _init
-		bic r2, r2, #32 // make uppercase
+		beq _init // if y
+		bic r2, r2, #32 // Make uppercase
 		cmp r1, r2
-		beq _init
+		beq _init // if Y
 
 	end:
 		mov r7, #0x04 // write syscall
@@ -65,11 +62,9 @@
 	_fork:
 		mov r7, #0x02 // fork syscall
 		swi 0 // execute syscall
-
+	
 	_loop:
 		b _fork // goto label _fork
 
 	.balign 4
 	addr_confirm_input: .word confirm_input
-	.balign 4
-	addr_confirm_char: .word confirm_char
