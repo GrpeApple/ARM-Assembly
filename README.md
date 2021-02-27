@@ -1,5 +1,6 @@
 # ARM Assembly
 All my ARM Assembly programs
+---
 ## Programs
 <table>
 <thead>
@@ -77,47 +78,105 @@ All my ARM Assembly programs
 	</tr>
 </tbody>
 </table>
-
+---
 ## Build
 ### make
-Build a single program
+#### Simple
+###### Program
 ```bash
 make <program>
 ```
 
-Build multiple programs
+###### Multiple programs
 ```bash
 make <program> <program1> <program2> ... .. .
 ```
 
-Build all programs
+###### All programs
 ```bash
 make all
 ```
 
-Build all programs with debug
+###### Debug all programs
 ```bash
 make debugall
 ```
 
-Clean assembled objects
+###### Run all
+```bash
+make runall
+```
+
+###### Clean assembled
 ```bash
 make clean
 ```
 
-Clean all built programs and assembled objects
+###### Clean all
 ```bash
 make cleanall
 ```
+----
+#### Advanced
+##### Commands
+###### Assembler
+```bash
+make AS=arm-linux-gnueabihf-as
+```
 
+###### Linker
+```bash
+make LD=arm-linux-gnueabihf-ld
+```
+
+###### C compiler
+```bash
+make CC=clang
+```
+
+###### Directories
+```bash
+make MKDIR=mkdir -p -v
+```
+
+###### Removing
+```bash
+make RM=rm -ri
+```
+##### Flags
+###### ASFLAGS
+```bash
+make ASFLAGS=-g
+```
+
+###### LDFLAGS
+```bash
+make LDFLAGS=-S
+```
+
+###### CFLAGS
+```bash
+make CFLAGS=-Wall
+```
+##### Other
+###### Binary extension
+```bash
+make EXT=.bin
+```
+###### Sources
+```bash
+make SD=yes PROGRAMS=no
+```
+---
 ### Manual
-Build a single standalone program
+Make sure you are in your src
+###### Single program
 ```bash
 as -o <program>.o <program>.S
 ld -o <program> <program>.o
 ```
 
-Build a single program with multiple dependencies
+###### Multiple dependencies
 ```bash
 as -o <program>.o <program>.S
 as -o <program1>.o <program1>.S
@@ -134,9 +193,20 @@ ld -o <program> \
 <program5>
 ```
 
-Build with debug
+###### debug (gdb)
 ```bash
-as -go <program>.o <program>.S
+as -g -o <program>.o <program>.S
 ld -o <program> <program>.o
 gdb ./<program>
+```
+
+###### Run all
+```bash
+./*
+```
+
+###### Binary extension
+```
+as -o <program>.o <program>.S
+ld -o <program>.bin <program>.S
 ```
