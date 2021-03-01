@@ -5,11 +5,11 @@
 
 	.global _start
 	_start:
-		mov r7, #0x0a // unlink syscall, aka remove files
+		mov r7, #0x0a // 10; unlink syscall, aka remove files
 		ldr r0, =file
-		swi 0 // execute syscall
+		swi 0x00 // execute syscall
 	
 	end:
 		mov r7, #0x01 // exit syscall
-		mov r0, #0 // exit status
-		swi 0 // execute syscall
+		mov r0, #0x00 // exit status
+		swi 0x00 // execute syscall
