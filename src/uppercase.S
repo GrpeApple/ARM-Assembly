@@ -15,17 +15,17 @@
 	.global _start
 	_start:
 		mov r7, #0x04 // write syscall
-		mov r0, #1 // stdout file descriptor
+		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =input_msg
-		mov r2, #32 // length
-		swi 0 // execute syscall
+		mov r2, #0x20 // 32; length
+		swi 0x00 // execute syscall
 
 	_input:
 		mov r7, #0x03 // read syscall
-		mov r0, #0 // stdin file descriptor
+		mov r0, #0x00 // stdin file descriptor
 		ldr r1, =char
-		mov r2, #1 // length
-		swi 0 // execute syscall
+		mov r2, #0x01 // length
+		swi 0x00 // execute syscall
 
 	_uppercase:
 		ldr r1, =char
@@ -36,36 +36,36 @@
 			a = 0   1  1  0  0 0 0 1
 			A = 0   1  0  0  0 0 0 1
 		*/
-		bic r0, r0, #32 // bit clear sixth bit
+		bic r0, r0, #0x20 // 32; bit clear sixth bit
 		str r0, [r1] // store from address
 
 	_output:
 		mov r7, #0x04 // write syscall
-		mov r0, #1 // stdout file descriptor
+		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =out_msg
-		mov r2, #22 // length
-		swi 0 // execute instruction
+		mov r2, #0x16 // 22; length
+		swi 0x00 // execute syscall
 
 		mov r7, #0x04 // write syscall
-		mov r0, #1 // stdout file descriptor
+		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =char
-		mov r2, #1 // length
-		swi 0 // execute instruction
+		mov r2, #0x01 // length
+		swi 0x00 // execute syscall
 
 	/*
 	error:
 		mov r7, #0x04 // write syscall
-		mov r0, #2 // stderr file descriptor
+		mov r0, #0x02 // stderr file descriptor
 		ldr r1, =err_msg
-		mov r2, #26 // length
-		swi 0 // execute instruction
+		mov r2, #0x1a // 26; length
+		swi 0x00 // execute syscall
 
 		mov r7, #0x01 // exit syscall
-		mov r0, #1 // exit status
-		swi 0 // execute instruction
+		mov r0, #0x01 // exit status
+		swi 0x00 // execute syscall
 	*/
 
 	end:
 		mov r7, #0x01 // exit syscall
-		mov r0, #0 // exit status
-		swi 0 // execute instruction
+		mov r0, #0x00 // exit status
+		swi 0x00 // execute syscall

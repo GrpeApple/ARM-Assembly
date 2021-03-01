@@ -6,13 +6,13 @@
 	.global _start
 	_start:
 		mov r7, #0x04 // write syscall
-		mov r0, #1 // stdout
+		mov r0, #0x01 // stdout
 		ldr r1, =string
-		mov r2, #11 // length
-		swi 0 // execute syscall
+		mov r2, #0x0b // 11; length
+		swi 0x00 // execute syscall
 
 	end:
 		mov r7, #0x01 // exit syscall
-		mov r0, #0 // exit status
-		swi 0 // execute syscall
+		mov r0, #0x00 // exit status
+		swi 0x00 // execute syscall
 

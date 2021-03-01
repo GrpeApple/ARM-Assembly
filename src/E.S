@@ -6,10 +6,12 @@
 	.global _start
 	_start:
 		mov r7, #0x04 // write syscall
-		mov r0, #1 // stdout file descriptor
+		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =string
-		mov r2, #1 // length
-		swi 0 // execute syscall
-
+		mov r2, #0x01 // length
+	
+	_output:
+		swi 0x00 // execute syscall
+	
 	loop:
-		b _start // goto label _start
+		b _output // goto label _output
