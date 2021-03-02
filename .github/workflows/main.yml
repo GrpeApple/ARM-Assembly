@@ -8,7 +8,6 @@ jobs:
         runs-on: ubuntu-20.04
 
         steps:
-            - uses: actions/checkout@v2
             - name: Install GNU Arm Embedded Toolchain
               uses: marvinschopf/install-gcc-arm-none-eabi@main
             - name: Pass AS and LD to build
@@ -33,10 +32,12 @@ jobs:
               run: |
                     chmod u+x ./arm-none-eabi-*
               shell: "bash"
-            - name: Run makefile
+            - name: Build all programs
               run: |
                     make \
                     AS=./arm-none-eabi-as \
                     LD=./arm-none-eabi-ld \
                     all
-              shell: "bash"
+            - name: Clean all
+              run: |
+                    make cleanall
