@@ -1,16 +1,35 @@
 on: push
 
 jobs:
-    build:
+    install-gcc:
         runs-on: ubuntu-20.04
 
         steps:
             - uses: actions/checkout@v2
             - name: Install GNU Arm Embedded Toolchain
               uses: marvinschopf/install-gcc-arm-none-eabi@main
+            - name: Pass AS and LD to build
+              uses: actions/upload-artifact@v2
+              with:
+                   name: Assembler and Linker
+                   path: |
+                          /usr/bin/arm-none-eabi-as
+                          /usr/bin/arm-none-eabi-ld
+
+    build:
+        needs: install-gcc
+        runs-on: ubuntu-20.04
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Get AS and LD from install-gcc
+              uses: actions/download-artifact@v2
+              with:
+                   name: Assembler and Linker
             - name: Run makefile
               run: |
                     make \
                     AS=arm-none-eabi-as \
                     LD=arm-none-eabi-ld \
                     all
+              shell: "bash"
