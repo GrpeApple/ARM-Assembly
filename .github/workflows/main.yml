@@ -1,4 +1,7 @@
-on: push
+on:
+  push:
+      paths:
+          - src/**
 
 jobs:
     install-gcc:
@@ -11,10 +14,10 @@ jobs:
             - name: Pass AS and LD to build
               uses: actions/upload-artifact@v2
               with:
-                   name: Assembler and Linker
-                   path: |
-                          /usr/bin/arm-none-eabi-as
-                          /usr/bin/arm-none-eabi-ld
+                  name: Assembler and Linker
+                  path: |
+                         /usr/bin/arm-none-eabi-as
+                         /usr/bin/arm-none-eabi-ld
 
     build:
         needs: install-gcc
