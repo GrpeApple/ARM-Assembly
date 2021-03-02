@@ -7,9 +7,9 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: Install GNU Arm Embedded Toolchain
-            uses: marvinschopf/install-gcc-arm-none-eabi@main
+              uses: marvinschopf/install-gcc-arm-none-eabi@main
             - name: Run makefile
-                run: |
+              run: |
                     make \
                     AS=arm-none-eabi-as \
                     LD=arm-none-eabi-ld \
