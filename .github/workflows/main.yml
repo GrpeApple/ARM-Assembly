@@ -29,7 +29,7 @@ jobs:
             - name: Run makefile
               run: |
                     make \
-                    AS=arm-none-eabi-as \
-                    LD=arm-none-eabi-ld \
+                    AS=./arm-none-eabi-as \
+                    LD=./arm-none-eabi-ld \
                     all
               shell: "bash"
