@@ -26,6 +26,10 @@ jobs:
               uses: actions/download-artifact@v2
               with:
                    name: Assembler and Linker
+            - name: Modify permissions
+              run: |
+                    chmod u+x ./arm-none-eabi-*
+              shell: "bash"
             - name: Run makefile
               run: |
                     make \
