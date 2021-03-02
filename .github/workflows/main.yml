@@ -1,0 +1,17 @@
+on: push 
+
+jobs:
+        install-gcc:
+                runs-on: ubuntu-20.04
+
+                steps:
+                        - uses: actions/checkout@v2
+                        - name: Install GNU Arm Embedded Toolchain
+                          uses: marvinschopf/install-gcc-arm-none-eabi@main
+        build:
+                needs: install-gcc
+                runs-on: ubuntu-20.04
+
+                steps:
+                        - uses: actions/checkout@v2
+                        - run: make all
