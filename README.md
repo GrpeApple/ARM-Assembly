@@ -137,6 +137,12 @@ make clean
 ```bash
 make cleanall
 ```
+
+###### Run multiple commands
+```bash
+make cleanall haha_ARM runall
+```
+
 ----
 #### Advanced
 ##### Commands
