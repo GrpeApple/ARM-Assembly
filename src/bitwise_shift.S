@@ -6,6 +6,6 @@
 		mov r2, #0x07 // the number of shifts
 		mov r0, r1, lsl r2 // exit status
 
-	end:
+	_end:
 		mov r7, #0x01 // exit syscall
 		swi 0x00 // execute syscall

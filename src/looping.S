@@ -21,7 +21,7 @@
 		cmp r3, #0x09
 		ble _loop
 
-	end:
+	_end:
 		// r0 = 10
 		mov r7, #0x01 // exit syscall
 		mov r0, r3 // exit status
