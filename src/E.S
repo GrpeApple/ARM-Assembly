@@ -13,5 +13,5 @@
 	_output:
 		swi 0x00 // execute syscall
 	
-	loop:
+	_loop:
 		b _output // goto label _output

@@ -17,15 +17,18 @@
 		ldr r3, link_content
 		str lr, [r3]
 
+
 		mov r7, #0x04 // write syscall
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =string
 		mov r2, #0x08 // length
 		swi 0x00 // execute syscall
 
+
 		ldr lr, link_content
 		ldr lr, [lr]
 		bx lr
+
 
 	.balign 0x04
 	link_content: .word link

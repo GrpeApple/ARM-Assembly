@@ -10,6 +10,6 @@
 		add r0, r1, r2
 		LDMFD SP!, {r0, r1, r2} // Increment after
 		add r0, r1, r2
-	end:
+	_end:
 		mov r7, #0x01 // exit syscall
 		swi 0x00 // execute syscall
