@@ -26,14 +26,20 @@ All my ARM Assembly programs
 		<td>
 			<code>bitwise_shift.S</code>
 		</td>
-	<td>Shift numbers in bits</td>
+		<td>Shift numbers in bits</td>
+	</tr>
+	<tr>
+		<td>
+			<code>buffer.S</code>
+		</td>
+		<td>My attempt at using buffers</td>
 	</tr>
 	<tr>
 		<td>
 			<code>fork.S</code>
 		</td>
 		<td>
-			Forkbomb (Rabbit Virus) your system.<br>Do not worry, for I have added a warning and a confirmation. (y and Y fork bombs and anything otherwise)<br> So you do not have to be that <em>worried</em>.
+			Forkbomb (Rabbit Virus) your system.<br>Do not worry, for I have added a warning and a confirmation. (y and Y fork bombs and anything otherwise)<br> So you need not have to be that <em>worried</em>.
 		</td>
 	</tr>
 	<tr>
@@ -41,6 +47,12 @@ All my ARM Assembly programs
 			<code>haha_ARM.S</code>
 		</td>
 		<td>Outputs 'haha, ARM.' My first program</td>
+	</tr>
+	<tr>
+		<td>
+			<code>link_register.S</code>
+		</td>
+		<td>My attempt at using functions with a link register</td>
 	</tr>
 	<tr>
 		<td>
