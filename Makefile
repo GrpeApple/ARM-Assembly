@@ -38,12 +38,10 @@ SOURCEEXT:=.S
 ### AS ouptut extension binary
 ASEXT:=.o
 ### LD output extension binary
-####EXT=.bin
+####LDEXT:=.bin
 LDEXT:=
 ### Sources
-PROGRAM:=$(shell find src -type f -iname "*.S" -print | tr -d ".S" | sed 's/.*\///')
-
-
+PROGRAM:=$(shell find $(SD) -type f -iname "*$(SOURCEEXT)" -print | tr -d "$(SOURCEEXT)" | sed 's/.*\///')
 $(PROGRAM): %: $(SD)/%$(SOURCEEXT)
 	$(MKDIR) $(BUD) $(BID)
 	$(eval ASSOURCE:=$<)
