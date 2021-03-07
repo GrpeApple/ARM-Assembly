@@ -33,16 +33,31 @@ LDFLAGS:=
 CFLAGS:=
 
 ## Other
-### File extension
+### Source code extension
+SOURCEEXT:=.S
+### AS ouptut extension binary
+ASEXT:=.o
+### LD output extension binary
 ####EXT=.bin
-EXT=
+LDEXT:=
 ### Sources
 PROGRAM:=$(shell find src -type f -iname "*.S" -print | tr -d ".S" | sed 's/.*\///')
 
-$(PROGRAM): %: $(SD)/%.S
-	mkdir -p $(BUD) $(BID)
-	$(AS) $(ASFLAGS) -o $(BUD)/$@.o $<
-	$(LD) $(LDFLAGS) -o $(BID)/$@$(EXT) $(BUD)/$@.o
+
+$(PROGRAM): %: $(SD)/%$(SOURCEEXT)
+	$(MKDIR) $(BUD) $(BID)
+	$(eval ASSOURCE:=$<)
+	$(eval ASOUTPUT:=$(BUD)/$@$(ASEXT))
+	$(eval LDSOURCE:=$(BUD)/$@$(ASEXT))
+	$(eval LDOUTPUT:=$(BID)/$@$(LDEXT))
+ifdef $(AS)
+	$(LD) $(LDFLAGS) -o $(BID)/$@$(EXT) $(LDSOURCE)
+else ifdef $(LD)
+	$(AS) $(ASFLAGS) -o $(BUD)/$@$(ASEXT) $(ASSOURCE)
+else
+	$(AS) $(ASFLAGS) -o $(BUD)/$@$(ASEXT) $(ASSOURCE)
+	$(LD) $(LDFLAGS) -o $(BID)/$@$(EXT) $(LDSOURCE)
+endif
 all: $(PROGRAM)
 debugall: debug $(PROGRAM)
 debug:
