@@ -4,6 +4,8 @@
 		0: Successfull exit
 		// 1: Error
 */
+.syntax unified
+
 .section .data
 	input_msg: .ascii "Input a character to uppercase: "
 	char: .asciz ""
@@ -64,6 +66,13 @@
 		mov r0, #0x01 // exit status
 		swi 0x00 // execute syscall
 	*/
+
+	_flush:
+		mov r7, #0x03 // read syscall
+		mov r0, #0x02 // stderr file descriptor
+		ldr r1, =char
+		mov r2, #(1 << 30) // maximum length
+		swi 0x00 // execute syscall
 
 	_end:
 		mov r7, #0x01 // exit syscall
