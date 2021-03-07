@@ -186,13 +186,21 @@ make LDFLAGS=-S
 make CFLAGS=-Wall
 ```
 ##### Other
-###### Binary extension
+###### Source code extension
 ```bash
-make EXT=.bin
+make SOURCEEXT=.S
+```
+###### AS Binary Extension
+```bash
+make ASEXT=o
+```
+###### LD Binary extension
+```bash
+make LDEXT=.bin
 ```
 ###### Sources
 ```bash
-make SD=yes PROGRAMS=no
+make SD=yes PROGRAM=no
 ```
 ---
 ### Manual
