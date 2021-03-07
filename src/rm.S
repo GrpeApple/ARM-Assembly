@@ -1,3 +1,5 @@
+.syntax unified
+
 .section .data
 	file: .asciz "file"
 

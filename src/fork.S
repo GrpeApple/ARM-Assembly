@@ -4,6 +4,8 @@
 	Also, it is case-insensitive.
 */
 
+.syntax unified
+
 .section .data
 
 

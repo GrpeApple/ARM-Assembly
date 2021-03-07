@@ -1,3 +1,5 @@
+.syntax unified
+
 .section .text
 	
 	.global _start

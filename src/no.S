@@ -1,3 +1,5 @@
+.syntax unified
+
 .section .data
 	string: .ascii "no"
 
