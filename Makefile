@@ -1,7 +1,7 @@
 # To anyone reading this Makefile, good luck.
 
 # Phony
-.PHONY: all debugall runall clean cleanall 
+.PHONY: all debugall runall clean cleanall
 
 # Variables
 ## Commands
