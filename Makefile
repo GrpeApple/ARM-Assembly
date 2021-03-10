@@ -9,6 +9,9 @@
 AS=as
 ### Linker, change this if you are on another platform
 LD=ld
+### Runner, change this if you are on another platform
+####RUN=qemu-arm
+RUN=
 ### C Compiler, if empty use gcc
 CC?=gcc
 ### Create directories
@@ -62,7 +65,7 @@ debug:
 	$(eval ASFLAGS:=$(ASFLAGS) -g)
 debugall: $(PROGRAM)
 runall: # do not do with dangerous programs
-	$(BID)/*
+	$(RUN) $(BID)/*
 clean:
 	$(RM) $(BUD)
 cleanall:
