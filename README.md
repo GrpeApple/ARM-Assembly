@@ -102,6 +102,8 @@ All my ARM Assembly programs
 ---
 ## Build
 ### make
+Often, the `Makefile` has comments that are not here. Look for the comments when stuck.
+If you are still stuck, Discuss on the `Discussion` tab above. (Assuming you are on the original Github)
 #### Simple
 ###### Program
 ```bash
@@ -154,6 +156,11 @@ make AS=arm-linux-gnueabihf-as
 ###### Linker
 ```bash
 make LD=arm-linux-gnueabihf-ld
+```
+
+###### Runner
+```bash
+make RUN=qemu-arm runall
 ```
 
 ###### C compiler
