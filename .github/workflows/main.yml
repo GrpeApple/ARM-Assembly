@@ -9,9 +9,6 @@ jobs:
         runs-on: ubuntu-20.04
 
         steps:
-          #            - name: Install GNU Arm Embedded Toolchain
-          #              uses: marvinschopf/install-gcc-arm-none-eabi@main
-            
             - name: Install gcc-arm-linux-gnueabihf
               run: sudo apt install gcc-arm-linux-gnueabihf
             - uses: actions/checkout@v2
