@@ -1,4 +1,4 @@
-// for (int r3 = 0, int r3 = 1; r3 <= 9; ++r3)
+// for (int r3 = 0; r3 <= 9; ++r3)
 .syntax unified
 
 .section .data
