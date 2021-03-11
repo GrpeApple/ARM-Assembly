@@ -1,10 +1,16 @@
 # To anyone reading this Makefile, good luck.
 # But, DO NOT CHANGE ANYTHING HERE. Unless, you know what you are doing; in that case, can you help me?
 
+
 # Phony
+.PHONY: help
 .PHONY: all debugall runall clean cleanall
 .PHONY: allarm debugallarm runallarm cleanarm cleanallarm
 .PHONY: allc debugallc runallc cleanc cleanallc
+
+help:
+	$(info Run some targets!)
+	@:
 
 # Variables
 
@@ -133,7 +139,6 @@ PROGRAM:=$(shell find $(SD) -maxdepth 1 -type f -iname "*$(SDEXT)" -print | tr -
 
 #### CC Sources
 CPROGRAM:=$(shell find $(CSD) -maxdepth 1 -type f -iname "*$(CSDEXT)" -print | tr -d "$(CSDEXT)" | sed 's/.*\///')
-
 
 
 $(PROGRAM): %: $(SD)/%$(SDEXT)
