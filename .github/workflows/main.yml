@@ -2,42 +2,26 @@ on:
   push:
       paths:
           - src/**
-      workflow_dispatch:
+      workflow-dispatch:
 
 jobs:
-    install-gcc:
-        runs-on: ubuntu-20.04
-
-        steps:
-            - name: Install GNU Arm Embedded Toolchain
-              uses: marvinschopf/install-gcc-arm-none-eabi@main
-            - name: Pass AS and LD to build
-              uses: actions/upload-artifact@v2
-              with:
-                  name: Assembler and Linker
-                  path: |
-                         /usr/bin/arm-none-eabi-as
-                         /usr/bin/arm-none-eabi-ld
-
     build:
-        needs: install-gcc
         runs-on: ubuntu-20.04
 
         steps:
+          #            - name: Install GNU Arm Embedded Toolchain
+          #              uses: marvinschopf/install-gcc-arm-none-eabi@main
+            
+            - name: Install gcc-arm-linux-gnueabihf
+              run: sudo apt install gcc-arm-linux-gnueabihf
             - uses: actions/checkout@v2
-            - name: Get AS and LD from install-gcc
-              uses: actions/download-artifact@v2
-              with:
-                   name: Assembler and Linker
-            - name: Modify permissions
-              run: |
-                    chmod u+x ./arm-none-eabi-*
-              shell: "bash"
             - name: Build all programs
               run: |
                     make \
-                    AS=./arm-none-eabi-as \
-                    LD=./arm-none-eabi-ld \
+                    AS=arm-linux-gnueabihf-as \
+                    LD=arm-linux-gnueabihf-ld \
+                    CC=arm-linux-gnueabihf-gcc \
+                    CL=arm-linux-gnueabihf-gcc \
                     all
             - name: Clean all
               run: |
