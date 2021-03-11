@@ -103,7 +103,7 @@ All my ARM Assembly programs
 ## Build
 ### make
 Often, the `Makefile` has comments that are not here. Look for the comments when stuck.
-If you are still stuck, Discuss on the `Discussion` tab above. (Assuming you are on the original Github)
+If you are still stuck, Discuss on the `Discussion` tab above. (Assuming it exists and your client supports it)
 #### Simple
 ###### Program
 ```bash
@@ -195,7 +195,7 @@ make CFLAGS=-Wall
 ##### Other
 ###### Source code extension
 ```bash
-make SOURCEEXT=.S
+make SDEXT=.S
 ```
 ###### AS Binary Extension
 ```bash
