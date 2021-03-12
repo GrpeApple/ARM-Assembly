@@ -42,6 +42,11 @@ LD:=ld
 RUN:=
 
 
+### Command Line Arguments; this may be passed to the Runner
+####ARGS="a b c d e f g h i j k l m n o p q r s t u v w x y z ./*"
+ARGS:=
+
+
 ### C Compiler
 ####CC=arm-linux-gnueabihf-gcc
 CC:=gcc
@@ -228,8 +233,17 @@ debugall: all
 
 
 runall:
-	@if [ ! -d "./$(ABID)" ]; then echo $(RUN_MESSAGE) $(ABID); else $(RUN) $(ABID)/*; fi
-	@if [ ! -d "./$(CBID)" ]; then echo $(RUN_MESSAGE) $(CBID); else $(RUN) $(CBID)/*; fi
+	@if [ ! -d "./$(ABID)" ]; then \
+		echo $(RUN_MESSAGE) $(ABID); \
+	else \
+		$(RUN) ./$(ABID)/* $(ARGS); \
+	fi
+	
+	@if [ ! -d "./$(CBID)" ]; then \
+		echo $(RUN_MESSAGE) $(CBID); \
+	else \
+		$(RUN) ./$(CBID)/* $(ARGS); \
+	fi
 
 
 clean:
@@ -259,7 +273,11 @@ debugallarm: allarm
 
 
 runallarm:
-	@if [ ! -d "./$(ABID)" ]; then echo $(RUN_MESSAGE) $(ABID); else $(RUN) $(ABID)/*; fi
+	@if [ ! -d "./$(ABID)" ]; then \
+		echo $(RUN_MESSAGE) $(ABID); \
+	else \
+		$(RUN) ./$(ABID)/* $(ARGS); \
+	fi
 
 
 cleanarm:
@@ -287,7 +305,11 @@ debugallc: allc
 
 
 runallc:
-	@if [ ! -d "./$(CBID)" ]; then echo $(RUN_MESSAGE) $(CBID); else $(RUN) $(CBID)/*; fi
+	@if [ ! -d "./$(CBID)" ]; then \
+		echo $(RUN_MESSAGE) $(CBID); \
+	else \
+		$(RUN) ./$(CBID)/* $(ARGS); \
+	fi
 
 
 cleanc:
