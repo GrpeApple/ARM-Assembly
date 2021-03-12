@@ -211,64 +211,90 @@ else
 	$(MKDIR) $(CBID)
 	$(CL) $(CLFLAGS) -o $(CLOUT) $(CLSD)
 endif
+
+
 all: $(PROGRAM) $(CPROGRAM)
+
+
 debugall: debug all 
+
+
 debug:
 	$(eval ASFLAGS:=$(ASFLAGS) -g)
 	$(eval CCFLAGS:=$(CCFLAGS) -g)
+
+
 debugall: all
+
+
 runall:
-ifneq ($(wildcard $(ABID)),)
-	$(RUN) $(ABID)/*
-else
-	$(info $(RUN_MESSAGE) $(ABID))
-endif
-ifneq ($(wildcard $(CBID)),)
-	$(RUN) $(CBID)/* 
-else
-	$(info $(RUN_MESSAGE) $(CBID))
-endif
+	@if [ ! -d "./$(ABID)" ]; then echo $(RUN_MESSAGE) $(ABID); else $(RUN) $(ABID)/*; fi
+	@if [ ! -d "./$(CBID)" ]; then echo $(RUN_MESSAGE) $(CBID); else $(RUN) $(CBID)/*; fi
+
+
 clean:
 	$(RM) $(ABUD)
 	$(RM) $(CBUD)
 	$(RM) $(BUD)
+
+
 cleanall:
 	$(RM) $(ABUD) $(ABID)
 	$(RM) $(CBUD) $(CBID)
 	$(RM) $(BUD) $(BID)
 
+
+
 allarm: $(PROGRAM)
+
+
 debugallarm: debugarm allarm
+
+
 debugarm:
 	$(eval ASFLAGS:=$(ASFLAGS) -g)
+
+
 debugallarm: allarm
+
+
 runallarm:
-ifneq ($(wildcard $(ABID)),)
-	$(RUN) $(ABID)/*
-else
-	$(info $(RUN_MESSAGE) $(ABID))
-endif
+	@if [ ! -d "./$(ABID)" ]; then echo $(RUN_MESSAGE) $(ABID); else $(RUN) $(ABID)/*; fi
+
+
 cleanarm:
 	$(RM) $(ABUD)
 	$(RM) $(BUD)
+
+
 cleanallarm:
 	$(RM) $(ABUD) $(ABID)
 	$(RM) $(BUD) $(BID)
 
+
+
 allc: $(CPROGRAM)
+
+
 debugallc: debugc allc
+
+
 debugc:
 	$(eval CFLAGS:=$(CFLAGS) -g)
+
+
 debugallc: allc
+
+
 runallc:
-ifneq ($(wildcard $(CBID)),)
-	$(RUN) $(CBID)/* 
-else
-	$(info $(RUN_MESSAGE) $(CBID))
-endif
+	@if [ ! -d "./$(CBID)" ]; then echo $(RUN_MESSAGE) $(CBID); else $(RUN) $(CBID)/*; fi
+
+
 cleanc:
 	$(RM) $(CBUD)
 	$(RM) $(BUD)
+
+
 cleanallc:
 	$(RM) $(CBUD) $(CBID)
 	$(RM) $(BUD) $(BID)
