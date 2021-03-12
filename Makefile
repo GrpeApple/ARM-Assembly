@@ -8,11 +8,21 @@
 .PHONY: allarm debugallarm runallarm cleanarm cleanallarm
 .PHONY: allc debugallc runallc cleanc cleanallc
 
-help:
-	$(info Run some targets!)
-	@:
-
 # Variables
+
+## Message
+
+
+### Help
+define HELP_MESSAGE
+Run some targets!
+endef
+
+
+### Directoy does not exist
+define RUN_MESSAGE
+Nothing to run for
+endef
 
 ## Commands
 
@@ -50,7 +60,6 @@ RM:=rm -rf
 
 ## Directories
 
-
 ### Source Directory
 SD:=src
 
@@ -63,16 +72,34 @@ BUD:=build
 BID:=bin
 
 
+#### ARM Source Directory
+ASD:=$(SD)/arm
+
+
+
+#### ARM Build Directory
+ABUD:=$(BUD)/arm
+
+
+
+#### ARM Binary Directory
+ABID:=$(BID)/arm
+
+
+
 #### C Source Directory
-CSD:=src/cc
+CSD:=$(SD)/cc
 
 
-### C Build Directory
-CBUD:=build/cc
+
+#### C Build Directory
+CBUD:=$(BUD)/cc
+
 
 
 #### C Binary Directory
-CBID:=bin/cc
+CBID:=$(BID)/cc
+
 
 ## Flags
 
@@ -98,8 +125,8 @@ CLFLAGS:=
 
 
 ### Source code extension
-####SDEXT=.asm
-SDEXT:=.S
+####ASDEXT=.asm
+ASDEXT:=.S
 
 
 ### AS ouptut extension binary
@@ -134,28 +161,35 @@ CLEXT:=
 ### Sources
 
 
-PROGRAM:=$(shell find $(SD) -maxdepth 1 -type f -iname "*$(SDEXT)" -print | tr -d "$(SDEXT)" | sed 's/.*\///')
+PROGRAM:=$(shell find $(ASD) -maxdepth 1 -type f -iname "*$(ASDEXT)" -print | tr -d "$(ASDEXT)" | sed 's/.*\///')
 
 
 #### CC Sources
 CPROGRAM:=$(shell find $(CSD) -maxdepth 1 -type f -iname "*$(CSDEXT)" -print | tr -d "$(CSDEXT)" | sed 's/.*\///')
 
 
-$(PROGRAM): %: $(SD)/%$(SDEXT)
+
+
+help:
+	$(info $(HELP_MESSAGE))
+	@:
+
+
+$(PROGRAM): %: $(ASD)/%$(ASDEXT)
 	$(eval ASSD:=$<)
-	$(eval ASOUT:=$(BUD)/$@$(ASEXT))
-	$(eval LDSD:=$(BUD)/$@$(ASEXT))
-	$(eval LDOUT:=$(BID)/$@$(LDEXT))
+	$(eval ASOUT:=$(ABUD)/$@$(ASEXT))
+	$(eval LDSD:=$(ABUD)/$@$(ASEXT))
+	$(eval LDOUT:=$(ABID)/$@$(LDEXT))
 ifdef $(AS)
-	$(MKDIR) $(BID)
+	$(MKDIR) $(ABID)
 	$(LD) $(LDFLAGS) -o $(LDOUT) $(LDSD)
 else ifdef $(LD)
-	$(MKDIR) $(BUD)
+	$(MKDIR) $(ABUD)
 	$(AS) $(ASFLAGS) -o $(ASOUT) $(ASSD)
 else
-	$(MKDIR) $(BUD)
+	$(MKDIR) $(ABUD)
 	$(AS) $(ASFLAGS) -o $(ASOUT) $(ASSD)
-	$(MKDIR) $(BID)
+	$(MKDIR) $(ABID)
 	$(LD) $(LDFLAGS) -o $(LDOUT) $(LDSD)
 endif
 
@@ -184,14 +218,24 @@ debug:
 	$(eval CCFLAGS:=$(CCFLAGS) -g)
 debugall: all
 runall:
-	$(RUN) $(BID)/*
-	$(RUN) $(CBID)/*
+ifneq ($(wildcard $(ABID)),)
+	$(RUN) $(ABID)/*
+else
+	$(info $(RUN_MESSAGE) $(ABID))
+endif
+ifneq ($(wildcard $(CBID)),)
+	$(RUN) $(CBID)/* 
+else
+	$(info $(RUN_MESSAGE) $(CBID))
+endif
 clean:
-	$(RM) $(BUD)
+	$(RM) $(ABUD)
 	$(RM) $(CBUD)
+	$(RM) $(BUD)
 cleanall:
-	$(RM) $(BUD) $(BID)
+	$(RM) $(ABUD) $(ABID)
 	$(RM) $(CBUD) $(CBID)
+	$(RM) $(BUD) $(BID)
 
 allarm: $(PROGRAM)
 debugallarm: debugarm allarm
@@ -199,10 +243,16 @@ debugarm:
 	$(eval ASFLAGS:=$(ASFLAGS) -g)
 debugallarm: allarm
 runallarm:
-	$(RUN) $(BID)/*
+ifneq ($(wildcard $(ABID)),)
+	$(RUN) $(ABID)/*
+else
+	$(info $(RUN_MESSAGE) $(ABID))
+endif
 cleanarm:
-	$(RM $(BUD)
+	$(RM) $(ABUD)
+	$(RM) $(BUD)
 cleanallarm:
+	$(RM) $(ABUD) $(ABID)
 	$(RM) $(BUD) $(BID)
 
 allc: $(CPROGRAM)
@@ -211,8 +261,14 @@ debugc:
 	$(eval CFLAGS:=$(CFLAGS) -g)
 debugallc: allc
 runallc:
-	$(RUN) $(CBID)/*
+ifneq ($(wildcard $(CBID)),)
+	$(RUN) $(CBID)/* 
+else
+	$(info $(RUN_MESSAGE) $(CBID))
+endif
 cleanc:
 	$(RM) $(CBUD)
+	$(RM) $(BUD)
 cleanallc:
 	$(RM) $(CBUD) $(CBID)
+	$(RM) $(BUD) $(BID)
