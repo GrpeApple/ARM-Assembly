@@ -1,100 +1,147 @@
 # ARM Assembly
 All my ARM Assembly programs
+
 ---
 ## Programs
+The sources are located in `src/` directory.
 <table>
 <thead>
 	<tr>
-		<th>Program</th>
+		<th>Source</th>
 		<th>Description</th>
+		<th>Files</th>
 	</tr>
 </thead>
 <tbody>
 	<tr>
 		<td>
-			<code>E.S</code>
+			<code>arm</code>
 		</td>
-    		<td>Output 'E' infinitely</td>
+		<td>Programs that are assembled and linked directly.</td>
+		<td>
+			<table>
+			<thead>
+				<tr>
+					<th>Program</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<code>E.S</code>
+					</td>
+					<td>Output 'E' infinitely</td>
+				</tr>
+				<tr>
+					<td>
+						<code>arguments.S</code>
+					</td>
+					<td>Outputs Argument length and content</td>
+				</tr>
+				<tr>
+					<td>
+						<code>bitwise_shift.S</code>
+					</td>
+					<td>Shift numbers in bits</td>
+				</tr>
+				<tr>
+					<td>
+						<code>buffer.S</code>
+					</td>
+					<td>My attempt at using buffers</td>
+				</tr>
+				<tr>
+					<td>
+						<code>fork.S</code>
+					</td>
+					<td>
+						Forkbomb (Rabbit Virus) your system.<br>Do not worry, for I have added a warning and a confirmation. (y and Y fork bombs and anything otherwise)<br> So you need not have to be that <em>worried</em>.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<code>haha_ARM.S</code>
+					</td>
+					<td>Outputs 'haha, ARM.' My first program</td>
+				</tr>
+				<tr>
+					<td>
+						<code>link_register.S</code>
+					</td>
+					<td>My attempt at using functions with a link register</td>
+				</tr>
+				<tr>
+					<td>
+						<code>looping.S</code>
+					</td>
+					<td>Loops in ARM Assembly</td>
+				</tr>
+				<tr>
+					<td>
+						<code>mkdir.S</code>
+					</td>
+					<td>Create directories in ARM Assembly</td>
+				</tr>
+				<tr>
+					<td>
+						<code>no.S</code>
+					</td>
+					<td>Output 'no' infinitely</td>
+				</tr>
+				<tr>
+					<td>
+						<code>rm.S</code>
+					</td>
+					<td>Remove files and only files</td>
+				</tr>
+				<tr>
+					<td>
+						<code>rmdir.S</code>
+					</td>
+					<td>Remove directories (non-recursively)</td>
+				</tr>
+				<tr>
+					<td>
+						<codestack.S</code>
+					</td>
+					<td>Use the stack</td>
+				</tr>
+				<tr>
+					<td>
+						<code>uppercase.S</code>
+					</td>
+					<td>Uppercases characters</td>
+				</tr>
+			</tbody>
+			</table>
+		</td>
 	</tr>
 	<tr>
 		<td>
-			<code>arguments.S</code>
+			<code>cc</code>
 		</td>
-		<td>Outputs Argument length and content</td>
-	</tr>
-	<tr>
+		<td>Programs that depend on C (Libraries, functions, etc...)</td>
 		<td>
-			<code>bitwise_shift.S</code>
+			<table>
+			<thead>
+				<tr>
+					<th>Program</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<code>printf.S</code>
+					</td>
+					<td>
+						Depends on printf, prints <code>Hello, World!</code>
+					</td>
+				</tr>
+			</tbody>
+			</table>
 		</td>
-		<td>Shift numbers in bits</td>
-	</tr>
-	<tr>
-		<td>
-			<code>buffer.S</code>
-		</td>
-		<td>My attempt at using buffers</td>
-	</tr>
-	<tr>
-		<td>
-			<code>fork.S</code>
-		</td>
-		<td>
-			Forkbomb (Rabbit Virus) your system.<br>Do not worry, for I have added a warning and a confirmation. (y and Y fork bombs and anything otherwise)<br> So you need not have to be that <em>worried</em>.
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<code>haha_ARM.S</code>
-		</td>
-		<td>Outputs 'haha, ARM.' My first program</td>
-	</tr>
-	<tr>
-		<td>
-			<code>link_register.S</code>
-		</td>
-		<td>My attempt at using functions with a link register</td>
-	</tr>
-	<tr>
-		<td>
-			<code>looping.S</code>
-		</td>
-    		<td>Loops in ARM Assembly</td>
-	</tr>
-	<tr>
-		<td>
-			<code>mkdir.S</code>
-		</td>
-    		<td>Create directories in ARM Assembly</td>
-	</tr>
-	<tr>
-		<td>
-			<code>no.S</code>
-		</td>
-		<td>Output 'no' infinitely</td>
-	</tr>
-	<tr>
-		<td>
-			<code>rm.S</code>
-		</td>
-		<td>Remove files and only files</td>
-	</tr>
-	<tr>
-		<td>
-			<code>rmdir.S</code>
-		</td>
-		<td>Remove directories (non-recursively)</td>
-	</tr>
-	<tr>
-		<td>
-			<codestack.S</code>
-		</td>
-		<td>Use the stack</td>
-	</tr>
-	<tr>
-		<td>
-			<code>uppercase.S</code>
-		</td>
-		<td>Uppercases characters</td>
 	</tr>
 </tbody>
 </table>
