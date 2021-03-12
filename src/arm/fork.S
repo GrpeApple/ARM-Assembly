@@ -32,10 +32,6 @@
 	.balign 0x08
 	fork: .asciz "Initializing fork bomb.........\n"
 	
-	.balign 0x04
-	linker: .word 0 // lr
-
-
 .section .bss
 
 
@@ -128,8 +124,7 @@
 
 
 	_change_message:
-		ldr r3, linker_content
-		str lr, [r3]
+		push {ip, lr}
 
 
 
@@ -165,14 +160,11 @@
 
 
 
-		ldr lr, linker_content
-		ldr lr, [lr]
-		bx lr
+		pop {ip, pc}
 
 
 	_change_input:
-		ldr r3, linker_content
-		str lr, [r3]
+		push {ip, lr}
 
 
 
@@ -193,14 +185,11 @@
 
 
 
-		ldr lr, linker_content
-		ldr lr, [lr]
-		bx lr
+		pop {ip, pc}
 
 
 	_change_check:
-		ldr r3, linker_content
-		str lr, [r3]
+		push {ip, lr}
 
 
 
@@ -217,16 +206,13 @@
 
 
 
-		ldr lr, linker_content
-		ldr lr, [lr]
-		bx lr
+		pop {ip, pc}
 
 
 
 	/*
 	_flush:
-		ldr r3, linker_content
-		str lr, [r3]
+		push {ip, lr}
 
 
 		
@@ -243,9 +229,7 @@
 
 
 
-		ldr lr, linker_content
-		ldr lr, [lr]
-		bx lr
+		pop {ip, pc}
 
 
 	*/
@@ -257,5 +241,3 @@
 	confirm2_input_content: .word confirm2_input
 	.balign 0x04
 	confirm2_string_content: .word confirm2_string
-	.balign 0x04
-	linker_content: .word linker // lr
