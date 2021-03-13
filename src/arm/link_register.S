@@ -14,7 +14,7 @@
 		swi 0x00 // execute syscall
 
 	_output:
-		push {ip, lr}
+		push {lr}
 
 
 		mov r7, #0x04 // write syscall
@@ -24,4 +24,4 @@
 		swi 0x00 // execute syscall
 
 
-		pop {ip, pc}
+		pop {pc}

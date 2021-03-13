@@ -124,7 +124,7 @@
 
 
 	_change_message:
-		push {ip, lr}
+		push {lr}
 
 
 
@@ -160,11 +160,11 @@
 
 
 
-		pop {ip, pc}
+		pop {pc}
 
 
 	_change_input:
-		push {ip, lr}
+		push {lr}
 
 
 
@@ -185,11 +185,11 @@
 
 
 
-		pop {ip, pc}
+		pop {pc}
 
 
 	_change_check:
-		push {ip, lr}
+		push {lr}
 
 
 
@@ -206,13 +206,13 @@
 
 
 
-		pop {ip, pc}
+		pop {pc}
 
 
 
 	/*
 	_flush:
-		push {ip, lr}
+		push {lr}
 
 
 		
@@ -229,7 +229,7 @@
 
 
 
-		pop {ip, pc}
+		pop {pc}
 
 
 	*/
