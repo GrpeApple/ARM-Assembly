@@ -8,9 +8,9 @@
 
 	.global main
 	main:
-		push {ip, lr}
+		push {lr}
 
 		ldr r0, =string
 		bl printf
 
-		pop {ip, pc}
+		pop {pc}
