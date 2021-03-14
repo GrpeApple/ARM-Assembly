@@ -220,7 +220,7 @@
 		mov r7, #0x03 // read syscall
 		mov r0, #0x03 // 3rd file descriptor
 		ldr r1, =confirm_input
-		mov r2, #(1 << 30) // maximum length
+		mov r2, #(0x01 << 0x1e) // 30; maximum length
 		swi 0x00 // execute syscall
 		
 		ldr r1, =confirm2_input
