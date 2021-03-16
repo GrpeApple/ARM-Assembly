@@ -67,6 +67,12 @@ The sources are located in `src/` directory.
 				</tr>
 				<tr>
 					<td>
+						<code>int2str.S</code>
+					</td>
+					<td>Convert integer to string and print it.</td>
+				</tr>
+				<tr>
+					<td>
 						<code>link_register.S</code>
 					</td>
 					<td>My attempt at using functions with a link register</td>
