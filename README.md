@@ -37,7 +37,7 @@ The sources are located in `src/` directory.
 					<td>
 						<code>arguments.S</code>
 					</td>
-					<td>Outputs Argument length and content</td>
+					<td>Outputs Argument Count and Value</td>
 				</tr>
 				<tr>
 					<td>
