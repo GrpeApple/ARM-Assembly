@@ -53,12 +53,14 @@
 
 	_check:
 		bl _change_check
-		cmp r1, r2
 		push {r2}
-		bicne r2, #0x20 // 32
+		cmp r8, #0x02 // confirm2
 		cmpne r1, r2
+		bicne r2, #0x20 // 32
+
+		cmp r1, r2
 		bne _end
-	
+
 	_loop:
 		cmp r8, #0x02 // confirm2
 		ldreq r3, confirm2_string_content
@@ -66,7 +68,7 @@
 		ldrlt r3, confirm_string_content
 
 		pop {r2}
-		str r2, [r3] 
+		str r2, [r3]
 		
 		add r8, #0x01
 		bl _flush
