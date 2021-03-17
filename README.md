@@ -43,7 +43,7 @@ The sources are located in `src/` directory.
 						<table>
 						<thead>
 							<tr>
-								<th>Program</th>
+								<th>Dependencies</th>
 								<th>Description</th>
 							</tr>
 						</thead>
