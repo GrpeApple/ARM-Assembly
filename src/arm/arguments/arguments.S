@@ -17,7 +17,7 @@
 	separator_length = . - separator
 
 .section .text
-	
+
 	.global _start
 	_start:
 		ldr r4, [sp] // argc
@@ -32,12 +32,12 @@
 		ldr r1, =argv_string
 		mov r2, #0x10 // 16; length
 		swi 0x00 // execute syscall
-		
+
 
 			_argv_write:
 				mov r0, #0x01 // stdout file descriptor
 				push {r0}
-				
+
 				mov r2, #0x00
 				ldr r3, [fp]
 
@@ -50,7 +50,7 @@
 
 				ldr r1, [fp]
 				swi 0x00 // execute syscall
-				
+
 				pop {r0}
 				ldr r1, =separator
 				ldr r2, =separator_length
@@ -59,7 +59,7 @@
 				ldr r0, [fp, #0x04]!
 				cmp r0, #0x00
 				bne _argv_write
-	
+
 	_argc:
 		mov r7, #0x04 // write syscall
 		mov r0, #0x01 // stdout file descriptor

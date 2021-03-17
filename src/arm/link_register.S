@@ -5,7 +5,7 @@
 	string: .ascii "abcdefgh"
 
 .section .text
-	
+
 	.global _start
 	_start:
 		bl _output

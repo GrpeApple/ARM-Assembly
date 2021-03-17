@@ -26,7 +26,7 @@
 		ldr r1, =dir
 		mov r2, #(0x001 << 0x01e) // 30; maximum length
 		swi 0x000 // execute syscall
-		
+
 		mov r2, #0x000
 
 			_terminate:
@@ -53,7 +53,7 @@
 		mov r2, #(0x001 << 0x01e) // 30; maximum length
 		swi 0x00 // execute syscall
 
-		
+
 	_end:
 		mov r7, #0x001 // exit syscall
 		mov r0, #0x000 // exit status
