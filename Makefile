@@ -235,7 +235,7 @@ else
 endif
 
 
-all: $(PROGRAM) $(CPROGRAM)
+all: $(PROGRAM) arguments $(CPROGRAM)
 
 
 debugall: debug all 
@@ -276,7 +276,7 @@ cleanall:
 
 
 
-allarm: $(PROGRAM)
+allarm: $(PROGRAM) arguments
 
 
 debugallarm: debugarm allarm
