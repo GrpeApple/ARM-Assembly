@@ -24,6 +24,7 @@ The sources are located in `src/` directory.
 				<tr>
 					<th>Program</th>
 					<th>Description</th>
+					<th>Files</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,9 +36,37 @@ The sources are located in `src/` directory.
 				</tr>
 				<tr>
 					<td>
-						<code>arguments.S</code>
+						<code>arguments/</code>
 					</td>
 					<td>Outputs Argument Count and Value</td>
+					<td>
+						<table>
+						<thead>
+							<tr>
+								<th>Program</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code>arguments.S</code>
+								</td>
+								<td>
+									Depends on <code>int2str.S</code> for integer to string conversion.
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<code>int2str.S</code>
+								</td>
+								<td>
+									Modified version of <code>../int2str.S</code> for <code>arguments.S</code>
+								</td>
+							</tr>
+						</tbody>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>
@@ -134,6 +163,7 @@ The sources are located in `src/` directory.
 				<tr>
 					<th>Program</th>
 					<th>Description</th>
+					<th>Files</th>
 				</tr>
 			</thead>
 			<tbody>

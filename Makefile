@@ -166,11 +166,10 @@ CLEXT:=
 ### Sources
 
 
-PROGRAM:=$(shell find $(ASD) -maxdepth 1 -type f -iname "*$(ASDEXT)" -print | tr -d "$(ASDEXT)" | sed 's/.*\///')
-
+PROGRAM:=$(shell find "./$(ASD)" -maxdepth 1 -type f -iname "*$(ASDEXT)" -print | tr -d "$(ASDEXT)" | sed 's/.*\///')
 
 #### CC Sources
-CPROGRAM:=$(shell find $(CSD) -maxdepth 1 -type f -iname "*$(CSDEXT)" -print | tr -d "$(CSDEXT)" | sed 's/.*\///')
+CPROGRAM:=$(shell find "./$(CSD)" -maxdepth 1 -type f -iname "*$(CSDEXT)" -print | tr -d "$(CSDEXT)" | sed 's/.*\///')
 
 
 
@@ -179,6 +178,24 @@ help:
 	$(info $(HELP_MESSAGE))
 	@:
 
+
+arguments: $(ASD)/arguments/arguments$(ASDEXT) $(ASD)/arguments/int2str$(ASDEXT)
+	$(eval ASOUT:=$(ABUD)/$@)
+	$(eval LDOUT:=$(ABID)/$@$(LDEXT))
+ifdef $(AS)
+	$(MKDIR) $(ABID)
+	$(LD) $(LDFLAGS) -o $(LDOUT) $(LDSD)
+else ifdef $(LD)
+	$(MKDIR) $(ABUD)/$@
+	$(AS) $(ASFLAGS) -o $(ASOUT)/$@$(ASEXT) $(ASD)/$@/$@$(ASDEXT)
+	$(AS) $(ASFLAGS) -o $(ASOUT)/int2str$(ASEXT) $(ASD)/$@/int2str$(ASDEXT)
+else
+	$(MKDIR) $(ABUD)/$@
+	$(AS) $(ASFLAGS) -o $(ASOUT)/$@$(ASEXT) $(ASD)/$@/$@$(ASDEXT)
+	$(AS) $(ASFLAGS) -o $(ASOUT)/int2str$(ASEXT) $(ASD)/$@/int2str$(ASDEXT)
+	$(MKDIR) $(ABID)
+	$(LD) $(LDFLAGS) -o $(LDOUT) $(ABUD)/$@/$@$(ASEXT) $(ABUD)/$@/int2str$(ASEXT)
+endif
 
 $(PROGRAM): %: $(ASD)/%$(ASDEXT)
 	$(eval ASSD:=$<)
