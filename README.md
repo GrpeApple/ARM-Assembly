@@ -53,7 +53,7 @@ The sources are located in `src/` directory.
 									<code>arguments.S</code>
 								</td>
 								<td>
-									Depends on <code>int2str.S</code> for integer to string conversion.
+									Depends on <code>int2str.S</code> for integer to string conversion. (Argument Count)
 								</td>
 							</tr>
 							<tr>
