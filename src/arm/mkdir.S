@@ -18,8 +18,7 @@
 .section .text
 
 	.global _start
-	_start:
-		ldr r3, dir_content
+	_start:	ldr r3, dir_content
 
 	_read:
 		mov r7, #0x003 // read syscall
@@ -29,6 +28,7 @@
 		swi 0x000 // execute syscall
 		
 		mov r2, #0x000
+
 			_terminate:
 				cmp r2, #0x100 // 256
 				beq _error

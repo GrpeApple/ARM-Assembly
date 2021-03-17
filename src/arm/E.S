@@ -12,8 +12,6 @@
 		ldr r1, =string
 		mov r2, #0x01 // length
 	
-	_output:
-		swi 0x00 // execute syscall
+	_output: swi 0x00 // execute syscall
 	
-	_loop:
-		b _output // goto label _output
+	_loop: b _output // goto label _output

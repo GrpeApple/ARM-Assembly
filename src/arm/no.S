@@ -13,5 +13,4 @@
 		mov r2, #0x02 // length
 		swi 0x00 // execute syscall
 
-	_loop:
-		b _start // goto label _start
+	_loop: b _start // goto label _start
