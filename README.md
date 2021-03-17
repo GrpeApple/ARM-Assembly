@@ -85,7 +85,7 @@ The sources are located in `src/` directory.
 						<code>fork.S</code>
 					</td>
 					<td>
-						Forkbomb (Rabbit Virus) your system.<br>Do not worry, for I have added a warning and a confirmation. (y and Y fork bombs and anything otherwise)<br> So you need not have to be that <em>worried</em>.
+						Forkbomb (Rabbit Virus) your system.<br>Do not worry, for I have added 3 warnings and confirmations. (1st and 2nd confirmation are y, Y. 3rd, you have to enter <code>Yes, please fork</code> which is case-sensetive.)<br> So you need not have to be that <em>worried</em>.
 					</td>
 				</tr>
 				<tr>
