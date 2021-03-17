@@ -1,7 +1,7 @@
 .syntax unified
 
 .section .text
-	
+
 	.global _start
 	_start:
 		mov r1, #0x01 // the number to operate on

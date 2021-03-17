@@ -23,7 +23,7 @@
 		ldr r1, =division
 		smmul r1, r0, r1
 		asr r2, r1, #0x02
-		
+
 	_modulo:
 		add r1, r2, r1, lsr #0x1f // 31
 		add r1, r1, r1, lsl #0x02
@@ -41,7 +41,7 @@
 		ldr r1, [sp]
 		cmp r1, #0x00
 		beq _newline
-		
+
 		mov r7, #0x04 // write syscall
 		mov r0, #0x01 // stdout file descriptor
 		mov r1, sp

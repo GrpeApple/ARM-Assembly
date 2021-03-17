@@ -13,7 +13,7 @@
 	// err_msg: .ascii "Error: no character input"
 
 .section .text
-	
+
 	.global _start
 	_start:
 		mov r7, #0x04 // write syscall

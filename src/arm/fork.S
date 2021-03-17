@@ -7,22 +7,22 @@
 
 	.balign 0x10 // 16
 	confirm: .asciz "Do you want to continue? (y/N): "
-	
+
 	.balign 0x10 // 16
 	confirm1: .asciz "Are you sure about this? (y/N): "
-	
+
 	.balign 0x10 // 16
 	confirm2: .asciz "Final warning.....\nAre you absolutely sure? (Yes, please fork): "
-	
+
 	.balign 0x01
 	confirm_string: .asciz "y"
-	
+
 	.balign 0x08
 	confirm2_string: .asciz "Yes, please fork"
-	
+
 	.balign 0x08
 	exit: .asciz "Great decision.\n"
-	
+
 	.balign 0x10 // 16
 	fork: .asciz "Initializing fork bomb.........\n"
 
@@ -30,7 +30,7 @@
 	flush:
 
 .section .text
-	
+
 	.global _start
 	_start:
 		mov r8, #0x00 // confirm, confirm1, confirm2
@@ -69,11 +69,11 @@
 
 		pop {r2}
 		str r2, [r3]
-		
+
 		add r8, #0x01
 		bl _flush
 		b _check_fork
-	
+
 	_flush:
 		push {lr}
 
@@ -116,9 +116,9 @@
 		ldr r1, =fork
 		mov r2, #0x20 // 32; length
 		swi 0x00 // execute syscall
-	
+
 		mov r7, #0x02 // fork syscall
-	
+
 	_fork:
 		swi 0x00 // execute syscall
 
@@ -132,7 +132,7 @@
 
 		mov r7, #0x04 // write syscall
 		mov r0, #0x01 // stdout file descriptor
-		
+
 		cmp r8, #0x00 // confirm
 		ldreq r1, =confirm
 
@@ -142,7 +142,7 @@
 		cmp r8, #0x02 // confirm2
 		ldreq r1, =confirm2
 		moveq r2, #0x40 // 64; length
-		
+
 		movlt r2, #0x20 // 32; length
 
 

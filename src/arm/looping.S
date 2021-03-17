@@ -13,7 +13,7 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =for_string
 		mov r2, #0x04 // length
-		
+
 		b _loop // goto label _loop
 
 	_loop:
