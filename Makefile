@@ -299,12 +299,10 @@ runallarm:
 
 cleanarm:
 	$(RM) $(ABUD)
-	$(RM) $(BUD)
 
 
 cleanallarm:
 	$(RM) $(ABUD) $(ABID)
-	$(RM) $(BUD) $(BID)
 
 
 
@@ -331,9 +329,7 @@ runallc:
 
 cleanc:
 	$(RM) $(CBUD)
-	$(RM) $(BUD)
 
 
 cleanallc:
 	$(RM) $(CBUD) $(CBID)
-	$(RM) $(BUD) $(BID)
