@@ -1,4 +1,8 @@
 /*
+	r3 = magic division number
+	r2 = division
+	r0 = integer to be converted
+
 	I recommend you use the compiler and check the assembly output with -S.
 	If something does not make sense, try using different optimization levels.
 */
@@ -11,17 +15,17 @@
 	.global _start
 	_start:
 		push {ip}
-		mov r4, #(0x01 << 0x1e) // replace this
-		mov r0, r4
-
-	_division:
+		mov r7, #0x04 // write syscall
 		/*
 			If your architecture is ARMv7 (or above).
-			movw r1, #:lower16:division // 26215
-			movt r1, #:upper16:division // 26214
+			movw r3, #:lower16:division // 26215
+			movt r3, #:upper16:division // 26214
 		*/
-		ldr r1, =division
-		smmul r1, r0, r1
+		ldr r3, =division
+		mov r0, #(0x01 << 0x1e) // replace this
+
+	_division:
+		smmul r1, r0, r3
 		asr r2, r1, #0x02
 
 	_modulo:
@@ -37,14 +41,14 @@
 		mov r0, r2
 		cmp r0, #0x00
 		bne _division
+
 	_write:
-		ldr r1, [sp]
-		cmp r1, #0x00
+		mov r1, sp
+		ldr r3, [r1]
+		cmp r3, #0x00
 		beq _newline
 
-		mov r7, #0x04 // write syscall
 		mov r0, #0x01 // stdout file descriptor
-		mov r1, sp
 		pop {ip}
 		mov r2, #0x01 // length
 		swi 0x00 // execute syscall
@@ -60,9 +64,9 @@
 		pop {ip}
 		swi 0x00 // execute syscall
 
-		pop {ip}
 
 	_end:
+		pop {ip}
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
 		swi 0x00 // execute syscall
