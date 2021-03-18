@@ -238,7 +238,7 @@ endif
 all: $(PROGRAM) arguments $(CPROGRAM)
 
 
-debugall: debug all 
+debugall: debug all
 
 
 debug:
@@ -255,7 +255,7 @@ runall:
 	else \
 		$(RUN) ./$(ABID)/* $(ARGS); \
 	fi
-	
+
 	@if [ ! -d "./$(CBID)" ]; then \
 		echo $(RUN_MESSAGE) $(CBID); \
 	else \
