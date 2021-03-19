@@ -166,10 +166,10 @@ CLEXT:=
 ### Sources
 
 
-PROGRAM:=$(shell find "./$(ASD)" -maxdepth 1 -type f -iname "*$(ASDEXT)" -print | tr -d "$(ASDEXT)" | sed 's/.*\///')
+PROGRAM:=$(shell find "./$(ASD)" -maxdepth 1 -type f -iname "*$(ASDEXT)" -print | tr -d "$(ASDEXT)" | sed 's|.*/||')
 
 #### CC Sources
-CPROGRAM:=$(shell find "./$(CSD)" -maxdepth 1 -type f -iname "*$(CSDEXT)" -print | tr -d "$(CSDEXT)" | sed 's/.*\///')
+CPROGRAM:=$(shell find "./$(CSD)" -maxdepth 1 -type f -iname "*$(CSDEXT)" -print | tr -d "$(CSDEXT)" | sed 's|.*/||')
 
 
 
