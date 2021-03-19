@@ -2,7 +2,8 @@ on:
   push:
       paths:
           - src/**
-      workflow-dispatch:
+  pull_request:
+  workflow-dispatch:
 
 jobs:
     build:
