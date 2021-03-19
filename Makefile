@@ -197,6 +197,45 @@ else
 	$(LD) $(LDFLAGS) -o $(LDOUT) $(ABUD)/$@/$@$(ASEXT) $(ABUD)/$@/int2str$(ASEXT)
 endif
 
+
+bitwise_shift: $(ASD)/bitwise_shift/bitwise_shift$(ASDEXT) $(ASD)/bitwise_shift/int2str$(ASDEXT)
+	$(eval ASOUT:=$(ABUD)/$@)
+	$(eval LDOUT:=$(ABID)/$@$(LDEXT))
+ifdef $(AS)
+	$(MKDIR) $(ABID)
+	$(LD) $(LDFLAGS) -o $(LDOUT) $(LDSD)
+else ifdef $(LD)
+	$(MKDIR) $(ABUD)/$@
+	$(AS) $(ASFLAGS) -o $(ASOUT)/$@$(ASEXT) $(ASD)/$@/$@$(ASDEXT)
+	$(AS) $(ASFLAGS) -o $(ASOUT)/int2str$(ASEXT) $(ASD)/$@/int2str$(ASDEXT)
+else
+	$(MKDIR) $(ABUD)/$@
+	$(AS) $(ASFLAGS) -o $(ASOUT)/$@$(ASEXT) $(ASD)/$@/$@$(ASDEXT)
+	$(AS) $(ASFLAGS) -o $(ASOUT)/int2str$(ASEXT) $(ASD)/$@/int2str$(ASDEXT)
+	$(MKDIR) $(ABID)
+	$(LD) $(LDFLAGS) -o $(LDOUT) $(ABUD)/$@/$@$(ASEXT) $(ABUD)/$@/int2str$(ASEXT)
+endif
+
+
+looping: $(ASD)/looping/looping$(ASDEXT) $(ASD)/looping/int2str$(ASDEXT)
+	$(eval ASOUT:=$(ABUD)/$@)
+	$(eval LDOUT:=$(ABID)/$@$(LDEXT))
+ifdef $(AS)
+	$(MKDIR) $(ABID)
+	$(LD) $(LDFLAGS) -o $(LDOUT) $(LDSD)
+else ifdef $(LD)
+	$(MKDIR) $(ABUD)/$@
+	$(AS) $(ASFLAGS) -o $(ASOUT)/$@$(ASEXT) $(ASD)/$@/$@$(ASDEXT)
+	$(AS) $(ASFLAGS) -o $(ASOUT)/int2str$(ASEXT) $(ASD)/$@/int2str$(ASDEXT)
+else
+	$(MKDIR) $(ABUD)/$@
+	$(AS) $(ASFLAGS) -o $(ASOUT)/$@$(ASEXT) $(ASD)/$@/$@$(ASDEXT)
+	$(AS) $(ASFLAGS) -o $(ASOUT)/int2str$(ASEXT) $(ASD)/$@/int2str$(ASDEXT)
+	$(MKDIR) $(ABID)
+	$(LD) $(LDFLAGS) -o $(LDOUT) $(ABUD)/$@/$@$(ASEXT) $(ABUD)/$@/int2str$(ASEXT)
+endif
+
+
 $(PROGRAM): %: $(ASD)/%$(ASDEXT)
 	$(eval ASSD:=$<)
 	$(eval ASOUT:=$(ABUD)/$@$(ASEXT))
@@ -235,7 +274,7 @@ else
 endif
 
 
-all: $(PROGRAM) arguments $(CPROGRAM)
+all: $(PROGRAM) arguments bitwise_shift looping $(CPROGRAM)
 
 
 debugall: | debug all
@@ -273,7 +312,7 @@ cleanall:
 
 
 
-allarm: $(PROGRAM) arguments
+allarm: $(PROGRAM) arguments bitwise_shift looping
 
 
 debugallarm: | debugarm allarm
