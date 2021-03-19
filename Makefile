@@ -166,7 +166,7 @@ CLEXT:=
 ### Sources
 
 
-PROGRAM:=$(shell find "./$(ASD)" -maxdepth 1 -type f -iname "*$(ASDEXT)" -print | tr -d "$(ASDEXT)" | sed 's|.*/||')
+PROGRAM:=$(shell find './$(ASD)' -maxdepth 1 -type f -iname '*$(ASDEXT)' -print | tr -d '$(ASDEXT)' | sed 's|.*/||')
 
 #### CC Sources
 CPROGRAM:=$(shell find "./$(CSD)" -maxdepth 1 -type f -iname "*$(CSDEXT)" -print | tr -d "$(CSDEXT)" | sed 's|.*/||')
@@ -238,7 +238,7 @@ endif
 all: $(PROGRAM) arguments $(CPROGRAM)
 
 
-debugall: debug all
+debugall: | debug all
 
 
 debug:
@@ -275,7 +275,7 @@ cleanall:
 allarm: $(PROGRAM) arguments
 
 
-debugallarm: debugarm allarm
+debugallarm: | debugarm allarm
 
 
 debugarm:
@@ -302,7 +302,7 @@ cleanallarm:
 allc: $(CPROGRAM)
 
 
-debugallc: debugc allc
+debugallc: | debugc allc
 
 
 debugc:
