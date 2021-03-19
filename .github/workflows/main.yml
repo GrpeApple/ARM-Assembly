@@ -4,6 +4,8 @@ on:
           - src/**
       workflow-dispatch:
   pull_request:
+      branches-ignore:
+        - issue-templates
 
 jobs:
     build:
