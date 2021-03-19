@@ -4,6 +4,7 @@
 
 # Phony
 .PHONY: help
+.PHONY: debug debugarm debugc
 .PHONY: all debugall runall clean cleanall
 .PHONY: allarm debugallarm runallarm cleanarm cleanallarm
 .PHONY: allc debugallc runallc cleanc cleanallc
@@ -178,7 +179,7 @@ help:
 	$(info $(HELP_MESSAGE))
 	@:
 
-
+dependency:
 arguments: $(ASD)/arguments/arguments$(ASDEXT) $(ASD)/arguments/int2str$(ASDEXT)
 	$(eval ASOUT:=$(ABUD)/$@)
 	$(eval LDOUT:=$(ABID)/$@$(LDEXT))
@@ -244,6 +245,7 @@ debugall: | debug all
 debug:
 	$(eval ASFLAGS:=$(ASFLAGS) -g)
 	$(eval CCFLAGS:=$(CCFLAGS) -g)
+	@:
 
 
 runall:
@@ -280,6 +282,7 @@ debugallarm: | debugarm allarm
 
 debugarm:
 	$(eval ASFLAGS:=$(ASFLAGS) -g)
+	@:
 
 
 runallarm:
@@ -307,6 +310,7 @@ debugallc: | debugc allc
 
 debugc:
 	$(eval CFLAGS:=$(CFLAGS) -g)
+	@:
 
 
 runallc:
