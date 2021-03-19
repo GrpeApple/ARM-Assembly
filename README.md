@@ -203,7 +203,19 @@ make <program> <program1> <program2> ... .. .
 make all
 ```
 
+##### Debug
+```bash
+make debug
+```
+
 ###### Debug all programs
+```bash
+make debug all
+```
+
+or
+
+
 ```bash
 make debugall
 ```
