@@ -104,15 +104,9 @@
 		mov r7, #0x02 // fork syscall
 
 	_fork:
-		/*
 		swi 0x00 // execute syscall
 
 		b _fork
-		*/
-		mov r7, #0x01
-		mov r0, #0x02
-		swi 0x00
-
 
 	_change_write:
 		push {lr}
