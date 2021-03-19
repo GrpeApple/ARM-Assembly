@@ -246,16 +246,12 @@ debug:
 	$(eval CCFLAGS:=$(CCFLAGS) -g)
 
 
-debugall: all
-
-
 runall:
 	@if [ ! -d "./$(ABID)" ]; then \
 		echo $(RUN_MESSAGE) $(ABID); \
 	else \
 		$(RUN) ./$(ABID)/* $(ARGS); \
 	fi
-
 	@if [ ! -d "./$(CBID)" ]; then \
 		echo $(RUN_MESSAGE) $(CBID); \
 	else \
@@ -286,9 +282,6 @@ debugarm:
 	$(eval ASFLAGS:=$(ASFLAGS) -g)
 
 
-debugallarm: allarm
-
-
 runallarm:
 	@if [ ! -d "./$(ABID)" ]; then \
 		echo $(RUN_MESSAGE) $(ABID); \
@@ -314,9 +307,6 @@ debugallc: debugc allc
 
 debugc:
 	$(eval CFLAGS:=$(CFLAGS) -g)
-
-
-debugallc: allc
 
 
 runallc:
