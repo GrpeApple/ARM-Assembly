@@ -179,7 +179,6 @@ help:
 	$(info $(HELP_MESSAGE))
 	@:
 
-dependency:
 arguments: $(ASD)/arguments/arguments$(ASDEXT) $(ASD)/arguments/int2str$(ASDEXT)
 	$(eval ASOUT:=$(ABUD)/$@)
 	$(eval LDOUT:=$(ABID)/$@$(LDEXT))
