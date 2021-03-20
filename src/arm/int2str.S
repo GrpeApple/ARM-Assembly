@@ -15,6 +15,8 @@
 	.global _start
 	_start:
 		push {ip}
+		mov r1, #0x0a // 10; newline
+		push {r1}
 		mov r7, #0x04 // write syscall
 		/*
 			If your architecture is ARMv7 (or above).
@@ -34,7 +36,7 @@
 		sub r0, r0, r1, lsl #0x01
 
 	_string:
-		add r0, #0x30 // 48; 0
+		add r0, #0x30 // 48; '0'
 		push {r0}
 
 	_shift:
@@ -46,7 +48,7 @@
 		mov r1, sp
 		ldr r3, [r1]
 		cmp r3, #0x00
-		beq _newline
+		beq _end
 
 		mov r0, #0x01 // stdout file descriptor
 		pop {ip}
@@ -54,15 +56,6 @@
 		swi 0x00 // execute syscall
 
 		bne _write
-
-	_newline:
-		mov r0, #0x0a // 10; newline
-		push {r0}
-
-		mov r0, #0x01 // stdout file descriptor
-		mov r1, sp
-		pop {ip}
-		swi 0x00 // execute syscall
 
 
 	_end:
