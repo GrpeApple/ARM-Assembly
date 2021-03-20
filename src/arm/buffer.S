@@ -42,13 +42,6 @@
 		swi 0x00 // execute syscall
 
 
-	_flush:
-        	mov r7, #0x03 // read syscall
-		mov r0, #0x03 // file descriptor
-		ldr r1, =input
-		mov r2, #(0x01 << 0x1e) // 30; maximum length
-		swi 0x00 // execute syscall
-
 	_end:
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
