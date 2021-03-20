@@ -1,8 +1,3 @@
-/*
-	I recommend you use the compiler and check the assembly output with -S.
-	If something does not make sense, try using different optimization levels.
-*/
-
 .syntax unified
 .equ division, 0x66666667 // 1717986919; (2 ^ 34 + 6) / 10
 
@@ -11,6 +6,8 @@
 	.global int2str
 	int2str:
 		push {ip, lr}
+		mov r1, #0x0a // 10; newline
+		push {r1}
 
 			_division:
 				/*
@@ -28,17 +25,18 @@
 				sub r0, r0, r1, lsl #0x01
 
 			_string:
-				add r0, #0x30 // 48; 0
+				add r0, #0x30 // 48; '0'
 				push {r0}
 
 			_shift:
 				mov r0, r2
 				cmp r0, #0x00
 				bne _division
+
 			_write:
 				ldr r1, [sp]
 				cmp r1, #0x00
-				beq _newline
+				popeq {ip, pc}
 
 				mov r7, #0x04 // write syscall
 				mov r0, #0x01 // stdout file descriptor
@@ -48,14 +46,3 @@
 				swi 0x00 // execute syscall
 
 				bne _write
-
-			_newline:
-				mov r0, #0x0a // 10; newline
-				push {r0}
-
-				mov r0, #0x01 // stdout file descriptor
-				mov r1, sp
-				pop {ip}
-				swi 0x00 // execute syscall
-
-				pop {ip, pc}
