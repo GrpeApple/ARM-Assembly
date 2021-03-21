@@ -2,6 +2,11 @@
 All my ARM Assembly programs
 
 ---
+## Badges
+- Actions
+	- [![.github/workflows/main.yml](https://github.com/GrpeApple/ARM-Assembly/actions/workflows/main.yml/badge.svg?branch=test)](https://github.com/GrpeApple/ARM-Assembly/actions/workflows/main.yml)
+
+---
 ## Programs
 The sources are located in `src/` directory.
 <table>
