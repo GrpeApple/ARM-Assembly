@@ -7,7 +7,7 @@ on:
         - issue-templates
       workflow-dispatch:
   pull_request:
-        paths:
+      paths:
           - src/**
           - Makefile
       branches-ignore:
