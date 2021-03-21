@@ -2,10 +2,10 @@ on:
   push:
       paths:
           - src/**
-      workflow-dispatch:
-  pull_request:
+          - Makefile
       branches-ignore:
         - issue-templates
+      workflow-dispatch:
 
 jobs:
     build:
