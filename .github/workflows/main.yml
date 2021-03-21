@@ -6,6 +6,12 @@ on:
       branches-ignore:
         - issue-templates
       workflow-dispatch:
+  pull_request:
+        paths:
+          - src/**
+          - Makefile
+      branches-ignore:
+        - issue-templates
 
 jobs:
     build:
