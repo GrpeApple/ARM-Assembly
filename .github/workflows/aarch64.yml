@@ -8,8 +8,6 @@ on:
   pull_request:
       paths:
           - AArch64/**
-      branches-ignore:
-        - issue-templates
 
 jobs:
     build:

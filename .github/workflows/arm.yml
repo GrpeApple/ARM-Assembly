@@ -8,8 +8,6 @@ on:
   pull_request:
       paths:
           - ARM/**
-      branches-ignore:
-        - issue-templates
 
 jobs:
     build:
