@@ -1,5 +1,5 @@
 # ARM Assembly
-All my ARM Assembly programs
+ARM Assembly programs
 
 ---
 ## Programs
