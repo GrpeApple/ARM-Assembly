@@ -180,7 +180,7 @@ help:
 	@:
 
 
-(PROGRAM): %: $(ASD)/%$(ASDEXT)
+$(PROGRAM): %: $(ASD)/%$(ASDEXT)
 	$(eval ASSD:=$<)
 	$(eval ASOUT:=$(ABUD)/$@$(ASEXT))
 	$(eval LDSD:=$(ABUD)/$@$(ASEXT))
