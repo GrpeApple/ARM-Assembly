@@ -1,20 +1,18 @@
 on:
   push:
       paths:
-          - src/**
-          - Makefile
+          - ARM/**
       branches-ignore:
         - issue-templates
       workflow-dispatch:
   pull_request:
       paths:
-          - src/**
-          - Makefile
+          - ARM/**
       branches-ignore:
         - issue-templates
 
 jobs:
-    build-arm:
+    build:
         runs-on: ubuntu-20.04
 
         steps:
@@ -32,25 +30,5 @@ jobs:
                     all
             - name: Clean all
               working-directory: ./ARM
-              run: |
-                    make cleanall
-    build-aarch64:
-        runs-on: ubuntu-20.04
-
-        steps:
-            - name: Install gcc-aarch64-linux-gnu
-              run: sudo apt install gcc-aarch64-linux-gnu
-            - uses: actions/checkout@v2
-            - name: Build all ARM programs
-              working-directory: ./AArch64
-              run: |
-                    make \
-                    AS=aarch64-linux-gnu-as \
-                    LD=aarch64-linux-gnu-ld \
-                    CC=aarch64-linux-gnu-gcc \
-                    CL=aarch64-linux-gnu-gcc \
-                    all
-            - name: Clean all
-              working-directory: ./AArch64
               run: |
                     make cleanall
