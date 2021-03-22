@@ -27,14 +27,14 @@
 </table>
 ## How to contribute
 ### Main
-1. Fork the repository [ARM Assembly](https://github.com/GrpeApple/ARM-Assembly).
+1. Fork the repository [Assembly](https://github.com/GrpeApple/Assembly).
 2. Do stuff on `test` branch.
 3. If your program is working, pull request on the `main` branch.
 4. If you are ready, pull request on the main repository (`main`) from your forked repository (`main`).
 5. Wait, you need some patience.
 6. Your modified program is now on the main repo (`main`)
 ### Test
-1. Fork the repository [ARM Assembly](https://github.com/GrpeApple/ARM-Assembly).
+1. Fork the repository [Assembly](https://github.com/GrpeApple/Assembly).
 2. Do stuff on `test` branch.
 3. If you are ready, pull request on the main repository (`test`) from your forked repository branch (`test`).
 4. Wait, you need some patience.
