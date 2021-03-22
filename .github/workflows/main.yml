@@ -14,14 +14,15 @@ on:
         - issue-templates
 
 jobs:
-    build:
+    build-arm:
         runs-on: ubuntu-20.04
 
         steps:
             - name: Install gcc-arm-linux-gnueabihf
               run: sudo apt install gcc-arm-linux-gnueabihf
             - uses: actions/checkout@v2
-            - name: Build all programs
+              working-directory: ./ARM
+            - name: Build all ARM programs
               run: |
                     make \
                     AS=arm-linux-gnueabihf-as \
