@@ -1,5 +1,5 @@
 # AArch64 Assembly
-All my AArch64 Assembly programs
+AArch64 Assembly programs
 
 ---
 ## Programs
