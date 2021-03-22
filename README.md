@@ -7,6 +7,12 @@ All my Assembly programs
 	- I would like to also add various architectures (like <code>AArch64</code>) from different Assembly programming languages. And that is why I renamed it to `Assembly`.
 
 ---
+## Badges
+- Actions
+	- [![.github/workflows/arm.yml](https://github.com/GrpeApple/Assembly/actions/workflows/arm.yml/badge.svg)](https://github.com/GrpeApple/Assembly/actions/workflows/arm.yml)
+	- [![.github/workflows/aarch64.yml](https://github.com/GrpeApple/Assembly/actions/workflows/aarch64.yml/badge.svg)](https://github.com/GrpeApple/Assembly/actions/workflows/aarch64.yml)
+
+---
 ## Assembly
 <table>
 <thead>

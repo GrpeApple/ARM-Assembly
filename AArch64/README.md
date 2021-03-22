@@ -1,10 +1,5 @@
-# ARM Assembly
-All my ARM Assembly programs
-
----
-## Badges
-- Actions
-	- [![.github/workflows/main.yml](https://github.com/GrpeApple/ARM-Assembly/actions/workflows/main.yml/badge.svg?branch=test)](https://github.com/GrpeApple/ARM-Assembly/actions/workflows/main.yml)
+# AArch64 Assembly
+All my AArch64 Assembly programs
 
 ---
 ## Programs
@@ -20,7 +15,7 @@ The sources are located in `src/` directory.
 <tbody>
 	<tr>
 		<td>
-			<code>arm</code>
+			<code>aarch64</code>
 		</td>
 		<td>Programs that are assembled and linked directly.</td>
 		<td>
@@ -37,121 +32,9 @@ The sources are located in `src/` directory.
 					<td>
 						<code>E.S</code>
 					</td>
-					<td>Output 'E' infinitely</td>
-				</tr>
-				<tr>
 					<td>
-						<code>arguments/</code>
+						Outputs <code>E</code> infinitely; My first program.
 					</td>
-					<td>Outputs Argument Count and Value</td>
-					<td>
-						<table>
-						<thead>
-							<tr>
-								<th>Dependencies</th>
-								<th>Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<code>arguments.S</code>
-								</td>
-								<td>
-									Depends on <code>int2str.S</code> for integer to string conversion. (Argument Count)
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<code>int2str.S</code>
-								</td>
-								<td>
-									Modified version of <code>../int2str.S</code> for <code>arguments.S</code>
-								</td>
-							</tr>
-						</tbody>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<code>bitwise_shift.S</code>
-					</td>
-					<td>Shift numbers in bits</td>
-				</tr>
-				<tr>
-					<td>
-						<code>buffer.S</code>
-					</td>
-					<td>My attempt at using buffers</td>
-				</tr>
-				<tr>
-					<td>
-						<code>fork.S</code>
-					</td>
-					<td>
-						Forkbomb (Rabbit Virus) your system.<br>Do not worry, for I have added 3 warnings and confirmations. (1st and 2nd confirmation are y, Y. 3rd, you have to enter <code>Yes, please fork</code> which is case-sensetive.)<br> So you need not have to be that <em>worried</em>.
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<code>haha_ARM.S</code>
-					</td>
-					<td>Outputs 'haha, ARM.' My first program</td>
-				</tr>
-				<tr>
-					<td>
-						<code>int2str.S</code>
-					</td>
-					<td>Convert integer to string and print it.</td>
-				</tr>
-				<tr>
-					<td>
-						<code>link_register.S</code>
-					</td>
-					<td>My attempt at using functions with a link register</td>
-				</tr>
-				<tr>
-					<td>
-						<code>looping.S</code>
-					</td>
-					<td>Loops in ARM Assembly</td>
-				</tr>
-				<tr>
-					<td>
-						<code>mkdir.S</code>
-					</td>
-					<td>Create directories in ARM Assembly</td>
-				</tr>
-				<tr>
-					<td>
-						<code>no.S</code>
-					</td>
-					<td>Output 'no' infinitely</td>
-				</tr>
-				<tr>
-					<td>
-						<code>rm.S</code>
-					</td>
-					<td>Remove files and only files</td>
-				</tr>
-				<tr>
-					<td>
-						<code>rmdir.S</code>
-					</td>
-					<td>Remove directories (non-recursively)</td>
-				</tr>
-				<tr>
-					<td>
-						<codestack.S</code>
-					</td>
-					<td>Use the stack</td>
-				</tr>
-				<tr>
-					<td>
-						<code>uppercase.S</code>
-					</td>
-					<td>Uppercases characters</td>
 				</tr>
 			</tbody>
 			</table>
@@ -242,25 +125,25 @@ make cleanall
 
 ###### Run multiple commands
 ```bash
-make cleanall haha_ARM runall
+make cleanall E runall
 ```
 
-----
+---
 #### Advanced
 ##### Commands
 ###### Assembler
 ```bash
-make AS=arm-linux-gnueabihf-as
+make AS=aarch64-linux-gnu-as
 ```
 
 ###### Linker
 ```bash
-make LD=arm-linux-gnueabihf-ld
+make LD=aarch64-linux-gnu-ld
 ```
 
 ###### Runner
 ```bash
-make RUN=qemu-arm runall
+make RUN=qemu-aarch64 runall
 ```
 
 ###### C compiler

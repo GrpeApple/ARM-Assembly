@@ -2,11 +2,6 @@
 All my ARM Assembly programs
 
 ---
-## Badges
-- Actions
-	- [![.github/workflows/main.yml](https://github.com/GrpeApple/ARM-Assembly/actions/workflows/main.yml/badge.svg?branch=test)](https://github.com/GrpeApple/ARM-Assembly/actions/workflows/main.yml)
-
----
 ## Programs
 The sources are located in `src/` directory.
 <table>
@@ -37,7 +32,9 @@ The sources are located in `src/` directory.
 					<td>
 						<code>E.S</code>
 					</td>
-					<td>Output 'E' infinitely</td>
+					<td>
+						Outputs <code>E</code> infinitely
+					</td>
 				</tr>
 				<tr>
 					<td>
@@ -245,7 +242,7 @@ make cleanall
 make cleanall haha_ARM runall
 ```
 
-----
+---
 #### Advanced
 ##### Commands
 ###### Assembler
