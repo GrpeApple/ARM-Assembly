@@ -21,8 +21,8 @@ jobs:
             - name: Install gcc-arm-linux-gnueabihf
               run: sudo apt install gcc-arm-linux-gnueabihf
             - uses: actions/checkout@v2
-              working-directory: ./ARM
             - name: Build all ARM programs
+              working-directory: ./ARM
               run: |
                     make \
                     AS=arm-linux-gnueabihf-as \
@@ -31,5 +31,6 @@ jobs:
                     CL=arm-linux-gnueabihf-gcc \
                     all
             - name: Clean all
+              working-directory: ./ARM
               run: |
                     make cleanall
