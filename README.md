@@ -15,9 +15,6 @@ Assembly programs
 			- [![.github/workflows/aarch64.yml](https://github.com/GrpeApple/Assembly/actions/workflows/aarch64.yml/badge.svg?branch=test)](https://github.com/GrpeApple/Assembly/actions/workflows/aarch64.yml)
 	- License
 		- [![license: MIT](https://img.shields.io/github/license/GrpeApple/Assembly)](LICENSE.md)
-    - Other
-        - [![Tobly: https://img.shields.io/github/languages/top/GrpeApple/Assembly?color=lightgrey)
-
 
 ---
 ## Assembly
