@@ -2,14 +2,15 @@ on:
   push:
       paths:
           - AArch64/**
-      workflow-dispatch:
+      workflow_dispatch:
   pull_request:
       paths:
           - AArch64/**
 
 jobs:
     defaults:
-      working-directory: ./ARM
+      run:
+        working-directory: ./AArch64
 
     replace:
       runs-on: ubuntu-20.04
@@ -21,14 +22,14 @@ jobs:
           with:
             find: 'arm'
             replace: 'aarch64'
-            include: './Makefile'
+            include: './AArch64/Makefile'
           # For comments
         - name: Replace 'gnueabihf-' with 'gnu-'
           uses: jacobtomlinson/gha-find-replace@master
           with:
             find: 'gnueabihf-'
             replace: 'gnu-'
-            include: './Makefile'
+            include: './AArch64/Makefile'
         - name: Commit and push
           run: |
             if [ -n "$(git status --porcelain)" ]; then # Check if it has changes.
