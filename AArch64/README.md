@@ -15,7 +15,7 @@ The sources are located in `src/` directory.
 <tbody>
 	<tr>
 		<td>
-			<code>aarch64</code>
+			<code>aarch64/</code>
 		</td>
 		<td>Programs that are assembled and linked directly.</td>
 		<td>
@@ -33,7 +33,7 @@ The sources are located in `src/` directory.
 						<code>E.S</code>
 					</td>
 					<td>
-						Outputs <code>E</code> infinitely; My first program.
+						Outputs <code>E</code> infinitely
 					</td>
 				</tr>
 			</tbody>
@@ -42,7 +42,7 @@ The sources are located in `src/` directory.
 	</tr>
 	<tr>
 		<td>
-			<code>cc</code>
+			<code>cc/</code>
 		</td>
 		<td>Programs that depend on C (Libraries, functions, etc...)</td>
 		<td>
@@ -61,6 +61,67 @@ The sources are located in `src/` directory.
 					</td>
 					<td>
 						Depends on printf, prints <code>Hello, World!</code>
+					</td>
+				</tr>
+			</tbody>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<code>deps/</code>
+		</td>
+		<td>Global Dependencies for programs, they are usually symlinked to here.</td>
+		<td>
+			<table>
+			<thead>
+				<tr>
+					<th>Source</th>
+					<th>Description</th>
+					<th>Files</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<code>aarch64/</code>
+					</td>
+					<td>AArch64 Dependencies for programs</td>
+					<td>
+						<table>
+						<thead>
+							<tr>
+								<th>Program</th>
+								<th>Description</th>
+								<th>Files</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+							</tr>
+						</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<code>cc/</code>
+					</td>
+					<td>Dependencies that depend on C (Libraries, functions, etc...) for programs</td>
+					<td>
+						<table>
+						<thead>
+							<tr>
+								<th>Program</th>
+								<th>Description</th>
+								<th>Files</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+							</tr>
+						</tbody>
+						</table>
 					</td>
 				</tr>
 			</tbody>
@@ -148,7 +209,7 @@ make RUN=qemu-aarch64 runall
 
 ###### C compiler
 ```bash
-make CC=clang
+make CC=aarch64-linux-gnu-gcc
 ```
 
 ###### Directories

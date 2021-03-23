@@ -196,7 +196,7 @@ The sources are located in `src/` directory.
 				</tr>
 				<tr>
 					<td>
-						<codestack.S</code>
+						<code>stack.S</code>
 					</td>
 					<td>Use the stack</td>
 				</tr>
@@ -383,7 +383,7 @@ make RUN=qemu-arm runall
 
 ###### C compiler
 ```bash
-make CC=clang
+make CC=arm-linux-gnueabihf-gcc
 ```
 
 ###### Directories
