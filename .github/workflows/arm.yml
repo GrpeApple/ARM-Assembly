@@ -44,9 +44,9 @@ jobs:
         runs-on: ubuntu-20.04
 
         steps:
+            - uses: actions/checkout@v2
             - name: Install gcc-arm-linux-gnueabihf
               run: sudo apt install gcc-arm-linux-gnueabihf
-            - uses: actions/checkout@v2
             - name: Build all ARM programs
               run: |
                     make \
