@@ -475,7 +475,7 @@ Assembly programs
 
 ---
 ## Build
-### make
+### `make`
 Often, the `Makefile` has comments that are not here. Look for the comments when stuck.
 If you are still stuck, Discuss on the `Discussion` tab above. (Assuming it exists and your client supports it)
 #### Simple
