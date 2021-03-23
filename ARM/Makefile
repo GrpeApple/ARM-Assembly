@@ -38,6 +38,16 @@ AS:=as
 LD:=ld
 
 
+### C Compiler
+####CC=arm-linux-gnueabihf-gcc
+CC:=gcc
+
+
+### C Linker
+####CL=arm-linux-gnueabihf-gcc
+CL:=gcc
+
+
 ### Runner, change this if you are on another platform
 ####RUN=qemu-arm
 RUN:=
@@ -47,15 +57,6 @@ RUN:=
 ####ARGS="a b c d e f g h i j k l m n o p q r s t u v w x y z ./*"
 ARGS:=
 
-
-### C Compiler
-####CC=arm-linux-gnueabihf-gcc
-CC:=gcc
-
-
-### C Linker
-####CL=arm-linux-gnueabihf-gcc
-CL:=gcc
 
 ### Create directories
 MKDIR:=mkdir -p
