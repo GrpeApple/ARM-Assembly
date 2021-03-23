@@ -167,10 +167,14 @@ CLEXT:=
 ### Sources
 
 
-PROGRAM:=$(shell find './$(ASD)' -maxdepth 1 -type f -iname '*$(ASDEXT)' -print | tr -d '$(ASDEXT)' | sed 's|.*/||')
+PROGRAM:=$(shell find './$(ASD)' -maxdepth 1 \( -type f -o -type l \) -iname '*$(ASDEXT)' -print | tr -d '$(ASDEXT)' | sed 's|.*/||')
+PROGRAM_DIRS:=$(shell find './$(ASD)' -maxdepth 1 \( -type d -o -type l \) ! -path "./$(ASD)" -print | sed 's|.*/||')
+PROGRAM_DEPS:=$(shell for i in $(PROGRAM_DIRS); do find "./$(ASD)/$${i}" -maxdepth 1 \( -type f -o -type l \) -iname '*$(ASDEXT)' -print | tr -d '$(ASDEXT)' | sed 's|/$(ASD)/||' | sed "s|$${i}/$${i}||"; done)
 
 #### CC Sources
 CPROGRAM:=$(shell find "./$(CSD)" -maxdepth 1 -type f -iname "*$(CSDEXT)" -print | tr -d "$(CSDEXT)" | sed 's|.*/||')
+CPROGRAM_DIRS:=$(shell find './$(CSD)' -maxdepth 1 \( -type d -o -type l \) ! -path "./$(CSD)" -print | sed 's|.*/||')
+CPROGRAM_DEPS:=$(shell for i in $(CPROGRAM_DIRS); do find "./$(CSD)/$${i}" -maxdepth 1 \( -type f -o -type l \) -iname '*$(CSDEXT)' -print | tr -d '$(CSDEXT)' | sed 's|/$(CSD)/||' | sed "s|$${i}/$${i}||"; done)
 
 
 
@@ -179,61 +183,47 @@ help:
 	$(info $(HELP_MESSAGE))
 	@:
 
-arguments: $(ASD)/arguments/arguments$(ASDEXT) $(ASD)/arguments/int2str$(ASDEXT)
-	$(eval ASOUT:=$(ABUD)/$@)
+
+$(PROGRAM_DIRS): %: $(ASD)/%
+	$(eval ASSD:=$</$@$(ASDEXT))
+	$(eval ASOUT:=$(ABUD)/$@/$@$(ASEXT))
 	$(eval LDOUT:=$(ABID)/$@$(LDEXT))
 ifdef $(AS)
 	$(MKDIR) $(ABID)
-	$(LD) $(LDFLAGS) -o $(LDOUT) $(LDSD)
+	$(LD) $(LDFLAGS) -o $(LDOUT) $(shell echo $(ABUD)/$@/*$(ASEXT))
 else ifdef $(LD)
-	$(MKDIR) $(ABUD)/$@
-	$(AS) $(ASFLAGS) -o $(ASOUT)/$@$(ASEXT) $(ASD)/$@/$@$(ASDEXT)
-	$(AS) $(ASFLAGS) -o $(ASOUT)/int2str$(ASEXT) $(ASD)/$@/int2str$(ASDEXT)
+	$(MKDIR) $(ABUD)/$@/
+	$(AS) $(ASFLAGS) -o $(ASOUT) $(ASSD)
+	for i in $(shell echo '$(PROGRAM_DEPS)' | grep -o '$@\S*'); do $(AS) $(ASFLAGS) -o "$(ABUD)/$${i}$(ASEXT)" "$(ASD)/$${i}$(ASDEXT)"; done
 else
-	$(MKDIR) $(ABUD)/$@
-	$(AS) $(ASFLAGS) -o $(ASOUT)/$@$(ASEXT) $(ASD)/$@/$@$(ASDEXT)
-	$(AS) $(ASFLAGS) -o $(ASOUT)/int2str$(ASEXT) $(ASD)/$@/int2str$(ASDEXT)
+	$(MKDIR) $(ABUD)/$@/
+	$(AS) $(ASFLAGS) -o $(ASOUT) $(ASSD)
+	for i in $(shell echo '$(PROGRAM_DEPS)' | grep -o '$@\S*'); do $(AS) $(ASFLAGS) -o "$(ABUD)/$${i}$(ASEXT)" "$(ASD)/$${i}$(ASDEXT)"; done
 	$(MKDIR) $(ABID)
-	$(LD) $(LDFLAGS) -o $(LDOUT) $(ABUD)/$@/$@$(ASEXT) $(ABUD)/$@/int2str$(ASEXT)
+	$(LD) $(LDFLAGS) -o $(LDOUT) $(shell echo $(ABUD)/$@/*$(ASEXT))
 endif
+	@:
 
 
-bitwise_shift: $(ASD)/bitwise_shift/bitwise_shift$(ASDEXT) $(ASD)/bitwise_shift/int2str$(ASDEXT)
-	$(eval ASOUT:=$(ABUD)/$@)
-	$(eval LDOUT:=$(ABID)/$@$(LDEXT))
-ifdef $(AS)
-	$(MKDIR) $(ABID)
-	$(LD) $(LDFLAGS) -o $(LDOUT) $(LDSD)
-else ifdef $(LD)
-	$(MKDIR) $(ABUD)/$@
-	$(AS) $(ASFLAGS) -o $(ASOUT)/$@$(ASEXT) $(ASD)/$@/$@$(ASDEXT)
-	$(AS) $(ASFLAGS) -o $(ASOUT)/int2str$(ASEXT) $(ASD)/$@/int2str$(ASDEXT)
+$(CPROGRAM_DIRS): %: $(CSD)/%
+	$(eval CCSD:=$</$@$(CSDEXT))
+	$(eval CCOUT:=$(CBUD)/$@/$@$(CCEXT))
+	$(eval CLOUT:=$(CBID)/$@$(CLEXT))
+ifdef $(CC)
+	$(MKDIR) $(CBID)
+	$(CL) $(CLFLAGS) -o $(CLOUT) $(shell echo $(CBUD)/$@/*$(CCEXT))
+else ifdef $(CL)
+	$(MKDIR) $(CBUD)/$@/
+	$(CC) $(CCFLAGS) -c -o $(CCOUT) $(CCSD)
+	for i in $(shell echo '$(CPROGRAM_DEPS)' | grep -o '$@\S*'); do $(CC) $(CCFLAGS) -o "$(CBUD)/$${i}$(CCEXT)" "$(CSD)/$${i}$(CSDEXT)"; done
 else
-	$(MKDIR) $(ABUD)/$@
-	$(AS) $(ASFLAGS) -o $(ASOUT)/$@$(ASEXT) $(ASD)/$@/$@$(ASDEXT)
-	$(AS) $(ASFLAGS) -o $(ASOUT)/int2str$(ASEXT) $(ASD)/$@/int2str$(ASDEXT)
-	$(MKDIR) $(ABID)
-	$(LD) $(LDFLAGS) -o $(LDOUT) $(ABUD)/$@/$@$(ASEXT) $(ABUD)/$@/int2str$(ASEXT)
+	$(MKDIR) $(CBUD)/$@/
+	$(CC) $(CCFLAGS) -c -o $(CCOUT) $(CCSD)
+	for i in $(shell echo '$(CPROGRAM_DEPS)' | grep -o '$@\S*'); do $(CC) $(CCFLAGS) -o "$(CBUD)/$${i}$(CCEXT)" "$(CSD)/$${i}$(CSDEXT)"; done
+	$(MKDIR) $(CBID)
+	$(CL) $(CLFLAGS) -o $(CLOUT) $(shell echo $(CBUD)/$@/*$(CCEXT))
 endif
-
-
-looping: $(ASD)/looping/looping$(ASDEXT) $(ASD)/looping/int2str$(ASDEXT)
-	$(eval ASOUT:=$(ABUD)/$@)
-	$(eval LDOUT:=$(ABID)/$@$(LDEXT))
-ifdef $(AS)
-	$(MKDIR) $(ABID)
-	$(LD) $(LDFLAGS) -o $(LDOUT) $(LDSD)
-else ifdef $(LD)
-	$(MKDIR) $(ABUD)/$@
-	$(AS) $(ASFLAGS) -o $(ASOUT)/$@$(ASEXT) $(ASD)/$@/$@$(ASDEXT)
-	$(AS) $(ASFLAGS) -o $(ASOUT)/int2str$(ASEXT) $(ASD)/$@/int2str$(ASDEXT)
-else
-	$(MKDIR) $(ABUD)/$@
-	$(AS) $(ASFLAGS) -o $(ASOUT)/$@$(ASEXT) $(ASD)/$@/$@$(ASDEXT)
-	$(AS) $(ASFLAGS) -o $(ASOUT)/int2str$(ASEXT) $(ASD)/$@/int2str$(ASDEXT)
-	$(MKDIR) $(ABID)
-	$(LD) $(LDFLAGS) -o $(LDOUT) $(ABUD)/$@/$@$(ASEXT) $(ABUD)/$@/int2str$(ASEXT)
-endif
+	@:
 
 
 $(PROGRAM): %: $(ASD)/%$(ASDEXT)
@@ -253,6 +243,7 @@ else
 	$(MKDIR) $(ABID)
 	$(LD) $(LDFLAGS) -o $(LDOUT) $(LDSD)
 endif
+	@:
 
 
 $(CPROGRAM): %: $(CSD)/%$(CSDEXT)
@@ -262,7 +253,7 @@ $(CPROGRAM): %: $(CSD)/%$(CSDEXT)
 	$(eval CLOUT:=$(CBID)/$@$(CLEXT))
 ifdef $(CC)
 	$(MKDIR) $(CBID)
-	$(CL) $(CLFLAGS) -o $(CCOUTT) $(CLSD)
+	$(CL) $(CLFLAGS) -c -o $(CCOUT) $(CLSD)
 else ifdef $(CL)
 	$(MKDIR) $(CBUD)
 	$(CC) $(CCFLAGS) -o $(CLOUT) $(CCSD)
@@ -272,9 +263,10 @@ else
 	$(MKDIR) $(CBID)
 	$(CL) $(CLFLAGS) -o $(CLOUT) $(CLSD)
 endif
+	@:
 
 
-all: $(PROGRAM) arguments bitwise_shift looping $(CPROGRAM)
+all: $(PROGRAM_DIRS) $(CPROGRAM_DIRS) $(PROGRAM) $(CPROGRAM)
 
 
 debugall: | debug all
@@ -297,22 +289,24 @@ runall:
 	else \
 		$(RUN) ./$(CBID)/* $(ARGS); \
 	fi
+	@:
 
 
 clean:
 	$(RM) $(ABUD)
 	$(RM) $(CBUD)
 	$(RM) $(BUD)
+	@:
 
 
 cleanall:
 	$(RM) $(ABUD) $(ABID)
 	$(RM) $(CBUD) $(CBID)
 	$(RM) $(BUD) $(BID)
+	@:
 
 
-
-allarm: $(PROGRAM) arguments bitwise_shift looping
+allarm: $(PROGRAM_DIRS) $(PROGRAM)
 
 
 debugallarm: | debugarm allarm
@@ -329,18 +323,20 @@ runallarm:
 	else \
 		$(RUN) ./$(ABID)/* $(ARGS); \
 	fi
+	@:
 
 
 cleanarm:
 	$(RM) $(ABUD)
+	@:
 
 
 cleanallarm:
 	$(RM) $(ABUD) $(ABID)
+	@:
 
 
-
-allc: $(CPROGRAM)
+allc: $(CPROGRAM_DIRS) $(CPROGRAM)
 
 
 debugallc: | debugc allc
@@ -357,11 +353,14 @@ runallc:
 	else \
 		$(RUN) ./$(CBID)/* $(ARGS); \
 	fi
+	@:
 
 
 cleanc:
 	$(RM) $(CBUD)
+	@:
 
 
 cleanallc:
 	$(RM) $(CBUD) $(CBID)
+	@:

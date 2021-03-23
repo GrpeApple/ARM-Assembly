@@ -15,7 +15,7 @@ The sources are located in `src/` directory.
 <tbody>
 	<tr>
 		<td>
-			<code>arm</code>
+			<code>arm/</code>
 		</td>
 		<td>Programs that are assembled and linked directly.</td>
 		<td>
@@ -63,7 +63,7 @@ The sources are located in `src/` directory.
 									<code>int2str.S</code>
 								</td>
 								<td>
-									Modified version of <code>../int2str.S</code> for <code>arguments.S</code>
+									A symlink to <code>../../deps/int2str.S</code>
 								</td>
 							</tr>
 						</tbody>
@@ -72,9 +72,37 @@ The sources are located in `src/` directory.
 				</tr>
 				<tr>
 					<td>
-						<code>bitwise_shift.S</code>
+						<code>bitwise_shift/</code>
 					</td>
 					<td>Shift numbers in bits</td>
+					<td>
+						<table>
+						<thead>
+							<tr>
+								<th>Dependencies</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code>bitwise_shift.S</code>
+								</td>
+								<td>
+									Depends on <code>int2str.S</code> for integer to string conversion. (Bitwise shifted integer)
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<code>int2str.S</code>
+								</td>
+								<td>
+									A symlink to <code>../../deps/int2str.S</code>
+								</td>
+							</tr>
+						</tbody>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>
@@ -110,9 +138,37 @@ The sources are located in `src/` directory.
 				</tr>
 				<tr>
 					<td>
-						<code>looping.S</code>
+						<code>looping/</code>
 					</td>
 					<td>Loops in ARM Assembly</td>
+					<td>
+						<table>
+						<thead>
+							<tr>
+								<th>Dependencies</th>
+								<th>Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code>loop.S</code>
+								</td>
+								<td>
+									Depends on <code>int2str.S</code> for integer to string conversion. (Loop integer)
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<code>int2str.S</code>
+								</td>
+								<td>
+									A symlink to <code>../../deps/int2str.S</code>
+								</td>
+							</tr>
+						</tbody>
+						</table>
+					</td>
 				</tr>
 				<tr>
 					<td>
@@ -156,7 +212,7 @@ The sources are located in `src/` directory.
 	</tr>
 	<tr>
 		<td>
-			<code>cc</code>
+			<code>cc/</code>
 		</td>
 		<td>Programs that depend on C (Libraries, functions, etc...)</td>
 		<td>
@@ -175,6 +231,71 @@ The sources are located in `src/` directory.
 					</td>
 					<td>
 						Depends on printf, prints <code>Hello, World!</code>
+					</td>
+				</tr>
+			</tbody>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<code>deps/</code>
+		</td>
+		<td>Global Dependencies for programs, they are usually symlinked to here.</td>
+		<td>
+			<table>
+			<thead>
+				<tr>
+					<th>Source</th>
+					<th>Description</th>
+					<th>Files</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<code>arm/</code>
+					</td>
+					<td>ARM Dependencies for programs</td>
+					<td>
+						<table>
+						<thead>
+							<tr>
+								<th>Program</th>
+								<th>Description</th>
+								<th>Files</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code>int2str.S</code>
+								</td>
+								<td>Modified <code>../../arm/int2str.S</code> for dependencies</td>
+							</tr>
+						</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<code>cc/</code>
+					</td>
+					<td>Dependencies that depend on C (Libraries, functions, etc...) for programs</td>
+					<td>
+						<table>
+						<thead>
+							<tr>
+								<th>Program</th>
+								<th>Description</th>
+								<th>Files</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+							</tr>
+						</tbody>
+						</table>
 					</td>
 				</tr>
 			</tbody>
