@@ -2,15 +2,44 @@ on:
   push:
       paths:
           - AArch64/**
-      branches-ignore:
-        - issue-templates
       workflow-dispatch:
   pull_request:
       paths:
           - AArch64/**
 
 jobs:
+    defaults:
+      working-directory: ./ARM
+
+    replace:
+      runs-on: ubuntu-20.04
+
+      steps:
+        - uses: actions/checkout@v2
+        - name: Replace 'arm' with 'aarch64'
+          uses: jacobtomlinson/gha-find-replace@master
+          with:
+            find: 'arm'
+            replace: 'aarch64'
+            include: './Makefile'
+          # For comments
+        - name: Replace 'gnueabihf-' with 'gnu-'
+          uses: jacobtomlinson/gha-find-replace@master
+          with:
+            find: 'gnueabihf-'
+            replace: 'gnu-'
+            include: './Makefile'
+        - name: Commit and push
+          run: |
+            if [ -n "$(git status --porcelain)" ]; then # Check if it has changes.
+              git config user.name github-actions
+              git config user.email github-actions@github.com
+              git add './Makefile'
+              git commit -m "Change"
+            fi
+
     build:
+        needs: replace
         runs-on: ubuntu-20.04
 
         steps:
@@ -18,7 +47,6 @@ jobs:
               run: sudo apt install gcc-aarch64-linux-gnu
             - uses: actions/checkout@v2
             - name: Build all AArch64 programs
-              working-directory: ./AArch64
               run: |
                     make \
                     AS=aarch64-linux-gnu-as \
@@ -27,6 +55,5 @@ jobs:
                     CL=aarch64-linux-gnu-gcc \
                     all
             - name: Clean all
-              working-directory: ./AArch64
               run: |
                     make cleanall
