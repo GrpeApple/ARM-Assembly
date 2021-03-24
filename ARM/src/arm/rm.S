@@ -12,7 +12,7 @@
 		mov r7, #0x03 // read syscall
 		mov r0, #0x00 // stdin file descriptor
 		ldr r1, =file
-		mov r2, #(0x01 << 0x1e) // 30; nmaximum length
+		mov r2, #(0x01 << 0x1e) // 30; maximum length
 		swi 0x00 // execute syscall
 
 		sub r0, #0x01
