@@ -156,6 +156,14 @@ Assembly programs
 							</tr>
 							<tr>
 								<td>
+									<code>hello.S</code>
+								</td>
+								<td>
+									Outputs <code>Hello, World!</code>
+								</td>
+							</tr>
+							<tr>
+								<td>
 									<code>int2str.S</code>
 								</td>
 								<td>Convert integer to string and print it.</td>
@@ -372,6 +380,14 @@ Assembly programs
 								</td>
 								<td>
 									Outputs <code>E</code> infinitely
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<code>hello.S</code>
+								</td>
+								<td>
+									Outputs <code>Hello, World!</code>
 								</td>
 							</tr>
 						</tbody>
