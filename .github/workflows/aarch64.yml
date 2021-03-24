@@ -18,25 +18,17 @@ jobs:
       steps:
         - uses: actions/checkout@v2
         - name: Replace 'arm' with 'aarch64'
-          uses: jacobtomlinson/gha-find-replace@master
-          with:
-            find: 'arm'
-            replace: 'aarch64'
-            include: './AArch64/Makefile'
+          run: sed -i 's|arm|aarch64|g' './Makefile'
           # For comments
         - name: Replace 'gnueabihf-' with 'gnu-'
-          uses: jacobtomlinson/gha-find-replace@master
-          with:
-            find: 'gnueabihf-'
-            replace: 'gnu-'
-            include: './AArch64/Makefile'
+          run: sed -i 's|gnueabihf-|gnu-|g' './Makefile'
         - name: Commit and push
           run: |
             if [ -n "$(git status --porcelain)" ]; then # Check if it has changes.
               git config user.name github-actions
               git config user.email github-actions@github.com
               git add './Makefile'
-              git commit -m "Change"
+              git commit -m 'Fix typos'
               git push origin
             fi
 
