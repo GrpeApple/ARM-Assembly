@@ -189,10 +189,10 @@ $(PROGRAM_DIRS): %: $(ASD)/%
 	$(eval ASSD:=$</$@$(ASDEXT))
 	$(eval ASOUT:=$(ABUD)/$@/$@$(ASEXT))
 	$(eval LDOUT:=$(ABID)/$@$(LDEXT))
-ifdef $(AS)
+ifndef AS
 	$(MKDIR) $(ABID)
 	$(LD) $(LDFLAGS) -o $(LDOUT) $(shell echo $(ABUD)/$@/*$(ASEXT))
-else ifdef $(LD)
+else ifndef LD
 	$(MKDIR) $(ABUD)/$@/
 	$(AS) $(ASFLAGS) -o $(ASOUT) $(ASSD)
 	for i in $(shell echo '$(PROGRAM_DEPS)' | grep -o '$@\S*'); do $(AS) $(ASFLAGS) -o "$(ABUD)/$${i}$(ASEXT)" "$(ASD)/$${i}$(ASDEXT)"; done
@@ -210,10 +210,10 @@ $(CPROGRAM_DIRS): %: $(CSD)/%
 	$(eval CCSD:=$</$@$(CSDEXT))
 	$(eval CCOUT:=$(CBUD)/$@/$@$(CCEXT))
 	$(eval CLOUT:=$(CBID)/$@$(CLEXT))
-ifdef $(CC)
+ifndef CC
 	$(MKDIR) $(CBID)
 	$(CL) $(CLFLAGS) -o $(CLOUT) $(shell echo $(CBUD)/$@/*$(CCEXT))
-else ifdef $(CL)
+else ifndef CL
 	$(MKDIR) $(CBUD)/$@/
 	$(CC) $(CCFLAGS) -c -o $(CCOUT) $(CCSD)
 	for i in $(shell echo '$(CPROGRAM_DEPS)' | grep -o '$@\S*'); do $(CC) $(CCFLAGS) -o "$(CBUD)/$${i}$(CCEXT)" "$(CSD)/$${i}$(CSDEXT)"; done
@@ -232,10 +232,10 @@ $(PROGRAM): %: $(ASD)/%$(ASDEXT)
 	$(eval ASOUT:=$(ABUD)/$@$(ASEXT))
 	$(eval LDSD:=$(ABUD)/$@$(ASEXT))
 	$(eval LDOUT:=$(ABID)/$@$(LDEXT))
-ifdef $(AS)
+ifndef AS
 	$(MKDIR) $(ABID)
 	$(LD) $(LDFLAGS) -o $(LDOUT) $(LDSD)
-else ifdef $(LD)
+else ifndef LD
 	$(MKDIR) $(ABUD)
 	$(AS) $(ASFLAGS) -o $(ASOUT) $(ASSD)
 else
@@ -252,10 +252,10 @@ $(CPROGRAM): %: $(CSD)/%$(CSDEXT)
 	$(eval CCOUT:=$(CBUD)/$@$(CEXT))
 	$(eval CLSD:=$(CBUD)/$@$(CEXT))
 	$(eval CLOUT:=$(CBID)/$@$(CLEXT))
-ifdef $(CC)
+ifndef CC
 	$(MKDIR) $(CBID)
 	$(CL) $(CLFLAGS) -c -o $(CCOUT) $(CLSD)
-else ifdef $(CL)
+else ifndef CL
 	$(MKDIR) $(CBUD)
 	$(CC) $(CCFLAGS) -o $(CLOUT) $(CCSD)
 else
