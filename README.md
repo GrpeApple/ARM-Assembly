@@ -1,16 +1,3 @@
-# Table of Contents
-<!--ts-->
-- [Assembly](#assembly)
-- [FAQ](#faq)
-- [Badges](#badges)
-- [Assembly](#assembly-1)
-- [Build](#build)
-	- [make](#make)
-	- [Manual](#manual)
-
-<!--te-->
-
-----
 # Assembly
 Assembly programs
 
