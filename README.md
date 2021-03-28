@@ -1,12 +1,33 @@
+# Table of Contents
+<!--ts-->
+   * [Table of Contents](#table-of-contents)
+   * [Assembly](#assembly)
+      * [FAQ](#faq)
+      * [Badges](#badges)
+      * [Assembly](#assembly-1)
+      * [Build](#build)
+         * [make](#make)
+         * [Manual](#manual)
+                  * [Single program](#single-program)
+                  * [Multiple dependencies](#multiple-dependencies)
+                  * [debug (gdb)](#debug-gdb)
+                  * [Run all](#run-all)
+                  * [Binary extension](#binary-extension)
+
+<!-- Added by: u0_a452, at: Sat Mar 27 21:15:43 +08 2021 -->
+
+<!--te-->
+
+----
 # Assembly
 Assembly programs
 
----
+----
 ## FAQ
 - What happened to `ARM-Assembly`?
 	- I would like to also add various architectures (like <code>AArch64</code>) from different Assembly programming languages. And that is why I renamed it to `Assembly`.
 
----
+----
 ## Badges
 - Github
 	- Actions
@@ -16,7 +37,7 @@ Assembly programs
 	- License
 		- [![license: MIT](https://img.shields.io/github/license/GrpeApple/Assembly)](LICENSE.md)
 
----
+----
 ## Assembly
 
 <table>
@@ -489,103 +510,113 @@ Assembly programs
 </tbody>
 </table>
 
----
+----
 ## Build
 ### `make`
 Often, the `Makefile` has comments that are not here. Look for the comments when stuck.
 If you are still stuck, Discuss on the `Discussion` tab above. (Assuming it exists and your client supports it)
-#### Simple
-###### Program
-```bash
-make <program>
-```
+The following table assumes you:
+- Installed `make`.
+- On an Architecture (like `ARM`) folder.
+- The `Makefile` exists.
+- On GNU Make (Might work on other versions).
+	- Version 4.3 (Might work on other versions).
+- Have an assembler (like `as`) and compiler (like `gcc`) installed.
 
-###### Multiple programs
-```bash
-make <program> <program1> <program2> ... .. .
-```
+Run the commands with `make <command>`.
 
-###### All programs
-```bash
-make all
-```
+-----
 
-##### Debug
-```bash
-make debug
-```
+<table>
+<thead>
+	<tr>
+		<th>Action</th>
+		<th>Command</th>
+		<th>Description</th>
+		<th>Notes</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td></td>
+		<td>
+			<code>make</code>
+		</td>
+		<td>Shows a help message.</td>
+		<td>You can modify the help message (`HELP_MESSAGE`) in the `Makefile`.</td> 
+	</tr>
+</tbody>
+</table>
 
-###### Debug all programs
-```bash
-make debug all
-```
-
-or
-
-
-```bash
-make debugall
-```
-
-###### Run all
-```bash
-make runall
-```
-
-###### Clean assembled
-```bash
-make clean
-```
-
-###### Clean all
-```bash
-make cleanall
-```
-
-###### Run multiple commands
-```bash
-make cleanall E runall
-```
-
----
+-----
 ### Manual
-###### Single program
-```bash
-as -o <program>.o <program>.S
-ld -o <program> <program>.o
-```
 
-###### Multiple dependencies
-```bash
-as -o <program>.o <program>.S
-as -o <program1>.o <program1>.S
-as -o <program2>.o <program2>.S
-as -o <program3>.o <program3>.S
-as -o <program4>.o <program4>.S
-as -o <program5>.o <program5>.S
-ld -o <program> \
-<program> \
-<program1> \
-<program2> \
-<program3> \
-<program4> \
-<program5>
-```
+<table>
+<thead>
+	<tr>
+		<th>Action</th>
+		<th>Command</th>
+		<th>Description</th>
+		<th>Notes</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>Single program</td>
+		<td>
+			
+			```bash
+			as -o <program>.o <program>.S
+			ld -o <program> <program>.o
+			```
 
-###### debug (gdb)
-```bash
-as -g -o <program>.o <program>.S
-ld -o <program> <program>.o
-gdb ./<program>
-```
+		</td>
+		<td>Command for assembling and linking a single program</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Multiple dependencies</td>
+		<td>
 
-###### Run all
-```bash
-./*
-```
+			```bash
+			as -o <program>.o <program>.S
+			as -o <program1>.o <program1>.S
+			as -o <program2>.o <program2>.S
+			as -o <program3>.o <program3>.S
+			as -o <program4>.o <program4>.S
+			as -o <program5>.o <program5>.S
+			ld -o <program> \
+			<program>.o \
+			<program1>.o \
+			<program2>.o \
+			<program3>.o \
+			<program4>.o \
+			<program5>.o
+			```
 
-###### Binary extension
-```
-as -o <program>.o <program>.S
-ld -o <program>.bin <program>.S
-```
+		</td>
+		<td>Command for assembling and linking programs that depend on other programs</td>
+		<td>
+			You can eliminate the need of <code>/</code> to stay it on a single line, like <code>ld -o <program> <program>.o <program1>.o <program2>.o <program3>.o <program4>.o <program5>.o</code> it is just for readability. You can further shorten it (if your shell supports it) with <code>ld -o <program> {program,program1,program2,program3,program4,program5}.o</code>.
+		</td>
+	</tr>
+	<tr>
+		<td>Debug (gdb)</td>
+		<td>
+
+			```bash
+			as -g -o <program>.o <program>.S
+			ld -o <program> <program>.o
+			gdb ./<program>
+			```
+
+		</td>
+		<td>
+			Debug with the flag <code>-g</code> if your device supports it.
+		</td>
+		<td>
+			You can use a debugger like <code>gdb</code> to debug a certain program.
+		</td>
+	</tr>
+</tbody>
+</table>
