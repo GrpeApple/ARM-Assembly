@@ -515,7 +515,7 @@ The following table assumes you:
 	- Version 4.3 (Might work on other versions).
 - Have an assembler (like `as`) and compiler (like `gcc`) installed.
 
-Run the commands with `make <command>`.
+Run the commands with `make [command]`.
 
 -----
 
