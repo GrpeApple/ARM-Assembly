@@ -565,8 +565,8 @@ Run the commands with `make <command>`.
 		<td>Single program</td>
 		<td>
 			<pre><code>
-as -o <program>.o <program>.S
-ld -o <program> <program>.o
+as -o [program].o [program].S
+ld -o [program] [program].o
 			</pre></code>
 		</td>
 		<td>Command for assembling and linking a single program</td>
@@ -576,33 +576,32 @@ ld -o <program> <program>.o
 		<td>Multiple dependencies</td>
 		<td>
 			<pre><code>
-as -o <program>.o <program>.S
-as -o <program1>.o <program1>.S
-as -o <program2>.o <program2>.S
-as -o <program3>.o <program3>.S
-as -o <program4>.o <program4>.S
-as -o <program5>.o <program5>.S
-ld -o <program> \
-<program>.o \
-<program1>.o \
-<program2>.o \
-<program3>.o \
-<program4>.o \
-<program5>.o
+as -o [program].o [program].S
+as -o [program1].o [program1].S
+as -o [program2].o [program2].S
+as -o [program3].o [program3].S
+as -o [program4].o [program4].S
+as -o [program5].o [program5].S
+ld -o [program] \
+[program].o \
+[program1].o \
+[program2].o \
+[program3].o \
+[program4].o \
+[program5].o
 			</pre></code>
 		</td>
 		<td>Command for assembling and linking programs that depend on other programs</td>
 		<td>
-			You can eliminate the need of <code>/</code> to stay it on a single line, like <code>ld -o <program> <program>.o <program1>.o <program2>.o <program3>.o <program4>.o <program5>.o</code> it is just for readability. You can further shorten it (if your shell supports it) with <code>ld -o <program> {program,program1,program2,program3,program4,program5}.o</code>.
+			You can eliminate the need of <code>/</code> to stay it on a single line, like <code>ld -o [program] [program].o [program1].o [program2].o [program3].o [program4].o [program5].o</code> it is just for readability. You can further shorten it (if your shell supports it) with <code>ld -o ]program] {[program],[program1],[program2],[program3],[program4],[program5]}.o</code>.
 		</td>
 	</tr>
 	<tr>
-		<td>Debug (gdb)</td>
+		<td>Debug</td>
 		<td>
 			<pre><code>
-as -g -o <program>.o <program>.S
-ld -o <program> <program>.o
-gdb ./<program>
+as -g -o [program].o [program].S
+ld -o [program] [program].o
 			</pre></code>
 		</td>
 		<td>
