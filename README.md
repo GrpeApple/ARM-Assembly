@@ -518,11 +518,21 @@ Run the commands with `make [command]`.
 <tbody>
 	<tr>
 		<td></td>
+		<td></td>
+		<td>Shows a help message.</td>
 		<td>
-			<code>make</code>
+			You can modify the help message (<code>HELP_MESSAGE</code>) in the <code>Makefile</code>.
+		</td>
+	</tr>
+	<tr>
+		<td>Help</td>
+		<td>
+			<code>help</code>
 		</td>
 		<td>Shows a help message.</td>
-		<td>You can modify the help message (`HELP_MESSAGE`) in the `Makefile`.</td> 
+		<td>
+			You can modify the help message (<code>HELP_MESSAGE</code>) in the <code>Makefile</code>.
+		</td>
 	</tr>
 </tbody>
 </table>
@@ -546,7 +556,7 @@ Run the commands with `make [command]`.
 			<pre><code>
 as -o [program].o [program].S
 ld -o [program] [program].o
-			</pre></code>
+			</code></pre>
 		</td>
 		<td>Command for assembling and linking a single program</td>
 		<td></td>
@@ -568,7 +578,7 @@ ld -o [program] \
 [program3].o \
 [program4].o \
 [program5].o
-			</pre></code>
+			</code></pre>
 		</td>
 		<td>Command for assembling and linking programs that depend on other programs</td>
 		<td>
@@ -581,7 +591,7 @@ ld -o [program] \
 			<pre><code>
 as -g -o [program].o [program].S
 ld -o [program] [program].o
-			</pre></code>
+			</code></pre>
 		</td>
 		<td>
 			Debug with the flag <code>-g</code> if your device supports it.
