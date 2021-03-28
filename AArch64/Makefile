@@ -4,10 +4,10 @@
 
 # Phony
 .PHONY: help
-.PHONY: debug debugaarch64 debugc
+.PHONY: debug debugaarch64 debugcc
 .PHONY: all debugall runall clean cleanall
 .PHONY: allaarch64 debugallaarch64 runallaarch64 cleanaarch64 cleanallaarch64
-.PHONY: allc debugallc runallc cleanc cleanallc
+.PHONY: allcc debugallcc runallcc cleancc cleanallcc
 
 # Variables
 
@@ -337,18 +337,18 @@ cleanallaarch64:
 	@:
 
 
-allc: $(CPROGRAM_DIRS) $(CPROGRAM)
+allcc: $(CPROGRAM_DIRS) $(CPROGRAM)
 
 
-debugallc: | debugc allc
+debugallcc: | debugcc allcc
 
 
-debugc:
-	$(eval CFLAGS:=$(CFLAGS) -g)
+debugcc:
+	$(eval CCFLAGS:=$(CCFLAGS) -g)
 	@:
 
 
-runallc:
+runallcc:
 	@if [ ! -d "./$(CBID)" ]; then \
 		echo $(RUN_MESSAGE) $(CBID); \
 	else \
@@ -357,11 +357,11 @@ runallc:
 	@:
 
 
-cleanc:
+cleancc:
 	$(RM) $(CBUD)
 	@:
 
 
-cleanallc:
+cleanallcc:
 	$(RM) $(CBUD) $(CBID)
 	@:
