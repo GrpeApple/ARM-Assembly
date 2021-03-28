@@ -564,12 +564,10 @@ Run the commands with `make <command>`.
 	<tr>
 		<td>Single program</td>
 		<td>
-			
-```bash
-as -o <program>.o <program>.S
-ld -o <program> <program>.o
-```
-
+			<code>
+			as -o <program>.o <program>.S
+			ld -o <program> <program>.o
+			</code>
 		</td>
 		<td>Command for assembling and linking a single program</td>
 		<td></td>
@@ -577,23 +575,21 @@ ld -o <program> <program>.o
 	<tr>
 		<td>Multiple dependencies</td>
 		<td>
-
-```bash
-as -o <program>.o <program>.S
-as -o <program1>.o <program1>.S
-as -o <program2>.o <program2>.S
-as -o <program3>.o <program3>.S
-as -o <program4>.o <program4>.S
-as -o <program5>.o <program5>.S
-ld -o <program> \
-<program>.o \
-<program1>.o \
-<program2>.o \
-<program3>.o \
-<program4>.o \
-<program5>.o
-```
-
+			<code>
+				as -o <program>.o <program>.S
+				as -o <program1>.o <program1>.S
+				as -o <program2>.o <program2>.S
+				as -o <program3>.o <program3>.S
+				as -o <program4>.o <program4>.S
+				as -o <program5>.o <program5>.S
+				ld -o <program> \
+				<program>.o \
+				<program1>.o \
+				<program2>.o \
+				<program3>.o \
+				<program4>.o \
+				<program5>.o
+			</code>
 		</td>
 		<td>Command for assembling and linking programs that depend on other programs</td>
 		<td>
@@ -603,13 +599,11 @@ ld -o <program> \
 	<tr>
 		<td>Debug (gdb)</td>
 		<td>
-
-```bash
-as -g -o <program>.o <program>.S
-ld -o <program> <program>.o
-gdb ./<program>
-```
-
+			<code>
+				as -g -o <program>.o <program>.S
+				ld -o <program> <program>.o
+				gdb ./<program>
+			</code>
 		</td>
 		<td>
 			Debug with the flag <code>-g</code> if your device supports it.
