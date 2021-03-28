@@ -503,6 +503,7 @@ The following table assumes you:
 - Have an assembler (like `as`) and compiler (like `gcc`) installed.
 
 Run the commands with `make [command]`.
+Things in "()" enclosed with `$()` are variables in the Makefile. Otherwise, they represent a command or flag or a description; depending on the context.
 
 -----
 
@@ -519,19 +520,92 @@ Run the commands with `make [command]`.
 	<tr>
 		<td></td>
 		<td></td>
-		<td>Shows a help message.</td>
 		<td>
-			You can modify the help message (<code>HELP_MESSAGE</code>) in the <code>Makefile</code>.
+			Runs the first target (<code>help</code>)
 		</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>Help</td>
 		<td>
 			<code>help</code>
 		</td>
-		<td>Shows a help message.</td>
 		<td>
-			You can modify the help message (<code>HELP_MESSAGE</code>) in the <code>Makefile</code>.
+			Shows a help message. (<code>HELP_MESSAGE</code>)
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Debug</td>
+		<td>
+			<code>debug[arch]</code>
+		</td>
+		<td>
+			Adds a debug (<code>-g</code>) flag (<code>$(ASFLAGS)</code> or <code>$(CCFLAGS)</code> when specifying the <code>[arch]</code>) to the Assembler (<code>$(AS)</code>) or Compiler (<code>$(CC)</code>); allowing debugging.
+		</td>
+		<td>
+			<code>[arch]</code> is optional.
+		</td>
+	</tr>
+	<tr>
+		<td>All</code>
+		<td>
+			<code>all[arch]</code>
+		</td>
+		<td>
+			Assemble (<code>$(AS)</code> or Compile (<code>$(CC)</code>) and Link (<code>LD</code> or <code>CL</code>) all programs (<code>$(SD)</code> for all; <code>$(ASD)</code> or <code>$(CSD)</code> when specifying the <code>[arch]</code>).
+		</td>
+		<td>
+			<code>[arch]</code> is optional.
+		</td>
+	</tr>
+	<tr>
+		<td>Debug All</td>
+		<td>
+			<code>debugall[arch]</code>
+		</td>
+		<td>
+			Same as <strong>All</strong> but adds a debug (<code>-g</code>) flag (<code>$(ASFLAGS)</code> or <code>$(CCFLAGS)</code> when specifying the <code>[arch]</code>); allowing debugging.
+		</td>
+		<td>
+			<code>[arch]</code> is optional.
+		</td>
+	</tr>
+	<tr>
+		<td>Run All</td>
+		<td>
+			<code>runall[arch]</code>
+		</td>
+		<td>
+			Run (<code>$(RUN)</code>) all programs (<code>$(BID)</code> for all; <code>$(ABID)</code> or <code>$(CBID)</code> when specifying the <code>[arch]</code>); it will display a message (<code>RUN_MESSAGE</code>) when a specified architecture (<code>[arch]</code>) does not exist.
+		</td>
+		<td>
+			<code>[arch]</code> is optional.
+			To run (<code>$(RUN)</code>) all programs (<code>$(BID)</code> for all; <code>$(ABID)</code> or <code>$(CBID)</code> when specifying the <code>[arch]</code>) however, you need execute permissions.
+		</td>
+	</tr>
+		<td>Clean</td>
+		<td>
+			<code>clean[arch]</code>
+		</td>
+		<td>
+			Cleans (<code>$(RM)</code>) object files (<code>$(BUD)</code> for all; <code>$(ABUD)</code> or <code>$(CBUD)</code> when specifying the <code>[arch]</code>).
+		</td>
+		<td>
+			<code>[arch]</code> is optional.
+			To remove (<code>$(RM)</code>) however, you need write permissions.
+		</td>
+	<tr>
+		<td>Clean all</td>
+		<td>
+			<code>cleanall[arch]</code>
+		</td>
+		<td>
+			Cleans (<code>$(RM)</code>) object files (<code>$(BUD)</code> for all; <code>$(ABUD)</code> or <code>$(CBUD)</code> when specifying the <code>[arch]</code>) and programs (<code>$(BID)</code> for all; <code>$(ABID)</code> or <code>$(CBID)</code> when specifying the <code>[arch]</code>).
+		</td>
+		<td>
+			<code>[arch]</code> is optional.
+			To remove (<code>$(RM)</code>) however, you need write permissions.
 		</td>
 	</tr>
 </tbody>
