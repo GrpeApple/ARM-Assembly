@@ -1,20 +1,12 @@
 # Table of Contents
 <!--ts-->
-   * [Table of Contents](#table-of-contents)
-   * [Assembly](#assembly)
-      * [FAQ](#faq)
-      * [Badges](#badges)
-      * [Assembly](#assembly-1)
-      * [Build](#build)
-         * [make](#make)
-         * [Manual](#manual)
-                  * [Single program](#single-program)
-                  * [Multiple dependencies](#multiple-dependencies)
-                  * [debug (gdb)](#debug-gdb)
-                  * [Run all](#run-all)
-                  * [Binary extension](#binary-extension)
-
-<!-- Added by: u0_a452, at: Sat Mar 27 21:15:43 +08 2021 -->
+- [Assembly](#assembly)
+- [FAQ](#faq)
+- [Badges](#badges)
+- [Assembly](#assembly-1)
+- [Build](#build)
+	- [make](#make)
+	- [Manual](#manual)
 
 <!--te-->
 
