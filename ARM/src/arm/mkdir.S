@@ -6,6 +6,7 @@
 		1: Directory length error (255)
 */
 
+.code 32 // arm
 .syntax unified
 
 .section .data

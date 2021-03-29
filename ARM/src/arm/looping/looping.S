@@ -3,6 +3,8 @@
 
 	for (int r0 = 0, r3 = 9; r0 <= r3; r0++)
 */
+
+.code 32 // arm
 .syntax unified
 
 .section .data

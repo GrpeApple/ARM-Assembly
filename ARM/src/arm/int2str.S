@@ -7,6 +7,7 @@
 	If something does not make sense, try using different optimization levels.
 */
 
+.code 32 // arm
 .syntax unified
 .equ division, 0x66666667 // 1717986919; (2 ^ 34 + 6) / 10
 

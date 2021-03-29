@@ -2,6 +2,7 @@
 	Depends on: int2str.S
 */
 
+.code 32 // arm
 .syntax unified
 
 .section .data

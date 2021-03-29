@@ -4,6 +4,8 @@
 		0: Successfull exit
 		// 1: Error
 */
+
+.code 32 // arm
 .syntax unified
 
 .section .data
