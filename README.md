@@ -1,12 +1,12 @@
 # Assembly
 Assembly programs
 
----
+----
 ## FAQ
 - What happened to `ARM-Assembly`?
 	- I would like to also add various architectures (like <code>AArch64</code>) from different Assembly programming languages. And that is why I renamed it to `Assembly`.
 
----
+----
 ## Badges
 - Github
 	- Actions
@@ -16,7 +16,7 @@ Assembly programs
 	- License
 		- [![license: MIT](https://img.shields.io/github/license/GrpeApple/Assembly)](LICENSE.md)
 
----
+----
 ## Assembly
 
 <table>
@@ -489,103 +489,189 @@ Assembly programs
 </tbody>
 </table>
 
----
+----
 ## Build
 ### `make`
 Often, the `Makefile` has comments that are not here. Look for the comments when stuck.
 If you are still stuck, Discuss on the `Discussion` tab above. (Assuming it exists and your client supports it)
-#### Simple
-###### Program
-```bash
-make <program>
-```
+The following table assumes you:
+- Installed `make`.
+- On an Architecture (like `ARM`) folder.
+- The `Makefile` exists.
+- On GNU Make (Might work on other versions).
+	- Version 4.3 (Might work on other versions).
+- Have an assembler (like `as`) and compiler (like `gcc`) installed.
 
-###### Multiple programs
-```bash
-make <program> <program1> <program2> ... .. .
-```
+Run the commands with `make [command]`.
+Things in "()" enclosed with `$()` are variables in the Makefile. Otherwise, they represent a command or flag or a description; depending on the context.
 
-###### All programs
-```bash
-make all
-```
+-----
 
-##### Debug
-```bash
-make debug
-```
+<table>
+<thead>
+	<tr>
+		<th>Action</th>
+		<th>Command</th>
+		<th>Description</th>
+		<th>Notes</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td></td>
+		<td></td>
+		<td>
+			Runs the first target (<code>help</code>)
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Help</td>
+		<td>
+			<code>help</code>
+		</td>
+		<td>
+			Shows a help message. (<code>HELP_MESSAGE</code>)
+		</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Debug</td>
+		<td>
+			<code>debug[arch]</code>
+		</td>
+		<td>
+			Adds a debug (<code>-g</code>) flag (<code>$(ASFLAGS)</code> or <code>$(CCFLAGS)</code> when specifying the <code>[arch]</code>) to the Assembler (<code>$(AS)</code>) or Compiler (<code>$(CC)</code>); allowing debugging.
+		</td>
+		<td>
+			<code>[arch]</code> is optional.
+		</td>
+	</tr>
+	<tr>
+		<td>All</code>
+		<td>
+			<code>all[arch]</code>
+		</td>
+		<td>
+			Creates directories (<code>$(MKDIR)</code>) for Building (<code>$(BUD)</code>) and Linking (<code>$(BID)</code>).<br>Assemble (<code>$(AS)</code> or Compile (<code>$(CC)</code>) and Link (<code>LD</code> or <code>CL</code>) all programs (<code>$(SD)</code> for all; <code>$(ASD)</code> or <code>$(CSD)</code> when specifying the <code>[arch]</code>).
+		</td>
+		<td>
+			<code>[arch]</code> is optional.
+		</td>
+	</tr> <tr>
+		<td>Debug All</td>
+		<td>
+			<code>debugall[arch]</code>
+		</td>
+		<td>
+			Same as <strong>All</strong> but adds a debug (<code>-g</code>) flag (<code>$(ASFLAGS)</code> or <code>$(CCFLAGS)</code> when specifying the <code>[arch]</code>); allowing debugging.
+		</td>
+		<td>
+			<code>[arch]</code> is optional.
+		</td>
+	</tr>
+	<tr>
+		<td>Run All</td>
+		<td>
+			<code>runall[arch]</code>
+		</td>
+		<td>
+			Run (<code>$(RUN)</code>) all programs (<code>$(BID)</code> for all; <code>$(ABID)</code> or <code>$(CBID)</code> when specifying the <code>[arch]</code>); it will display a message (<code>RUN_MESSAGE</code>) when a specified architecture (<code>[arch]</code>) does not exist.
+		</td>
+		<td>
+			<code>[arch]</code> is optional.
+			To run (<code>$(RUN)</code>) all programs (<code>$(BID)</code> for all; <code>$(ABID)</code> or <code>$(CBID)</code> when specifying the <code>[arch]</code>) however, you need execute permissions.
+		</td>
+	</tr>
+		<td>Clean</td>
+		<td>
+			<code>clean[arch]</code>
+		</td>
+		<td>
+			Cleans (<code>$(RM)</code>) object files (<code>$(BUD)</code> for all; <code>$(ABUD)</code> or <code>$(CBUD)</code> when specifying the <code>[arch]</code>).
+		</td>
+		<td>
+			<code>[arch]</code> is optional.
+			To remove (<code>$(RM)</code>) however, you need write permissions.
+		</td>
+	<tr>
+		<td>Clean all</td>
+		<td>
+			<code>cleanall[arch]</code>
+		</td>
+		<td>
+			Cleans (<code>$(RM)</code>) object files (<code>$(BUD)</code> for all; <code>$(ABUD)</code> or <code>$(CBUD)</code> when specifying the <code>[arch]</code>) and programs (<code>$(BID)</code> for all; <code>$(ABID)</code> or <code>$(CBID)</code> when specifying the <code>[arch]</code>).
+		</td>
+		<td>
+			<code>[arch]</code> is optional.
+			To remove (<code>$(RM)</code>) however, you need write permissions.
+		</td>
+	</tr>
+</tbody>
+</table>
 
-###### Debug all programs
-```bash
-make debug all
-```
-
-or
-
-
-```bash
-make debugall
-```
-
-###### Run all
-```bash
-make runall
-```
-
-###### Clean assembled
-```bash
-make clean
-```
-
-###### Clean all
-```bash
-make cleanall
-```
-
-###### Run multiple commands
-```bash
-make cleanall E runall
-```
-
----
+-----
 ### Manual
-###### Single program
-```bash
-as -o <program>.o <program>.S
-ld -o <program> <program>.o
-```
 
-###### Multiple dependencies
-```bash
-as -o <program>.o <program>.S
-as -o <program1>.o <program1>.S
-as -o <program2>.o <program2>.S
-as -o <program3>.o <program3>.S
-as -o <program4>.o <program4>.S
-as -o <program5>.o <program5>.S
-ld -o <program> \
-<program> \
-<program1> \
-<program2> \
-<program3> \
-<program4> \
-<program5>
-```
-
-###### debug (gdb)
-```bash
-as -g -o <program>.o <program>.S
-ld -o <program> <program>.o
-gdb ./<program>
-```
-
-###### Run all
-```bash
-./*
-```
-
-###### Binary extension
-```
-as -o <program>.o <program>.S
-ld -o <program>.bin <program>.S
-```
+<table>
+<thead>
+	<tr>
+		<th>Action</th>
+		<th>Command</th>
+		<th>Description</th>
+		<th>Notes</th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td>Single program</td>
+		<td>
+			<pre><code>
+as -o [program].o [program].S
+ld -o [program] [program].o
+			</code></pre>
+		</td>
+		<td>Command for assembling and linking a single program</td>
+		<td></td>
+	</tr>
+	<tr>
+		<td>Multiple dependencies</td>
+		<td>
+			<pre><code>
+as -o [program].o [program].S
+as -o [program1].o [program1].S
+as -o [program2].o [program2].S
+as -o [program3].o [program3].S
+as -o [program4].o [program4].S
+as -o [program5].o [program5].S
+ld -o [program] \
+[program].o \
+[program1].o \
+[program2].o \
+[program3].o \
+[program4].o \
+[program5].o
+			</code></pre>
+		</td>
+		<td>Command for assembling and linking programs that depend on other programs</td>
+		<td>
+			You can eliminate the need of <code>/</code> to stay it on a single line, like <code>ld -o [program] [program].o [program1].o [program2].o [program3].o [program4].o [program5].o</code> it is just for readability. You can further shorten it (if your shell supports it) with <code>ld -o ]program] {[program],[program1],[program2],[program3],[program4],[program5]}.o</code>.
+		</td>
+	</tr>
+	<tr>
+		<td>Debug</td>
+		<td>
+			<pre><code>
+as -g -o [program].o [program].S
+ld -o [program] [program].o
+			</code></pre>
+		</td>
+		<td>
+			Debug with the flag <code>-g</code> if your device supports it.
+		</td>
+		<td>
+			You can use a debugger like <code>gdb</code> to debug a certain program.
+		</td>
+	</tr>
+</tbody>
+</table>
