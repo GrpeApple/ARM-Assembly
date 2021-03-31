@@ -93,7 +93,7 @@ Assembly programs
 												<code>int2str.S</code>
 											</td>
 											<td>
-												A symlink to <code>../../deps/int2str.S</code>
+												A symlink to <code>../../deps/arm/int2str.S</code>
 											</td>
 										</tr>
 									</tbody>
@@ -127,7 +127,7 @@ Assembly programs
 												<code>int2str.S</code>
 											</td>
 											<td>
-												A symlink to <code>../../deps/int2str.S</code>
+												A symlink to <code>../../deps/arm/int2str.S</code>
 											</td>
 										</tr>
 									</tbody>
@@ -201,7 +201,7 @@ Assembly programs
 												<code>int2str.S</code>
 											</td>
 											<td>
-												A symlink to <code>../../deps/int2str.S</code>
+												A symlink to <code>../../deps/arm/int2str.S</code>
 											</td>
 										</tr>
 									</tbody>
