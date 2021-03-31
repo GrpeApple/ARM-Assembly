@@ -1,5 +1,9 @@
 /*
 	Uses registers from r0-r2
+
+	r0 = integer to be converted
+	r1 = magic division number
+	r2 = division
 */
 
 .code 32 // arm
@@ -15,7 +19,7 @@
 		mov r1, #0x0a // 10; newline
 		push {r1}
 
-			_division:
+			__division:
 				/*
 					If your architecture is ARMv7 (or above).
 					movw r1, #:lower16:division // 26215
@@ -25,21 +29,21 @@
 				smmul r1, r0, r1
 				asr r2, r1, #0x02
 
-			_modulo:
+			__modulo:
 				add r1, r2, r1, lsr #0x1f // 31
 				add r1, r1, r1, lsl #0x02
 				sub r0, r0, r1, lsl #0x01
 
-			_string:
+			__string:
 				add r0, #0x30 // 48; '0'
 				push {r0}
 
-			_shift:
+			__shift:
 				mov r0, r2
 				cmp r0, #0x00
-				bne _division
+				bne __division
 
-			_write:
+			__write:
 				ldr r1, [sp]
 				cmp r1, #0x00
 				popeq {ip, pc}
@@ -51,4 +55,4 @@
 				mov r2, #0x01 // length
 				swi 0x00 // execute syscall
 
-				bne _write
+				bne __write

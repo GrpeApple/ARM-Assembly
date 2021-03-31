@@ -1,7 +1,8 @@
 /*
-	r3 = magic division number
-	r2 = division
 	r0 = integer to be converted
+	r1 = division / modulo
+	r2 = division / modulo
+	r3 = magic division number
 
 	I recommend you use the compiler and check the assembly output with -S.
 	If something does not make sense, try using different optimization levels.
