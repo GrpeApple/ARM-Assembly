@@ -136,9 +136,9 @@ Assembly programs
 							</tr>
 							<tr>
 								<td>
-									<code>buffer.S</code>
+									<code>flush.S</code>
 								</td>
-								<td>My attempt at using buffers</td>
+								<td>Flushes anything from stdin to a buffer; this is very useful if you want the user to not enter an extra command to the terminal.</td>
 							</tr>
 							<tr>
 								<td>
@@ -310,6 +310,12 @@ Assembly programs
 												<code>int2str.S</code>
 											</td>
 											<td>Modified <code>../../arm/int2str.S</code> for programs that depend.</td>
+										</tr>
+										<tr>
+											<td>
+												<code>flush.S</code>
+											</td>
+											<td>Modified <code>../../arm/flush.S</code> for programs that depend.</td>
 										</tr>
 									</tbody>
 									</table>
