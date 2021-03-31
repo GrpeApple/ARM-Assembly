@@ -2,6 +2,7 @@
 	Uses registers from r0-r3
 
 	r0 = input address (required)
+	r1 = input variable (required)
 */
 
 .code 32 // arm
@@ -17,7 +18,6 @@
 			__input:
 				mov r7, #0x03 // read syscall
 				mov r0, #0x00 // stdin file descriptor
-				ldr r1, =input
 				mov r2, #0x01 // length
 				swi 0x00 // execute syscall
 

@@ -10,9 +10,11 @@
 
 .section .data
 	input_msg: .ascii "Input a character to uppercase: "
-	char: .asciz ""
 	out_msg: .ascii "Uppercased character: "
 	// err_msg: .ascii "Error: no character input"
+
+.section .bss
+	char: .asciz ""
 
 .section .text
 
@@ -69,14 +71,14 @@
 		swi 0x00 // execute syscall
 	*/
 
-	_flush:
-		mov r7, #0x03 // read syscall
-		mov r0, #0x02 // stderr file descriptor
-		ldr r1, =char
-		mov r2, #(0x01 << 0x1e) // 30; maximum length
-		swi 0x00 // execute syscall
-
 	_end:
+		ldr r0, char_content
+		ldr r1, =char
+		bl flush
+
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
 		swi 0x00 // execute syscall
+
+
+	char_content: .word char
