@@ -309,7 +309,7 @@ Assembly programs
 											<td>
 												<code>int2str.S</code>
 											</td>
-											<td>Modified <code>../../arm/int2str.S</code> for dependencies</td>
+											<td>Modified <code>../../arm/int2str.S</code> for programs that depend.</td>
 										</tr>
 									</tbody>
 									</table>
