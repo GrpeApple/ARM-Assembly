@@ -173,6 +173,7 @@ Assembly programs
 											</td>
 										</tr>
 									</tbody>
+									</table>
 								</td>
 							</tr>
 							<tr>
@@ -296,6 +297,7 @@ Assembly programs
 											</td>
 										</tr>
 									</tbody>
+									</table>
 								</td>
 							</tr>
 						</tbody>
