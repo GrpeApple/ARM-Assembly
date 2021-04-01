@@ -9,7 +9,7 @@
 	.global _start
 	_start:
 		mov r7, #0x04 // write syscall
-		mov r0, #0x01 // stdout
+		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =string
 		mov r2, #0x0b // 11; length
 		swi 0x00 // execute syscall
