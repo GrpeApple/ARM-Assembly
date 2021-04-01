@@ -1,3 +1,7 @@
+/*
+	Depends on: flush.S
+*/
+
 .code 32 // arm
 .syntax unified
 
@@ -46,6 +50,7 @@
 		bl _change_write
 		swi 0x00 // execute syscall
 
+		ldr r3, input_content
 
 	_read:
 		bl _change_read
@@ -54,6 +59,9 @@
 
 	_check:
 		bl _change_check
+
+		beq _loop // if newline
+
 		cmp r8, #0x02 // confirm2
 		beq _check_confirm2
 
@@ -61,22 +69,19 @@
 				cmp r1, r2
 				bicne r2, #0x20 // 32
 				cmpne r1, r2
-				beq _loop
+				beq _check_loop
 
 				bne _end
 
 			_check_confirm2:
-				cmp r9, #0x14 // 20
-				addeq r8, #0x01
-				beq _check_fork
-
 				ldr r2, [r4, r9]
-				ldr r1, [r3, r9]
-				add r9, #0x04
+				ldr r1, [r3]
+				add r9, #0x01
 				cmp r1, r2
-				beq _check_confirm2
-
 				bne _end
+
+			_check_loop:
+				b _read
 
 
 	_loop:
@@ -89,6 +94,10 @@
 		ldr r1, =exit
 		mov r2, #0x10 // 16; length
 		swi 0x00 // execute syscall
+
+		ldr r0, =input
+		ldr r1, input_content
+		bl flush
 
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
@@ -144,7 +153,7 @@
 		mov r7, #0x03 // read syscall
 		mov r0, #0x00 // stdin file descriptor
 		ldr r1, =input
-		mov r2, #(0x01 << 0x1e) // maximum length
+		mov r2, #0x01 // length
 
 
 
@@ -157,20 +166,15 @@
 
 
 
+		ldr r3, input_content
 
 		cmp r8, #0x02 // confirm2
 		ldreq r4, confirm2_string_content
-		ldreq r3, input_content
 
 		ldrlt r2, confirm_string_content
 		ldrlt r1, input_content
 		ldrlt r2, [r2]
-		strblt ip, [r1, #0x01]
 		ldrlt r1, [r1]
-
-		ldreq r5, [r3, #0x10] // 16
-		cmp r5, #0x0a // 10; newline
-		strbeq ip, [r3, #0x10] // 16
 
 
 

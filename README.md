@@ -142,10 +142,37 @@ Assembly programs
 							</tr>
 							<tr>
 								<td>
-									<code>fork.S</code>
+									<code>fork/</code>
 								</td>
 								<td>
 									Forkbomb (Rabbit Virus) your system.<br>Do not worry, for I have added 3 warnings and confirmations. (1st and 2nd confirmation are y, Y. 3rd, you have to enter <code>Yes, please fork</code> which is case-sensetive.)<br> So you need not have to be that <em>worried</em>.
+								</td>
+								<td>
+									<table>
+									<thead>
+										<tr>
+											<th>Dependencies</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<code>fork.S</code>
+											</td>
+											<td>
+												Depends on <code>flush.S</code> for flushing when exiting the program.
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<code>flush.S</code>
+											</td>
+											<td>
+												A symlink to <code>../../deps/arm/flush.S</code>
+											</td>
+										</tr>
+									</tbody>
 								</td>
 							</tr>
 							<tr>
@@ -240,9 +267,36 @@ Assembly programs
 							</tr>
 							<tr>
 								<td>
-									<code>uppercase.S</code>
+									<code>uppercase</code>
 								</td>
-								<td>Uppercases characters</td>
+								<td>Uppercases one character.</td>
+								<td>
+									<table>
+									<thead>
+										<tr>
+											<th>Dependencies</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<code>uppercase.S</code>
+											</td>
+											<td>
+												Depends on <code>flush.S</code> for flushing when flushing the rest of the characters.
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<code>flush.S</code>
+											</td>
+											<td>
+												A symlink to <code>../../deps/arm/flush.S</code>
+											</td>
+										</tr>
+									</tbody>
+								</td>
 							</tr>
 						</tbody>
 						</table>
