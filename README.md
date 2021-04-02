@@ -53,6 +53,7 @@ Assembly programs
 						<thead>
 							<tr>
 								<th>Program</th>
+								<th>Usage</th>
 								<th>Description</th>
 								<th>Files</th>
 							</tr>
@@ -62,13 +63,19 @@ Assembly programs
 								<td>
 									<code>E.S</code>
 								</td>
+								<td></td>
 								<td>
 									Outputs <code>E</code> infinitely
 								</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
 									<code>arguments/</code>
+								</td>
+								<td>
+									Provide arguments to it.<br>
+									For example: <code>./arguments /*</code>
 								</td>
 								<td>Outputs Argument Count and Value</td>
 								<td>
@@ -104,6 +111,7 @@ Assembly programs
 								<td>
 									<code>bitwise_shift/</code>
 								</td>
+								<td></td>
 								<td>Shift numbers in bits</td>
 								<td>
 									<table>
@@ -138,14 +146,30 @@ Assembly programs
 								<td>
 									<code>flush.S</code>
 								</td>
+								<td>
+									Input something from the <strong>stdin file descriptor</strong><br>
+									For example: <code>echo 'Flush me!' | ./flush</code>
+								</td>
 								<td>Flushes anything from stdin to a buffer; this is very useful if you want the user to not enter an extra command to the terminal.</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
 									<code>fork/</code>
 								</td>
 								<td>
-									Forkbomb (Rabbit Virus) your system.<br>Do not worry, for I have added 3 warnings and confirmations. (1st and 2nd confirmation are y, Y. 3rd, you have to enter <code>Yes, please fork</code> which is case-sensetive.)<br> So you need not have to be that <em>worried</em>.
+									Confirm something from the <strong>stdin file descriptor</strong><br>
+									For example: <br>
+									<samp>
+										Do you want to continue? (y/N): <kbd>y</kbd><br>
+										Are you sure about this? (y/N): <kbd>Y</kbd><br>
+										Final warning.....<br>
+										Are you absolutely sure? (Yes, please fork): <kbd>Yes, please fork</kbd><br>
+										Initializing fork bomb.........<br>
+									</samp>
+								</td>
+								<td>
+									Forkbomb (Rabbit Virus) your system.<br>Do not worry, for I have added 3 warnings and confirmations.<br>So you need not have to be that <em>worried</em>.
 								</td>
 								<td>
 									<table>
@@ -180,32 +204,41 @@ Assembly programs
 								<td>
 									<code>haha_ARM.S</code>
 								</td>
+								<td></td>
 								<td>Outputs 'haha, ARM.' My first program</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
 									<code>hello.S</code>
 								</td>
+								<td></td>
 								<td>
 									Outputs <code>Hello, World!</code>
 								</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
 									<code>int2str.S</code>
 								</td>
+								<td></td>
 								<td>Convert integer to string and print it.</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
 									<code>link_register.S</code>
 								</td>
+								<td></td>
 								<td>My attempt at using functions with a link register</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
 									<code>looping/</code>
 								</td>
+								<td></td>
 								<td>Loops in ARM Assembly</td>
 								<td>
 									<table>
@@ -240,35 +273,58 @@ Assembly programs
 								<td>
 									<code>mkdir.S</code>
 								</td>
-								<td>Create directories in ARM Assembly</td>
+								<td>
+									Provide arguments to create directories to.<br>
+									For example: <code>./mkdir /home/someuser/I-am-a-directory</code>
+								</td>
+								<td>Create directories.</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
 									<code>no.S</code>
 								</td>
+								<td></td>
 								<td>Output 'no' infinitely</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
 									<code>rm.S</code>
 								</td>
-								<td>Remove files and only files</td>
+								<td>
+									Provide arguments to remove files to.<br>
+									For example: <code>./rm /home/someuser/big-file</code>
+								</td>
+								<td>Remove files.</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
 									<code>rmdir.S</code>
 								</td>
-								<td>Remove directories (non-recursively)</td>
+								<td>
+									Provide arguments to remove directories to.<br>
+									For example: <code>./rmdir /home/someuser/big-directory</code>
+								</td>
+								<td>Remove directories (non-recursively).</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
 									<code>stack.S</code>
 								</td>
+								<td></td>
 								<td>Use the stack</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
 									<code>uppercase</code>
+								</td>
+								<td>
+									Input a character to the <strong>stdin file descriptor</strong><br>
+									For example: <code>echo 'e' | ./uppercase</code>
 								</td>
 								<td>Uppercases one character.</td>
 								<td>
@@ -314,6 +370,7 @@ Assembly programs
 						<thead>
 							<tr>
 								<th>Program</th>
+								<th>Usage</th>
 								<th>Description</th>
 								<th>Files</th>
 							</tr>
@@ -323,9 +380,11 @@ Assembly programs
 								<td>
 									<code>printf.S</code>
 								</td>
+								<td></td>
 								<td>
 									Depends on printf, prints <code>Hello, World!</code>
 								</td>
+								<td></td>
 							</tr>
 						</tbody>
 						</table>
@@ -356,6 +415,7 @@ Assembly programs
 									<thead>
 										<tr>
 											<th>Program</th>
+											<th>Usage</th>
 											<th>Description</th>
 											<th>Files</th>
 										</tr>
@@ -365,13 +425,41 @@ Assembly programs
 											<td>
 												<code>int2str.S</code>
 											</td>
+											<td>
+												The label <code>int2str</code> is used.<br>
+												Use the <code>r0</code> register for the integer conversion. (and write)<br>
+											</td>
 											<td>Modified <code>../../arm/int2str.S</code> for programs that depend.</td>
+											<td></td>
 										</tr>
 										<tr>
 											<td>
 												<code>flush.S</code>
 											</td>
+											<td>
+												The label <code>flush</code> is used.<br>
+												Use the <code>r0</code> register for the input address.<br>
+												Use the <code>r1</code> register for the input variable.<br>
+												For example:
+<pre><code>
+// Please note that this is a snippet.
+
+.section .data
+	input: .ascii "Yes."
+
+.section .text
+
+	.global _start
+	_start:
+		ldr r0, input_content
+		ldr r1, =input
+		bl flush
+
+	input_content: .word input
+</code></pre>
+											</td>
 											<td>Modified <code>../../arm/flush.S</code> for programs that depend.</td>
+											<td></td>
 										</tr>
 									</tbody>
 									</table>
@@ -387,12 +475,17 @@ Assembly programs
 									<thead>
 										<tr>
 											<th>Program</th>
+											<th>Usage</th>
 											<th>Description</th>
 											<th>Files</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
 										</tr>
 									</tbody>
 									</table>
@@ -431,6 +524,7 @@ Assembly programs
 						<thead>
 							<tr>
 								<th>Program</th>
+								<th>Usage</th>
 								<th>Description</th>
 								<th>Files</th>
 							</tr>
@@ -440,17 +534,21 @@ Assembly programs
 								<td>
 									<code>E.S</code>
 								</td>
+								<td></td>
 								<td>
 									Outputs <code>E</code> infinitely
 								</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>
 									<code>hello.S</code>
 								</td>
+								<td></td>
 								<td>
 									Outputs <code>Hello, World!</code>
 								</td>
+								<td></td>
 							</tr>
 						</tbody>
 						</table>
@@ -466,6 +564,7 @@ Assembly programs
 						<thead>
 							<tr>
 								<th>Program</th>
+								<th>Usage</th>
 								<th>Description</th>
 								<th>Files</th>
 							</tr>
@@ -475,9 +574,11 @@ Assembly programs
 								<td>
 									<code>printf.S</code>
 								</td>
+								<td></td>
 								<td>
 									Depends on printf, prints <code>Hello, World!</code>
 								</td>
+								<td></td>
 							</tr>
 						</tbody>
 						</table>
@@ -508,12 +609,17 @@ Assembly programs
 									<thead>
 										<tr>
 											<th>Program</th>
+											<th>Usage</th>
 											<th>Description</th>
 											<th>Files</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
 										</tr>
 									</tbody>
 									</table>
@@ -529,12 +635,17 @@ Assembly programs
 									<thead>
 										<tr>
 											<th>Program</th>
+											<th>Usage</th>
 											<th>Description</th>
 											<th>Files</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
 										</tr>
 									</tbody>
 									</table>

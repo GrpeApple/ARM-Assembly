@@ -60,6 +60,8 @@
 	_check:
 		bl _change_check
 
+		ldr r5, [r3]
+		cmp r5, #0x0a // 10; newline
 		beq _loop // if newline
 
 		cmp r8, #0x02 // confirm2
@@ -69,6 +71,7 @@
 				cmp r1, r2
 				bicne r2, #0x20 // 32
 				cmpne r1, r2
+				moveq r9, #0x01
 				beq _check_loop
 
 				bne _end
@@ -83,8 +86,10 @@
 			_check_loop:
 				b _read
 
-
 	_loop:
+		cmp r9, #0x00
+		beq _end
+
 		add r8, #0x01
 		b _check_fork
 

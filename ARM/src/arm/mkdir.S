@@ -1,67 +1,30 @@
 /*
-	The max directory file name is 255 (linux)
-	This won't allow you to make directories that are nested that the path exceeds 255. Sorry, about that bug.
-	Exit status:
-		0: exit successfully
-		1: Directory length error (255)
+	This may depend on your length of filenames; exceeding the length may cause the directory to be not created.
 */
 
 .code 32 // arm
 .syntax unified
 
-.section .data
-	err: .ascii "Error: directory length exceeds 255."
-	len= .- err
-
-.section .bss
-	dir: .asciz ""
-
 .section .text
 
 	.global _start
-	_start:	ldr r3, dir_content
-
-	_read:
-		mov r7, #0x003 // read syscall
-		mov r0, #0x000 // stdin file descriptor
-		ldr r1, =dir
-		mov r2, #(0x001 << 0x01e) // 30; maximum length
-		swi 0x000 // execute syscall
-
-		mov r2, #0x000
-
-			_terminate:
-				cmp r2, #0x100 // 256
-				beq _error
-
-				ldrb r5, [r3, r2]
-				cmp r5, #0x00a // 10; newline
-				strbeq ip, [r3, r2]
-				addne r2, #0x001
-				bne _terminate
+	_start:
+		pop {r0, ip} // argc
+		cmp r0, #0x000 // Is argc 0? (Should not happen)
+		moveq r3, #0x001 // exit status
 
 	_mkdir:
+		pop {r0} // argv
+		cmp r0, #0x000 // Did we reach the end of argv?
+		beq _end
+
 		mov r7, #0x027 // mkdir syscall
-		ldr r0, =dir
 		mov r1, #0x1f4 // 500; Permissions
 		swi 0x00 // execute syscall
 
+		b _mkdir
+
 	_end:
 		mov r7, #0x001 // exit syscall
-		mov r0, #0x000 // exit status
+		mov r0, r3 // exit status
 		swi 0x000 // execute syscall
-
-
-	_error:
-		mov r7, #0x004 // write syscall
-		mov r0, #0x002 // stderr file descriptor
-		ldr r1, =err
-		ldr r2, =len
-		swi 0x000 // execute syscall
-
-		mov r7, #0x001 // exit syscall
-		mov r0, #0x001 // exit status
-		swi 0x000 // execute syscall
-
-
-	dir_content: .word dir

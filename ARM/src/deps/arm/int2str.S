@@ -1,7 +1,7 @@
 /*
-	Uses registers from r0-r2
+	Uses register r0
 
-	r0 = integer to be converted
+	r0 = integer to be converted (required)
 	r1 = magic division number
 	r2 = division
 */
@@ -15,7 +15,8 @@
 
 	.global int2str
 	int2str:
-		push {ip, lr}
+		push {r1-r2, lr}
+		push {ip}
 		mov r1, #0x0a // 10; newline
 		push {r1}
 
@@ -46,7 +47,8 @@
 			__write:
 				ldr r1, [sp]
 				cmp r1, #0x00
-				popeq {ip, pc}
+				popeq {ip}
+				popeq {r1-r2, pc}
 
 				mov r7, #0x04 // write syscall
 				mov r0, #0x01 // stdout file descriptor
