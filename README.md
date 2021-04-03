@@ -323,6 +323,44 @@ Assembly programs
 							</tr>
 							<tr>
 								<td>
+									<code>str2ascii/</code>
+								</td>
+								<td>
+									Input a string to the <strong>stdin file descriptor</strong><br>
+									For example: <code>echo 'Hello, World!' | ./str2ascii</code>
+								</td>
+								<td>Converts a string to ASCII separated with spaces.<td>
+								<td>
+									<table>
+									<thead>
+										<tr>
+											<th>Dependencies</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<code>str2ascii.S</code>
+											</td>
+											<td>
+												Depends on <code>int2str.S</code> for converting the ascii value to a string and printing it.
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<code>int2str.S</code>
+											</td>
+											<td>
+												A symlink to <code>../../deps/arm/str2ascii/int2str.S</code>
+											</td>
+										</tr>
+									</tbody>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>
 									<code>uppercase</code>
 								</td>
 								<td>
@@ -426,17 +464,6 @@ Assembly programs
 									<tbody>
 										<tr>
 											<td>
-												<code>int2str.S</code>
-											</td>
-											<td>
-												The label <code>int2str</code> is used.<br>
-												Use the <code>r0</code> register for the integer conversion. (and write)<br>
-											</td>
-											<td>Modified <code>../../arm/int2str.S</code> for programs that depend.</td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>
 												<code>flush.S</code>
 											</td>
 											<td>
@@ -445,7 +472,7 @@ Assembly programs
 												Use the <code>r1</code> register for the input variable.<br>
 												For example:
 <pre><code>
-// Please note that this is a snippet.
+// Please note that this is just an example.
 
 .section .data
 	input: .ascii "Yes."
@@ -461,8 +488,69 @@ Assembly programs
 	input_content: .word input
 </code></pre>
 											</td>
-											<td>Modified <code>../../arm/flush.S</code> for programs that depend.</td>
+											<td>
+												Modified <code>../../arm/flush.S</code> for programs that depend.
+											</td>
 											<td></td>
+										</tr>
+										<tr>
+											<td>
+												<code>int2str.S</code>
+											</td>
+											<td>
+												The label <code>int2str</code> is used.<br>
+												Use the <code>r0</code> register for the integer conversion. (and write)<br>
+												For example:
+<pre><code>
+// Please note that this is just an example.
+
+.section .text
+
+	.global _start
+	_start:
+		mov r0, #0x45 // 69
+		bl int2str
+</code></pre>
+											</td>
+											<td>
+												Modified <code>../../arm/int2str.S</code> for programs that depend.
+											</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>
+												<code>str2ascii/</code>
+											</td>
+											<td></td>
+											<td>
+												Modified versions of programs for <strong>str2ascii.S</strong>
+											</td>
+											<td>
+												<table>
+												<thead>
+													<tr>
+														<th>Program</th>
+														<th>Usage</th>
+														<th>Description</th>
+														<th>Files</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>
+															<code>int2str.S</code>
+														</td>
+														<td>
+															Same as <code>../int2str.S</code>
+														</td>
+														<td>
+															Modified version of <code>../int2str.S</code> without newlines.
+														</td>
+														<td></td>
+													</tr>
+												</tbody>
+												</table>
+											</td>
 										</tr>
 									</tbody>
 									</table>
