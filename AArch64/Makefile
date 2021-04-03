@@ -1,7 +1,3 @@
-# To anyone reading this Makefile, good luck.
-# But, DO NOT CHANGE ANYTHING HERE. Unless, you know what you are doing; in that case, can you help me?
-
-
 # Phony
 .PHONY: help
 .PHONY: debug debugaarch64 debugcc
