@@ -25,7 +25,7 @@ jobs:
         - name: Commit and push
           run: |
             if [ -n "${{github.event.pull_request.head.ref}}" ]; then # If pull request
-              git checkout ${{github.event.pull_request.head.ref}}
+              git switch ${{github.event.pull_request.head.ref}}
             fi
             if [ -n "$(git status --porcelain)" ]; then # Check if it has changes.
               git config user.name github-actions
