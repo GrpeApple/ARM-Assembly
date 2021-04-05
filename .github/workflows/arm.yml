@@ -22,8 +22,8 @@ jobs:
         - name: Replace 'aarch64' with 'arm'
           run: sed -i 's|aarch64|arm|g' './Makefile'
           # For comments
-        - name: Replace '-gnu' with '-gnueabihf'
-          run: sed -i 's|-gnu|-gnueabihf|g' './Makefile'
+        - name: Replace 'gnu-' with 'gnueabihf-'
+          run: sed -i 's|gnu-|-gnueabihf-|g' './Makefile'
         - name: Commit and push
           run: |
             if [ -n "$(git status --porcelain)" ]; then # Check if it has changes.
@@ -41,7 +41,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: Cache
-              uses: actions/cache@v2.0
+              uses: actions/cache@v2
               id: cache-install-arm
               with:
                 path: '~/install-arm'
