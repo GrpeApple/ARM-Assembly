@@ -20,8 +20,8 @@ jobs:
         - name: Replace 'arm' with 'aarch64'
           run: sed -i 's|arm|aarch64|g' './Makefile'
           # For comments
-        - name: Replace 'gnueabihf-' with 'gnu-'
-          run: sed -i 's|gnueabihf-|gnu-|g' './Makefile'
+        - name: Replace '-gnueabihf' with '-gnu'
+          run: sed -i 's|-gnueabihf|-gnu|g' './Makefile'
         - name: Commit and push
           run: |
             if [ -n "$(git status --porcelain)" ]; then # Check if it has changes.
@@ -38,8 +38,23 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
+            - name: Cache
+              uses: actions/cache@v2.0
+              id: cache-install-aarch64
+              with:
+                path: '~/install-aarch64'
+                key: ${{secrets.VERSION}}
             - name: Install gcc-aarch64-linux-gnu
-              run: sudo apt install gcc-aarch64-linux-gnu
+              env:
+                CACHE_HIT: ${{steps.cache-install.outputs.cache-hit}}
+                VERSION: ${{secrets.VERSION}}
+              run: |
+                if [ "$CACHE_HIT" == 'true' ]; then
+                    sudo cp --verbose --force --recursive ~/install-aarch64/* /
+                else
+                    sudo apt install gcc-aarch64-linux-gnu -y
+                    mkdir -p ~/install-aarch64
+                    sudo dpkg -L gcc-aarch64-linux-gnu | while IFS= read -r f; do if test -f ${f}; then echo ${f}; fi; done | xargs cp --parents --target-directory ~/install-aarch64/
             - name: Build all AArch64 programs
               run: |
                     make \
