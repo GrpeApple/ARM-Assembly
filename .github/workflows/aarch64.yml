@@ -40,26 +40,8 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
-            - name: Cache
-              uses: actions/cache@v2
-              id: cache-install-aarch64
-              with:
-                path: '~/install-aarch64'
-                key: ${{secrets.UPDATE_AARCH64}}
             - name: Install gcc-aarch64-linux-gnu
-              env:
-                CACHE_HIT: ${{steps.cache-install.outputs.cache-hit}}
-                UPDATE_AARCH64: ${{secrets.UPDATE_AARCH64}}
-              run: |
-                cache() { sudo dpkg -L "${1}" | while IFS= read -r f; do if test -f "${f}"; then echo "${f}"; fi; done | xargs cp --parents --target-directory ~/install-aarch64/; }
-                recursive() { for i in $(apt-cache depends "${1}" | \grep 'Depends: ' | sed 's|Depends: ||g'); do if test -n "${i}"; then cache "${i}"; recursive "${i}"; fi; done; }
-                if [ "$CACHE_HIT" == 'true' ]; then
-                    sudo cp --verbose --force --recursive ~/install-aarch64/* /
-                else
-                    sudo apt install gcc-aarch64-linux-gnu -y
-                    mkdir -p ~/install-aarch64
-                    recursive gcc-aarch64-linux-gnu
-                fi
+              run: sudo apt install gcc-aarch64-linux-gnu --yes
             - name: Build all AArch64 programs
               run: |
                     make \
@@ -69,5 +51,4 @@ jobs:
                     CL=aarch64-linux-gnu-gcc \
                     all
             - name: Clean all
-              run: |
-                    make cleanall
+              run: make cleanall
