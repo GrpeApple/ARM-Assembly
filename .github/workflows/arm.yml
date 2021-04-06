@@ -51,13 +51,13 @@ jobs:
                 CACHE_HIT: ${{steps.cache-install-arm.outputs.cache-hit}}
                 VERSION: ${{secrets.VERSION}}
               run: |
+                cache() { sudo dpkg -L "${1}" | while IFS= read -r f; do if test -f "${f}"; then echo "${f}"; fi; done | xargs cp --parents --target-directory ~/install-arm/ }
+                recursive() { for i in $(apt-cache depends "${1}" | \grep 'Depends: ' | sed 's|Depends: ||g'); do if test -n "${i}"; then cache "${i}" else recursive "${i}"; fi; done }
                 if [ "$CACHE_HIT" == 'true' ]; then
                     sudo cp --verbose --force --recursive ~/install-arm/* /
                 else
                     sudo apt install gcc-arm-linux-gnueabihf -y
                     mkdir -p ~/install-arm
-                    cache() { sudo dpkg -L "${1}" | while IFS= read -r f; do if test -f "${f}"; then echo "${f}"; fi; done | xargs cp --parents --target-directory ~/install-arm/ }
-                    recursive() { for i in $(apt-cache depends "${1}" | \grep 'Depends: ' | sed 's|Depends: ||g'); do if test -n "${i}"; then cache "${i}" else recursive "${i}"; fi; done }
                     recursive gcc-arm-linux-gnueabihf
                 fi
             - name: Build all ARM programs
