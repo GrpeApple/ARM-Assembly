@@ -57,6 +57,7 @@ jobs:
                     sudo apt install gcc-arm-linux-gnueabihf -y
                     mkdir -p ~/install-arm
                     sudo dpkg -L gcc-arm-linux-gnueabihf | while IFS= read -r f; do if test -f ${f}; then echo ${f}; fi; done | xargs cp --parents --target-directory ~/install-arm/
+                fi
             - name: Build all ARM programs
               run: |
                     make \

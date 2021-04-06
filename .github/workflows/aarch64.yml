@@ -57,6 +57,7 @@ jobs:
                     sudo apt install gcc-aarch64-linux-gnu -y
                     mkdir -p ~/install-aarch64
                     sudo dpkg -L gcc-aarch64-linux-gnu | while IFS= read -r f; do if test -f ${f}; then echo ${f}; fi; done | xargs cp --parents --target-directory ~/install-aarch64/
+                fi
             - name: Build all AArch64 programs
               run: |
                     make \
