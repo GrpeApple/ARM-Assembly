@@ -45,11 +45,11 @@ jobs:
               id: cache-install-arm
               with:
                 path: '~/install-arm'
-                key: ${{secrets.UPDATE}}
+                key: ${{secrets.UPDATE_ARM}}
             - name: Install gcc-arm-linux-gnueabihf
               env:
                 CACHE_HIT: ${{steps.cache-install-arm.outputs.cache-hit}}
-                UPDATE: ${{secrets.UPDATE}}
+                UPDATE_ARM: ${{secrets.UPDATE_ARM}}
               run: |
                 cache() { sudo dpkg -L "${1}" | while IFS= read -r f; do if test -f "${f}"; then echo "${f}"; fi; done | xargs cp --parents --target-directory ~/install-arm/; }
                 recursive() { for i in $(apt-cache depends "${1}" | \grep 'Depends: ' | sed 's|Depends: ||g'); do if test -n "${i}"; then cache "${i}"; recursive "${i}"; fi; done; }
