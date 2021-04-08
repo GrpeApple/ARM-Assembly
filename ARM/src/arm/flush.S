@@ -3,9 +3,9 @@
 
 .section .data
 	.balign 0x08
-	prompt: .ascii "Enter anything: "
+	prompt: .asciz "Enter anything: "
 	.balign 0x08
-	flush_prompt: .ascii "Flushed buffer.\n"
+	flush_prompt: .asciz "Flushed buffer.\n"
 
 .section .bss
 	buffer: .space 1

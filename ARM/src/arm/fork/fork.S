@@ -11,13 +11,13 @@
 	/* I spent my time making the length fit. (Including this comment.) */
 
 	.balign 0x10 // 16
-	confirm: .ascii "Do you want to continue? (y/N): "
+	confirm: .asciz "Do you want to continue? (y/N): "
 
 	.balign 0x10 // 16
-	confirm1: .ascii "Are you sure about this? (y/N): "
+	confirm1: .asciz "Are you sure about this? (y/N): "
 
 	.balign 0x10 // 16
-	confirm2: .ascii "Final warning.....\nAre you absolutely sure? (Yes, please fork): "
+	confirm2: .asciz "Final warning.....\nAre you absolutely sure? (Yes, please fork): "
 
 	.balign 0x01
 	confirm_string: .asciz "y"
@@ -26,10 +26,10 @@
 	confirm2_string: .asciz "Yes, please fork"
 
 	.balign 0x08
-	exit: .ascii "Great decision.\n"
+	exit: .asciz "Great decision.\n"
 
 	.balign 0x10 // 16
-	fork: .ascii "Initializing fork bomb.........\n"
+	fork: .asciz "Initializing fork bomb.........\n"
 
 .section .bss
 	.balign 0x08

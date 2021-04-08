@@ -2,7 +2,7 @@
 .syntax unified
 
 .section .data
-	string: .ascii "Hello, World!\n"
+	string: .asciz "Hello, World!\n"
 
 .section .text
 

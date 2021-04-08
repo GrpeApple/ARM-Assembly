@@ -2,7 +2,7 @@
 .syntax unified
 
 .section .data
-	string: .ascii "haha, ARM.\n"
+	string: .asciz "haha, ARM.\n"
 
 .section .text
 

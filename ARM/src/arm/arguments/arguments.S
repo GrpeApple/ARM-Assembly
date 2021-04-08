@@ -7,13 +7,13 @@
 
 .section .data
 	.balign 0x08
-	argv_string: .ascii "Argument Value: "
+	argv_string: .asciz "Argument Value: "
 	.balign 0x08
-	argc_string: .ascii "Argument Count: "
+	argc_string: .asciz "Argument Count: "
 	.balign 0x10 // 16
-	error_string: .ascii "Error: Unknown.\nTerminating....\n"
+	error_string: .asciz "Error: Unknown.\nTerminating....\n"
 	.balign 0x02
-	separator: .ascii "\n"
+	separator: .asciz "\n"
 	.balign 0x02
 	separator_length = . - separator
 

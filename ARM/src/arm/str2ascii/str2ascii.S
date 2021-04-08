@@ -7,10 +7,10 @@
 
 .section .data
 	.balign 0x04
-	input_string: .ascii "String: "
+	input_string: .asciz "String: "
 
 	.balign 0x04
-	ascii_string: .ascii "ASCII: "
+	ascii_string: .asciz "ASCII: "
 
 .section .bss
 	.balign 0x01

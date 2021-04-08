@@ -2,7 +2,7 @@
 .syntax unified
 
 .section .data
-	string: .ascii "E"
+	string: .asciz "E"
 
 .section .text
 

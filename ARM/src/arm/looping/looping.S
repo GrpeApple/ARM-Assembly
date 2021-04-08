@@ -8,7 +8,7 @@
 .syntax unified
 
 .section .data
-	for_string: .ascii "Loop: "
+	for_string: .asciz "Loop: "
 
 .section .text
 

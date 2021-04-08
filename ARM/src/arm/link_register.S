@@ -3,7 +3,7 @@
 
 .section .data
 	.balign 0x08
-	string: .ascii "abcdefgh"
+	string: .asciz "abcdefgh"
 
 .section .text
 

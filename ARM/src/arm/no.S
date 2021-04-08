@@ -2,7 +2,7 @@
 .syntax unified
 
 .section .data
-	string: .ascii "no"
+	string: .asciz "no"
 
 .section .text
 

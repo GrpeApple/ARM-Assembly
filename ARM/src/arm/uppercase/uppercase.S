@@ -9,9 +9,9 @@
 .syntax unified
 
 .section .data
-	input_msg: .ascii "Input a character to uppercase: "
-	out_msg: .ascii "Uppercased character: "
-	// err_msg: .ascii "Error: no character input"
+	input_msg: .asciz "Input a character to uppercase: "
+	out_msg: .asciz "Uppercased character: "
+	// err_msg: .asciz "Error: no character input"
 
 .section .bss
 	char: .asciz ""
