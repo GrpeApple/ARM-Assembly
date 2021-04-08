@@ -361,41 +361,14 @@ Assembly programs
 							</tr>
 							<tr>
 								<td>
-									<code>uppercase</code>
+									<code>uppercase.S</code>
 								</td>
 								<td>
-									Input a character to the <strong>stdin file descriptor</strong><br>
-									For example: <code>echo 'e' | ./uppercase</code>
+									Input a string to the <strong>stdin file descriptor</strong><br>
+									For example: <code>echo 'Help me, please. Please help...' | ./uppercase</code>
 								</td>
-								<td>Uppercases one character.</td>
-								<td>
-									<table>
-									<thead>
-										<tr>
-											<th>Dependencies</th>
-											<th>Description</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>
-												<code>uppercase.S</code>
-											</td>
-											<td>
-												Depends on <code>flush.S</code> for flushing when flushing the rest of the characters.
-											</td>
-										</tr>
-										<tr>
-											<td>
-												<code>flush.S</code>
-											</td>
-											<td>
-												A symlink to <code>../../deps/arm/flush.S</code>
-											</td>
-										</tr>
-									</tbody>
-									</table>
-								</td>
+								<td>Uppercases a string.</td>
+								<td></td>
 							</tr>
 						</tbody>
 						</table>
