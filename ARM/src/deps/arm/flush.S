@@ -31,6 +31,6 @@
 				mov r7, #0x03 // read syscall
 				mov r0, #0x00 // stdin file descriptor
 				mov r2, #0x01 // length
-				swi 0x00 // execute syscall
+				swi #0x00 // execute syscall
 
 				bne __input // if not 10; newline

@@ -19,7 +19,7 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =for_string
 		mov r2, #0x06 // length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 		mov r0, #0x00
 		b _loop // goto label _loop
@@ -35,7 +35,7 @@
 		movle r0, #0x01 // stdout file descriptor
 		ldrle r1, =for_string
 		movle r2, #0x06 // length
-		swile 0x00 // execute syscall
+		swile #0x00 // execute syscall
 
 		pople {r0}
 		addle r0, #0x01
@@ -44,4 +44,4 @@
 	_end:
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall

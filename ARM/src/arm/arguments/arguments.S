@@ -32,7 +32,7 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =argv_string
 		mov r2, #0x10 // 16; length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 			_argv_write:
@@ -50,12 +50,12 @@
 						bne _argv_length
 
 				ldr r1, [fp]
-				swi 0x00 // execute syscall
+				swi #0x00 // execute syscall
 
 				pop {r0}
 				ldr r1, =separator
 				ldr r2, =separator_length
-				swi 0x00 // execute syscall
+				swi #0x00 // execute syscall
 
 				ldr r0, [fp, #0x04]!
 				cmp r0, #0x00
@@ -66,7 +66,7 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =argc_string
 		mov r2, #0x10 // 16; length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 		mov r0, r4
 		bl int2str
@@ -74,7 +74,7 @@
 	_end:
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 	_error:
@@ -82,8 +82,8 @@
 		mov r0, #0x02 // stderr file descriptor
 		ldr r1, =error_string
 		mov r2, #0x20 // 32; length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x01 // exit status
-		swi 0x00
+		swi #0x00

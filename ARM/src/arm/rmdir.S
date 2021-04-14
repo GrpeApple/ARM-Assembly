@@ -15,11 +15,11 @@
 		beq _end
 
 		mov r7, #0x28 // 40; rmdir syscall
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 		b _rmdir
 
 	_end:
 		mov r7, #0x01 // exit syscall
 		mov r0, r3 // exit status
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall

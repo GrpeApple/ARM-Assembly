@@ -12,6 +12,6 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =string
 		mov r2, #0x02 // length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 	_loop: b _start // goto label _start

@@ -24,7 +24,7 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =input_msg
 		mov r2, #0x20 // 32; length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 	_input_1:
@@ -32,7 +32,7 @@
 		mov r0, #0x00 // stdin file descriptor
 		ldr r1, =char
 		mov r2, #0x01 // length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 	_output_message:
@@ -40,7 +40,7 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =out_msg
 		mov r2, #0x16 // 22; length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 	_uppercase:
@@ -67,7 +67,7 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =char
 		mov r2, #0x01 // length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 	_input:
@@ -79,14 +79,14 @@
 		mov r0, #0x00 // stdin file descriptor
 		ldr r1, =char
 		mov r2, #0x01 // length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 		b _uppercase
 
 	_end:
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 	char_content: .word char

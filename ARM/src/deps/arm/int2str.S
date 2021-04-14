@@ -55,6 +55,6 @@
 				mov r1, sp
 				pop {ip}
 				mov r2, #0x01 // length
-				swi 0x00 // execute syscall
+				swi #0x00 // execute syscall
 
 				bne __write

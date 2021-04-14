@@ -55,7 +55,7 @@
 		mov r0, #0x01 // stdout file descriptor
 		pop {ip}
 		mov r2, #0x01 // length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 		bne _write
 
@@ -64,4 +64,4 @@
 		pop {ip}
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall

@@ -48,13 +48,13 @@
 
 	_write:
 		bl _change_write
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 		ldr r3, input_content
 
 	_read:
 		bl _change_read
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 	_check:
@@ -98,7 +98,7 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =exit
 		mov r2, #0x10 // 16; length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 		ldr r0, =input
 		ldr r1, input_content
@@ -106,7 +106,7 @@
 
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 	_fork_init:
@@ -114,12 +114,12 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =fork
 		mov r2, #0x20 // 32; length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 		mov r7, #0x02 // fork syscall
 
 	_fork:
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 		b _fork
 

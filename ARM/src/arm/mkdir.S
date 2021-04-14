@@ -20,11 +20,11 @@
 
 		mov r7, #0x027 // mkdir syscall
 		mov r1, #0x1f4 // 500; Permissions
-		swi 0x00 // execute syscall
+		swi #0x000 // execute syscall
 
 		b _mkdir
 
 	_end:
 		mov r7, #0x001 // exit syscall
 		mov r0, r3 // exit status
-		swi 0x000 // execute syscall
+		swi #0x000 // execute syscall

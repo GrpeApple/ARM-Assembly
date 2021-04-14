@@ -16,4 +16,4 @@
 
 	_end:
 		mov r7, #0x01 // exit syscall
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall

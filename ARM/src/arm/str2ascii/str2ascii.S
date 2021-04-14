@@ -30,7 +30,7 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =input_string
 		mov r2, #0x08 // length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 	_input_1:
@@ -38,7 +38,7 @@
 		mov r0, #0x00 // stdin file descriptor
 		ldr r1, =input
 		mov r2, #0x01 // length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 	_ascii:
@@ -46,7 +46,7 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =ascii_string
 		mov r2, #0x07 // length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 	_loop:
@@ -61,7 +61,7 @@
 		mov r0, #0x01 // stdout file descriptor
 		mov r1, sp
 		mov r2, #0x01 // length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 		pop {ip}
 		mov ip, #0x00
@@ -74,18 +74,18 @@
 		mov r0, #0x00 // stdin file descriptor
 		ldr r1, =input
 		mov r2, #0x01 // length
-		swi 0x00
+		swi #0x00
 
 		b _loop
 
 	_end:
 		mov r0, #0x01 // stdout file descriptor
 		mov r1, sp // '\n'
-		swi 0x00 // execute syscall; write
+		swi #0x00 // execute syscall; write
 
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 
 	.balign 0x04

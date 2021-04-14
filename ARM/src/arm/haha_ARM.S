@@ -12,10 +12,10 @@
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =string
 		mov r2, #0x0b // 11; length
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
 	_end:
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
-		swi 0x00 // execute syscall
+		swi #0x00 // execute syscall
 
