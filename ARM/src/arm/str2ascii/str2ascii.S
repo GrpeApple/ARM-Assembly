@@ -32,14 +32,7 @@
 		mov r2, #0x08 // length
 		swi #0x00 // execute syscall
 
-
-	_input_1:
-		mov r7, #0x03 // read syscall
-		mov r0, #0x00 // stdin file descriptor
-		mov r1, r3
-		mov r2, #0x01 // length
-		swi #0x00 // execute syscall
-
+		bl _input
 
 	_ascii:
 		mov r7, #0x04 // write syscall
@@ -69,13 +62,7 @@
 		cmp r0, #0x0a // 10; '\n'
 		beq _end
 
-	_input:
-		mov r7, #0x03 // read syscall
-		mov r0, #0x00 // stdin file descriptor
-		mov r1, r3
-		mov r2, #0x01 // length
-		swi #0x00
-
+		bl _input
 		b _loop
 
 	_end:
@@ -86,3 +73,15 @@
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
 		swi #0x00 // execute syscall
+
+
+	_input:
+		push {ip, lr}
+
+		mov r7, #0x03 // read syscall
+		mov r0, #0x00 // stdin file descriptor
+		mov r1, r3
+		mov r2, #0x01 // length
+		swi #0x00
+
+		pop {ip, pc}
