@@ -443,7 +443,8 @@ Assembly programs
 												The label <code>flush</code> is used.<br>
 												Use the <code>r0</code> register for the input address.<br>
 												Use the <code>r1</code> register for the input variable.<br>
-												For example:
+												For example:<br>
+
 												<pre><code>
 // Please note that this is just an example.
 
@@ -473,7 +474,8 @@ Assembly programs
 											<td>
 												The label <code>int2str</code> is used.<br>
 												Use the <code>r0</code> register for the integer conversion. (and write)<br>
-												For example:
+												For example:<br>
+
 												<pre><code>
 // Please note that this is just an example.
 
