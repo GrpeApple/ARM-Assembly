@@ -443,6 +443,8 @@ Assembly programs
 												The label <code>flush</code> is used.<br>
 												Use the <code>r0</code> register for the input address.<br>
 												Use the <code>r1</code> register for the input variable.<br>
+
+See [flush.S](examples/flush.S)
 											</td>
 											<td>
 												Modified <code>../../arm/flush.S</code> for programs that depend.
@@ -456,6 +458,8 @@ Assembly programs
 											<td>
 												The label <code>int2str</code> is used.<br>
 												Use the <code>r0</code> register for the integer conversion. (and write)<br>
+
+See [int2str.S](examples/int2str.S)
 											</td>
 											<td>
 												Modified <code>../../arm/int2str.S</code> for programs that depend.
