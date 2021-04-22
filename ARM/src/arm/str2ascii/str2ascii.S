@@ -23,7 +23,7 @@
 		mov r0, #0x0a // 10; '\n'
 		push {r0}
 
-		ldr r3, input_content
+		ldr r3, =input
 
 	_string:
 		mov r7, #0x04 // write syscall
@@ -36,7 +36,7 @@
 	_input_1:
 		mov r7, #0x03 // read syscall
 		mov r0, #0x00 // stdin file descriptor
-		ldr r1, =input
+		mov r1, r3
 		mov r2, #0x01 // length
 		swi #0x00 // execute syscall
 
@@ -72,7 +72,7 @@
 	_input:
 		mov r7, #0x03 // read syscall
 		mov r0, #0x00 // stdin file descriptor
-		ldr r1, =input
+		mov r1, r3
 		mov r2, #0x01 // length
 		swi #0x00
 
@@ -86,7 +86,3 @@
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
 		swi #0x00 // execute syscall
-
-
-	.balign 0x04
-	input_content: .word input

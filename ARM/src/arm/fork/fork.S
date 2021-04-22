@@ -50,7 +50,7 @@
 		bl _change_write
 		swi #0x00 // execute syscall
 
-		ldr r3, input_content
+		ldr r3, =input
 
 	_read:
 		bl _change_read
@@ -101,7 +101,6 @@
 		swi #0x00 // execute syscall
 
 		ldr r0, =input
-		ldr r1, input_content
 		bl flush
 
 		mov r7, #0x01 // exit syscall
@@ -171,13 +170,11 @@
 
 
 
-		ldr r3, input_content
-
 		cmp r8, #0x02 // confirm2
-		ldreq r4, confirm2_string_content
+		ldreq r4, =confirm2_string
 
-		ldrlt r2, confirm_string_content
-		ldrlt r1, input_content
+		ldrlt r2, =confirm_string
+		movlt r1, r3
 		ldrlt r2, [r2]
 		ldrlt r1, [r1]
 
@@ -185,10 +182,3 @@
 
 
 		pop {pc}
-
-	.balign 0x04
-	confirm_string_content: .word confirm_string
-	.balign 0x04
-	confirm2_string_content: .word confirm2_string
-	.balign 0x04
-	input_content: .word input

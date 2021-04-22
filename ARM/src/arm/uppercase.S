@@ -18,7 +18,7 @@
 
 	.global _start
 	_start:
-		ldr r3, char_content
+		ldr r3, =char
 
 		mov r7, #0x04 // write syscall
 		mov r0, #0x01 // stdout file descriptor
@@ -30,7 +30,7 @@
 	_input_1:
 		mov r7, #0x03 // read syscall
 		mov r0, #0x00 // stdin file descriptor
-		ldr r1, =char
+		mov r1, r3
 		mov r2, #0x01 // length
 		swi #0x00 // execute syscall
 
@@ -65,7 +65,7 @@
 
 		mov r7, #0x04 // write syscall
 		mov r0, #0x01 // stdout file descriptor
-		ldr r1, =char
+		mov r1, r3
 		mov r2, #0x01 // length
 		swi #0x00 // execute syscall
 
@@ -77,7 +77,7 @@
 
 		mov r7, #0x03 // read syscall
 		mov r0, #0x00 // stdin file descriptor
-		ldr r1, =char
+		mov r1, r3
 		mov r2, #0x01 // length
 		swi #0x00 // execute syscall
 
@@ -87,6 +87,3 @@
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
 		swi #0x00 // execute syscall
-
-
-	char_content: .word char

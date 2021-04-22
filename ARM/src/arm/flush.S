@@ -13,9 +13,7 @@
 .section .text
 
 	.global _start
-	_start: ldr r4, buffer_content
-
-	_prompt:
+	_start:
 		mov r7, #0x04 // write syscall
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =prompt
@@ -30,7 +28,7 @@
 		mov r2, #0x01 // length
 		swi #0x00 // execute syscall
 
-		ldr r3, [r4]
+		ldr r3, [r1]
 		cmp r3, #0x0a // 10; newline
 		bne _flush
 
@@ -46,6 +44,3 @@
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
 		swi #0x00 // execute syscall
-
-
-	buffer_content: .word buffer
