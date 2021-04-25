@@ -6,12 +6,13 @@
 	.global _start
 	_start:
 		pop {r0, ip} // argc
-		cmp r0, #0x00 // Is argc 0? (Should not happen)
+
+		cmp r0, #0x00 // Should NOT happen
 		moveq r3, #0x01 // exit status
 
 	_unlink:
-		pop {r0} // argv
-		cmp r0, #0x00 // Did we reach the end of argv?
+		pop {r0} // arg <- argv[i]
+		cmp r0, #0x00 // End of argv?
 		beq _end
 
 		mov r7, #0x0a // 10; unlink syscall, aka remove files

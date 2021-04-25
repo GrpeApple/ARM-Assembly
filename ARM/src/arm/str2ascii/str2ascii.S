@@ -8,7 +8,6 @@
 .section .data
 	.balign 0x04
 	input_string: .asciz "String: "
-
 	.balign 0x04
 	ascii_string: .asciz "ASCII: "
 
@@ -43,8 +42,9 @@
 
 
 	_loop:
-		ldr r0, [r3]
+		ldr r0, [r3] // input
 		push {r0}
+
 		bl int2str
 
 		mov r0, #0x20 // 32; ' '
@@ -57,18 +57,17 @@
 		swi #0x00 // execute syscall
 
 		pop {ip}
-		mov ip, #0x00
 		pop {r0}
 		cmp r0, #0x0a // 10; '\n'
-		beq _end
-
-		bl _input
-		b _loop
+		blne _input
+		bne _loop
 
 	_end:
 		mov r0, #0x01 // stdout file descriptor
 		mov r1, sp // '\n'
 		swi #0x00 // execute syscall; write
+
+		pop {ip} // '\n'
 
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
@@ -76,12 +75,12 @@
 
 
 	_input:
-		push {ip, lr}
+		push {lr}
 
 		mov r7, #0x03 // read syscall
 		mov r0, #0x00 // stdin file descriptor
-		mov r1, r3
+		mov r1, r3 // input address
 		mov r2, #0x01 // length
-		swi #0x00
+		swi #0x00 // execute syscall
 
-		pop {ip, pc}
+		pop {pc}

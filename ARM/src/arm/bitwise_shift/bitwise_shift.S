@@ -9,8 +9,8 @@
 
 	.global _start
 	_start:
-		mov r1, #0x01 // the number to operate on
-		mov r2, #0x1e // the number of shifts
+		mov r1, #0x01 // integer
+		mov r2, #0x1e // shifts
 		mov r0, r1, lsl r2
 
 		bl int2str

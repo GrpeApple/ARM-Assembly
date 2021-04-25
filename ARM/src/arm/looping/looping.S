@@ -8,13 +8,13 @@
 .syntax unified
 
 .section .data
+	.balign 0x02
 	for_string: .asciz "Loop: "
 
 .section .text
 
 	.global _start
 	_start:
-
 		mov r7, #0x04 // write syscall
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =for_string
@@ -22,14 +22,14 @@
 		swi #0x00 // execute syscall
 
 		mov r0, #0x00
-		b _loop // goto label _loop
 
 	_loop:
-		push {r0}
+		push {r0} // integer
+
 		bl int2str
 
 	_write:
-		ldr r0, [sp]
+		ldr r0, [sp] // integer
 		cmp r0, #0x09
 
 		movle r0, #0x01 // stdout file descriptor
@@ -37,8 +37,9 @@
 		movle r2, #0x06 // length
 		swile #0x00 // execute syscall
 
-		pople {r0}
-		addle r0, #0x01
+
+		pople {r0} // integer
+		addle r0, #0x01 // integer++
 		ble _loop
 
 	_end:

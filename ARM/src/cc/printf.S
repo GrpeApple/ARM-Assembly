@@ -2,6 +2,7 @@
 .extern printf
 
 .section .data
+	.balign 0x08
 	string: .asciz "Hello, World!\n"
 
 .section .text

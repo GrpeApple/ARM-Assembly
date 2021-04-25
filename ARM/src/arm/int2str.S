@@ -10,22 +10,24 @@
 
 .code 32 // arm
 .syntax unified
-.equ division, 0x66666667 // 1717986919; (2 ^ 34 + 6) / 10
+.equ division_, 0x66666667 // 1717986919; (2 ^ 34 + 6) / 10
 
 .section .text
 
 	.global _start
 	_start:
 		push {ip}
-		mov r1, #0x0a // 10; newline
+
+		mov r1, #0x0a // 10; '\n'
 		push {r1}
+
 		mov r7, #0x04 // write syscall
 		/*
 			If your architecture is ARMv7 (or above).
-			movw r3, #:lower16:division // 26215
-			movt r3, #:upper16:division // 26214
+			movw r3, #:lower16:division_ // 26215
+			movt r3, #:upper16:division_ // 26214
 		*/
-		ldr r3, =division
+		ldr r3, =division_
 		mov r0, #(0x01 << 0x1e) // replace this
 
 	_division:
@@ -39,29 +41,30 @@
 
 	_string:
 		add r0, #0x30 // 48; '0'
-		push {r0}
+		push {r0} // Least significant character
 
 	_shift:
-		mov r0, r2
+		mov r0, r2 // division
 		cmp r0, #0x00
 		bne _division
 
 	_write:
-		mov r1, sp
-		ldr r3, [r1]
+		mov r1, sp // Most significant character address
+		ldr r3, [r1] // character
 		cmp r3, #0x00
 		beq _end
 
+		pop {ip} // Most significant character
+
 		mov r0, #0x01 // stdout file descriptor
-		pop {ip}
 		mov r2, #0x01 // length
 		swi #0x00 // execute syscall
 
 		bne _write
 
-
 	_end:
 		pop {ip}
+
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
 		swi #0x00 // execute syscall

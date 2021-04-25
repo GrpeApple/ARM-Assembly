@@ -28,8 +28,8 @@
 		mov r2, #0x01 // length
 		swi #0x00 // execute syscall
 
-		ldr r3, [r1]
-		cmp r3, #0x0a // 10; newline
+		ldr r3, [r1] // buffer
+		cmp r3, #0x0a // 10; '\n'
 		bne _flush
 
 	_flush_prompt:

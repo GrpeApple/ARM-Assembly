@@ -21,11 +21,8 @@
 
 	.global _start
 	_start:
-		ldr r4, [sp] // argc
-		cmp r4, #0x00 // argc should not be 0
-		beq _error
-		mov fp, sp
-		add fp, #0x04
+		mov fp, sp // fp <- argc
+		add fp, #0x04 // *argv[] <- &argc + 4
 
 	_argv:
 		mov r7, #0x04 // write syscall
@@ -37,28 +34,31 @@
 
 			_argv_write:
 				mov r0, #0x01 // stdout file descriptor
-				push {r0}
 
-				mov r2, #0x00
-				ldr r3, [fp]
+				push {r0} // stdout
+
+				mov r2, #0x00 // length
+				ldr r3, [fp] // arg <- argv[argc]
 
 					_argv_length:
-						ldrb r1, [r3, r2]
+						ldrb r1, [r3, r2] // char <- (argv[argc])[length]
 
-						cmp r1, #0x00 // if terminated
-						addne r2, #0x01
+						cmp r1, #0x00 // terminated?
+						addne r2, #0x01 // length++
 						bne _argv_length
 
-				ldr r1, [fp]
+				mov r1, r3 // argv[argc]
 				swi #0x00 // execute syscall
 
-				pop {r0}
+
+				pop {r0} // stdout
+
 				ldr r1, =separator
 				ldr r2, =separator_length
 				swi #0x00 // execute syscall
 
-				ldr r0, [fp, #0x04]!
-				cmp r0, #0x00
+				ldr r0, [fp, #0x04]! // arg = argv[argc + 4]
+				cmp r0, #0x00 // End of argv?
 				bne _argv_write
 
 	_argc:
@@ -68,7 +68,10 @@
 		mov r2, #0x10 // 16; length
 		swi #0x00 // execute syscall
 
-		mov r0, r4
+		ldr r0, [sp] // argc <- sp
+		cmp r0, #0x00 // Should NOT happen
+		beq _error
+
 		bl int2str
 
 	_end:
@@ -86,4 +89,4 @@
 
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x01 // exit status
-		swi #0x00
+		swi #0x00 // execute syscall

@@ -8,25 +8,26 @@
 
 .code 32 // arm
 .syntax unified
-
-.equ division, 0x66666667 // 1717986919; (2 ^ 34 + 6) / 10
+.equ division__, 0x66666667 // 1717986919; (2 ^ 34 + 6) / 10
 
 .section .text
 
 	.global int2str
 	int2str:
 		push {r1-r2, lr}
+		mov ip, #0x00
 		push {ip}
-		mov r1, #0x0a // 10; newline
+
+		mov r1, #0x0a // 10; '\n'
 		push {r1}
 
 			__division:
 				/*
 					If your architecture is ARMv7 (or above).
-					movw r1, #:lower16:division // 26215
-					movt r1, #:upper16:division // 26214
+					movw r1, #:lower16:division__ // 26215
+					movt r1, #:upper16:division__ // 26214
 				*/
-				ldr r1, =division
+				ldr r1, =division__
 				smmul r1, r0, r1
 				asr r2, r1, #0x02
 
@@ -37,23 +38,24 @@
 
 			__string:
 				add r0, #0x30 // 48; '0'
-				push {r0}
+				push {r0} // Least significant character
 
 			__shift:
-				mov r0, r2
+				mov r0, r2 // division
 				cmp r0, #0x00
 				bne __division
 
 			__write:
-				ldr r1, [sp]
+				ldr r1, [sp] // Most significant character
 				cmp r1, #0x00
 				popeq {ip}
 				popeq {r1-r2, pc}
 
+				mov r1, sp // Most significant character address
+				pop {ip}
+
 				mov r7, #0x04 // write syscall
 				mov r0, #0x01 // stdout file descriptor
-				mov r1, sp
-				pop {ip}
 				mov r2, #0x01 // length
 				swi #0x00 // execute syscall
 

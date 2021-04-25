@@ -10,12 +10,13 @@
 	.global _start
 	_start:
 		pop {r0, ip} // argc
-		cmp r0, #0x000 // Is argc 0? (Should not happen)
+
+		cmp r0, #0x000 // Should NOT happen
 		moveq r3, #0x001 // exit status
 
 	_mkdir:
-		pop {r0} // argv
-		cmp r0, #0x000 // Did we reach the end of argv?
+		pop {r0} // arg <- argv[i]
+		cmp r0, #0x000 // End of argv?
 		beq _end
 
 		mov r7, #0x027 // mkdir syscall

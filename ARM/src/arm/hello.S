@@ -2,6 +2,7 @@
 .syntax unified
 
 .section .data
+	.balign 0x08
 	string: .asciz "Hello, World!\n"
 
 .section .text
@@ -13,6 +14,7 @@
 		ldr r1, =string
 		mov r2, #0x0e // 14; length
 		swi #0x00 // execute syscall
+
 
 	_end:
 		mov r7, #0x01 // exit syscall

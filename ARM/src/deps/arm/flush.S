@@ -13,16 +13,14 @@
 	.global flush
 	flush:
 		push {r1-r2, lr}
+		mov ip, #0x00
 		push {ip} // ip
 		push {r0} // r0
 		mov r1, r0
 
 			__input:
-				pop {r0}
-				ldr r2, [r0]
-				push {r0}
-
-				cmp r2, #0x0a // 10; newline
+				ldr r2, [r1] // r0
+				cmp r2, #0x0a // 10; '\n'
 
 				popeq {ip} // r0
 				popeq {ip} // ip
@@ -34,4 +32,4 @@
 				mov r2, #0x01 // length
 				swi #0x00 // execute syscall
 
-				bne __input // if not 10; newline
+				bne __input // if not 10; '\n'

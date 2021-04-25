@@ -2,6 +2,7 @@
 .syntax unified
 
 .section .data
+	.balign 0x01
 	string: .asciz "E"
 
 .section .text
@@ -15,4 +16,4 @@
 
 	_output: swi #0x00 // execute syscall
 
-	_loop: b _output // goto label _output
+	_loop: b _output
