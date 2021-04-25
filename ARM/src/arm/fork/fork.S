@@ -7,103 +7,118 @@
 
 .section .data
 	/* I spent my time making the length fit. (Including this comment.) */
+	confirm:
 	.balign 0x10 // 16
-	confirm: .asciz "Do you want to continue? (y/N): "
+	.asciz "Do you want to continue? (y/N): " // confirm
 	.balign 0x10 // 16
-	confirm1: .asciz "Are you sure about this? (y/N): "
+	.asciz "Are you sure about this? (y/N): " // confirm1
 	.balign 0x10 // 16
-	confirm2: .asciz "Final warning.....\nAre you absolutely sure? (Yes, please fork): "
+	.asciz "Final warning.....\nAre you absolutely sure? (Yes, please fork): " // confirm2
+
+	confirm_string:
 	.balign 0x01
-	confirm_string: .asciz "y"
+	.asciz "y" // confirm, confirm1
 	.balign 0x08
-	confirm2_string: .asciz "Yes, please fork"
+	.asciz "Yes, please fork" // confirm2
+
 	.balign 0x08
 	exit: .asciz "Great decision.\n"
 	.balign 0x10 // 16
 	fork: .asciz "Initializing fork bomb.........\n"
 
 .section .bss
-	.balign 0x08
-	input: .space 0x10 // 16
+	.balign 0x01
+	input: .space 0x01
 
 .section .text
 
 	.global _start
 	_start:
-		mov r8, #0x00 // confirm, confirm1, confirm2
-		mov r9, #0x00 // confirm..confirm1, length
-		ldr r3, =input
-
-	_check_fork:
-		cmp r8, #0x03 // End of confirmations?
-		beq _fork_init
+		ldr r3, =confirm // confirm_address
+		/*	r4 -- confirm_level
+			r5 -- confirm_index	*/
+		ldr r6, =confirm_string // check_confirm_address
+		ldr r8, =input // input_address
 
 	_write:
-		bl _change_write
+		cmp r4, #0x02 // confirm2
+		movlt r2, #0x20 // 32; length
+
+		moveq r2, #0x40 // 64; length
+
+		mov r7, #0x04 // write syscall
+		mov r1, r3 // confirm_address
+		mov r0, #0x01 // stdout file descriptor
 		swi #0x00 // execute syscall
 
-
-	_read:
-		bl _change_read
+	_input:
+		mov r7, #0x03 // read syscall
+		mov r0, #0x00 // stdin file descriptor
+		mov r1, r8 // input
+		mov r2, #0x01 // length
 		swi #0x00 // execute syscall
-
 
 	_check:
-		bl _change_check
+		ldr r1, [r8] // input <- input_address
+		ldrb r2, [r6, r5] // check_confirm_character <- check_confirm_address[confirm_index]
 
-		ldr r5, [r3] // input
-
-		cmp r8, #0x02 // confirm2
+		cmp r4, #0x02 // confirm2
 		beq _check_confirm2
 
-		cmp r5, #0x0a // 10; '\n'
-		beq _loop
+		_check_confirm:
+			cmp r5, #0x01
+			cmpeq r1, #0x0a // 10; '\n'
+			beq _loop
 
+			cmp r1, r2
+			bicne r2, #0x20 // 32; Uppercase
+			cmpne r1, r2
+			bne _end
 
-			_check_confirm:
-				cmp r1, r2 // input, confirm_string
-				bicne r2, #0x20 // 32; Uppercase confirm..confirm1_string
-				cmpne r1, r2
-				moveq r9, #0x01 // confirm..confirm1
-				beq _loop_check
+			add r5, #0x01 // confirm_index++
+			b _input
 
-				bne _end
+		_check_confirm2:
+			cmp r5, #0x10 // 16
+			cmpeq r1, #0x0a // 10; '\n'
+			addeq r4, #0x01 // confirm_level++
+			beq _loop
 
-			_check_confirm2:
-				cmp r9, #0x10 // 16
-				beq _loop
+			cmp r1, r2
+			bne _end
 
-				ldr r1, [r3] // input
-				ldrb r2, [r4, r9] // confirm2_string_character <- confirm2_string[length]
-				add r9, #0x01 // length++
-				cmp r1, r2
-				bne _end
-
-			_loop_check:
-				b _read
+			add r5, #0x01 // confirm_index++
+			b _input
 
 	_loop:
-		cmp r9, #0x00 // not confirm
-		movne r9, #0x00 // length
-		addne r8, #0x01 // confirm++
-		bne _check_fork
+		mov r5, #0x00 // confirm_index
+
+		cmp r4, #0x03 // Did we pass all confirmations?
+		beq _fork
+
+		add r3, #0x30 // confirm_address++
+		add r4, #0x01 // confirm_level++
+
+		cmp r4, #0x02 // confirm2
+		addeq r6, #0x07 // confirm2_string
+
+		b _write
 
 	_end:
+		mov r0, r8 // input_address
+		bl flush
+
 		mov r7, #0x04 // write syscall
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =exit
 		mov r2, #0x10 // 16; length
 		swi #0x00 // execute syscall
 
-		mov r0, r3 // input address
-		blne flush
-
 		mov r7, #0x01 // exit syscall
 		mov r0, #0x00 // exit status
 		swi #0x00 // execute syscall
 
-
-	_fork_init:
+	_fork:
 		mov r7, #0x04 // write syscall
 		mov r0, #0x01 // stdout file descriptor
 		ldr r1, =fork
@@ -112,50 +127,6 @@
 
 		mov r7, #0x02 // fork syscall
 
-	_fork:
-		swi #0x00 // execute syscall
-
-		b _fork
-
-	_change_write:
-		push {lr}
-
-		mov r7, #0x04 // write syscall
-		mov r0, #0x01 // stdout file descriptor
-
-		cmp r8, #0x00 // confirm
-		ldreq r1, =confirm
-
-		cmp r8, #0x01 // confirm1
-		ldreq r1, =confirm1
-
-		cmp r8, #0x02 // confirm2
-		ldreq r1, =confirm2
-		moveq r2, #0x40 // 64; length
-
-		movlt r2, #0x20 // 32; length
-
-		pop {pc}
-
-	_change_read:
-		push {lr}
-
-		mov r7, #0x03 // read syscall
-		mov r0, #0x00 // stdin file descriptor
-		ldr r1, =input
-		mov r2, #0x01 // length
-
-		pop {pc}
-
-	_change_check:
-		push {lr}
-
-		cmp r8, #0x02 // confirm2
-		ldreq r4, =confirm2_string
-
-		ldrlt r2, =confirm_string
-		movlt r1, r3 // input address
-		ldrlt r2, [r2] // confirm_string
-		ldrlt r1, [r1] // input
-
-		pop {pc}
+			_init:
+				swi #0x00 // execute syscall
+				b _init
