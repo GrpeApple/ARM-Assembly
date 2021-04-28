@@ -589,10 +589,10 @@ See [int2str.S](examples/ARM/deps/int2str.S)
 	</tr>
 	<tr>
 		<td>
-			<td>C</td>
-			<td>
-				Assembly programs that uses <code>C</code>
-			</td>
+			<code>C</code>
+		</td>
+		<td>
+			Assembly programs that uses <code>C</code>
 		</td>
 		<td>
 			<table>
