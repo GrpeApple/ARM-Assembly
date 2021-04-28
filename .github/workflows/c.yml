@@ -1,0 +1,95 @@
+on:
+  push:
+      paths:
+          - C/**
+      workflow_dispatch:
+  pull_request:
+      paths:
+          - C/**
+
+defaults:
+  run:
+    working-directory: ./C
+
+jobs:
+    replace-arm:
+      runs-on: ubuntu-20.04
+
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            ref: ${{github.event.pull_request.head.ref}}
+        - name: Replace 'aarch64' with 'arm'
+          run: sed -i 's|aarch64|arm|g' './ARM/Makefile'
+          # For comments
+        - name: Replace 'gnu-' with 'gnueabihf-'
+          run: sed -i 's|gnu-|-gnueabihf-|g' './ARM/Makefile'
+        - name: Commit and push
+          run: |
+            if [ -n "$(git status --porcelain)" ]; then # Check if it has changes.
+              git config user.name github-actions
+              git config user.email github-actions@github.com
+              git add './ARM/Makefile'
+              git commit -m 'Fix typos'
+              git push origin
+            fi
+
+    replace-aarch64:
+      runs-on: ubuntu-20.04
+
+      steps:
+        - uses: actions/checkout@v2
+          with:
+            ref: ${{github.event.pull_request.head.ref}}
+        - name: Replace 'arm' with 'aarch64'
+          run: sed -i 's|arm|aarch64|g' './AArch64/Makefile'
+          # For comments
+        - name: Replace 'gnueabihf-' with 'gnu-'
+          run: sed -i 's|gnu-|-gnueabihf-|g' './AArch64/Makefile'
+        - name: Commit and push
+          run: |
+            if [ -n "$(git status --porcelain)" ]; then # Check if it has changes.
+              git config user.name github-actions
+              git config user.email github-actions@github.com
+              git add './AArch64/Makefile'
+              git commit -m 'Fix typos'
+              git push origin
+            fi
+
+    build-arm:
+        needs: replace-arm
+        runs-on: ubuntu-20.04
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Install gcc-arm-linux-gnueabihf
+              run: sudo apt install gcc-arm-linux-gnueabihf --yes
+            - name: Build all ARM programs
+              run: |
+                    make \
+                    CC=arm-linux-gnueabihf-gcc \
+                    CL=arm-linux-gnueabihf-gcc \
+                    all
+              working-directory: ./C/ARM/
+            - name: Clean all
+              run: make cleanall
+              working-directory: ./C/ARM/
+
+    build-aarch64:
+        needs: replace-aarch64
+        runs-on: ubuntu-20.04
+
+        steps:
+            - uses: actions/checkout@v2
+            - name: Install gcc-aarch64-linux-gnu
+              run: sudo apt install gcc-aarch64-linux-gnu --yes
+            - name: Build all AArch64 programs
+              run: |
+                    make \
+                    CC=aarch64-linux-gnu-gcc \
+                    CL=aarch64-linux-gnu-gcc \
+                    all
+              working-directory: ./C/AArch64
+            - name: Clean all
+              run: make cleanall
+              working-directory: ./C/AArch64

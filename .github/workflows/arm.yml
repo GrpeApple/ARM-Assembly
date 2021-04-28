@@ -40,15 +40,13 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
-            - name: Install gcc-arm-linux-gnueabihf
-              run: sudo apt install gcc-arm-linux-gnueabihf --yes
+            - name: Install binutils-arm-linux-gnueabihf
+              run: sudo apt install binutils-arm-linux-gnueabihf --yes
             - name: Build all ARM programs
               run: |
                     make \
                     AS=arm-linux-gnueabihf-as \
                     LD=arm-linux-gnueabihf-ld \
-                    CC=arm-linux-gnueabihf-gcc \
-                    CL=arm-linux-gnueabihf-gcc \
                     all
             - name: Clean all
               run: make cleanall

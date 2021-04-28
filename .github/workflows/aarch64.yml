@@ -40,15 +40,13 @@ jobs:
 
         steps:
             - uses: actions/checkout@v2
-            - name: Install gcc-aarch64-linux-gnu
-              run: sudo apt install gcc-aarch64-linux-gnu --yes
+            - name: Install binutils-aarch64-linux-gnu
+              run: sudo apt install binutils-aarch64-linux-gnu --yes
             - name: Build all AArch64 programs
               run: |
                     make \
                     AS=aarch64-linux-gnu-as \
                     LD=aarch64-linux-gnu-ld \
-                    CC=aarch64-linux-gnu-gcc \
-                    CL=aarch64-linux-gnu-gcc \
                     all
             - name: Clean all
               run: make cleanall
