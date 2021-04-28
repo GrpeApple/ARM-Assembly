@@ -23,7 +23,7 @@ jobs:
           run: sed -i 's|aarch64|arm|g' './ARM/Makefile'
           # For comments
         - name: Replace 'gnu-' with 'gnueabihf-'
-          run: sed -i 's|gnu-|-gnueabihf-|g' './ARM/Makefile'
+          run: sed -i 's|gnu-|gnueabihf-|g' './ARM/Makefile'
         - name: Commit and push
           run: |
             if [ -n "$(git status --porcelain)" ]; then # Check if it has changes.
@@ -45,7 +45,7 @@ jobs:
           run: sed -i 's|arm|aarch64|g' './AArch64/Makefile'
           # For comments
         - name: Replace 'gnueabihf-' with 'gnu-'
-          run: sed -i 's|gnu-|-gnueabihf-|g' './AArch64/Makefile'
+          run: sed -i 's|gnueabihf-|gnu-|g' './AArch64/Makefile'
         - name: Commit and push
           run: |
             if [ -n "$(git status --porcelain)" ]; then # Check if it has changes.
