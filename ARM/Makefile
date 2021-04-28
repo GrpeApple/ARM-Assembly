@@ -1,9 +1,6 @@
 # Phony
-.PHONY: help
-.PHONY: debug debugarm debugcc
+.PHONY: help debug
 .PHONY: all debugall runall clean cleanall
-.PHONY: allarm debugallarm runallarm cleanarm cleanallarm
-.PHONY: allcc debugallcc runallcc cleancc cleanallcc
 
 # Variables
 
@@ -32,16 +29,6 @@ AS:=as
 ### Linker, change this if you are on another platform
 ####LD=arm-linux-gnueabihf-ld
 LD:=ld
-
-
-### C Compiler
-####CC=arm-linux-gnueabihf-gcc
-CC:=gcc
-
-
-### C Linker
-####CL=arm-linux-gnueabihf-gcc
-CL:=gcc
 
 
 ### Runner, change this if you are on another platform
@@ -90,20 +77,6 @@ ABID:=$(BID)/arm
 
 
 
-#### C Source Directory
-CSD:=$(SD)/cc
-
-
-
-#### C Build Directory
-CBUD:=$(BUD)/cc
-
-
-
-#### C Binary Directory
-CBID:=$(BID)/cc
-
-
 ## Flags
 
 
@@ -114,15 +87,6 @@ ASFLAGS:=
 ### Linker Flags
 LDFLAGS:=
 
-
-### C Compiler Flags
-####CCFLAGS=-g
-CCFLAGS:=
-
-
-### C Linker Flags
-####CLFLAGS=-static
-CLFLAGS:=
 
 ## Other
 
@@ -142,36 +106,12 @@ ASEXT:=.o
 LDEXT:=
 
 
-### C Compiler Source code extension
-####CSDEXT=.asm
-CSDEXT:=.S
-
-
-### C Linker Source code extension
-####CSDEXT=.asm
-CSDEXT:=.S
-
-
-### CC output extension binary
-####CEXT=.obj
-CEXT:=.o
-
-
-### CC link output extension binary
-####CLEXT=.bin
-CLEXT:=
-
 ### Sources
 
 
 PROGRAM:=$(shell find './$(ASD)' -maxdepth 1 \( -type f -o -type l \) -iname '*$(ASDEXT)' -print | tr -d '$(ASDEXT)' | sed 's|.*/||')
 PROGRAM_DIRS:=$(shell find './$(ASD)' -maxdepth 1 \( -type d -o -type l \) ! -path "./$(ASD)" -print | sed 's|.*/||')
 PROGRAM_DEPS:=$(shell for i in $(PROGRAM_DIRS); do find "./$(ASD)/$${i}" -maxdepth 1 \( -type f -o -type l \) -iname '*$(ASDEXT)' -print | tr -d '$(ASDEXT)' | sed 's|/$(ASD)/||' | sed "s|$${i}/$${i}||"; done)
-
-#### CC Sources
-CPROGRAM:=$(shell find "./$(CSD)" -maxdepth 1 -type f -iname "*$(CSDEXT)" -print | tr -d "$(CSDEXT)" | sed 's|.*/||')
-CPROGRAM_DIRS:=$(shell find './$(CSD)' -maxdepth 1 \( -type d -o -type l \) ! -path "./$(CSD)" -print | sed 's|.*/||')
-CPROGRAM_DEPS:=$(shell for i in $(CPROGRAM_DIRS); do find "./$(CSD)/$${i}" -maxdepth 1 \( -type f -o -type l \) -iname '*$(CSDEXT)' -print | tr -d '$(CSDEXT)' | sed 's|/$(CSD)/||' | sed "s|$${i}/$${i}||"; done)
 
 
 
@@ -202,27 +142,6 @@ endif
 	@:
 
 
-$(CPROGRAM_DIRS): %: $(CSD)/%
-	$(eval CCSD:=$</$@$(CSDEXT))
-	$(eval CCOUT:=$(CBUD)/$@/$@$(CCEXT))
-	$(eval CLOUT:=$(CBID)/$@$(CLEXT))
-ifndef CC
-	$(MKDIR) $(CBID)
-	$(CL) $(CLFLAGS) -o $(CLOUT) $(shell echo $(CBUD)/$@/*$(CCEXT))
-else ifndef CL
-	$(MKDIR) $(CBUD)/$@/
-	$(CC) $(CCFLAGS) -c -o $(CCOUT) $(CCSD)
-	for i in $(shell echo '$(CPROGRAM_DEPS)' | grep -o '$@\S*'); do $(CC) $(CCFLAGS) -o "$(CBUD)/$${i}$(CCEXT)" "$(CSD)/$${i}$(CSDEXT)"; done
-else
-	$(MKDIR) $(CBUD)/$@/
-	$(CC) $(CCFLAGS) -c -o $(CCOUT) $(CCSD)
-	for i in $(shell echo '$(CPROGRAM_DEPS)' | grep -o '$@\S*'); do $(CC) $(CCFLAGS) -o "$(CBUD)/$${i}$(CCEXT)" "$(CSD)/$${i}$(CSDEXT)"; done
-	$(MKDIR) $(CBID)
-	$(CL) $(CLFLAGS) -o $(CLOUT) $(shell echo $(CBUD)/$@/*$(CCEXT))
-endif
-	@:
-
-
 $(PROGRAM): %: $(ASD)/%$(ASDEXT)
 	$(eval ASSD:=$<)
 	$(eval ASOUT:=$(ABUD)/$@$(ASEXT))
@@ -243,27 +162,7 @@ endif
 	@:
 
 
-$(CPROGRAM): %: $(CSD)/%$(CSDEXT)
-	$(eval CCSD:=$<)
-	$(eval CCOUT:=$(CBUD)/$@$(CEXT))
-	$(eval CLSD:=$(CBUD)/$@$(CEXT))
-	$(eval CLOUT:=$(CBID)/$@$(CLEXT))
-ifndef CC
-	$(MKDIR) $(CBID)
-	$(CL) $(CLFLAGS) -c -o $(CCOUT) $(CLSD)
-else ifndef CL
-	$(MKDIR) $(CBUD)
-	$(CC) $(CCFLAGS) -o $(CLOUT) $(CCSD)
-else
-	$(MKDIR) $(CBUD)
-	$(CC) $(CCFLAGS) -c -o $(CCOUT) $(CCSD)
-	$(MKDIR) $(CBID)
-	$(CL) $(CLFLAGS) -o $(CLOUT) $(CLSD)
-endif
-	@:
-
-
-all: $(PROGRAM_DIRS) $(CPROGRAM_DIRS) $(PROGRAM) $(CPROGRAM)
+all: $(PROGRAM_DIRS) $(PROGRAM)
 
 
 debugall: | debug all
@@ -271,7 +170,6 @@ debugall: | debug all
 
 debug:
 	$(eval ASFLAGS:=$(ASFLAGS) -g)
-	$(eval CCFLAGS:=$(CCFLAGS) -g)
 	@:
 
 
@@ -281,83 +179,16 @@ runall:
 	else \
 		$(RUN) ./$(ABID)/* $(ARGS); \
 	fi
-	@if [ ! -d "./$(CBID)" ]; then \
-		echo $(RUN_MESSAGE) $(CBID); \
-	else \
-		$(RUN) ./$(CBID)/* $(ARGS); \
-	fi
 	@:
 
 
 clean:
 	$(RM) $(ABUD)
-	$(RM) $(CBUD)
 	$(RM) $(BUD)
 	@:
 
 
 cleanall:
 	$(RM) $(ABUD) $(ABID)
-	$(RM) $(CBUD) $(CBID)
 	$(RM) $(BUD) $(BID)
-	@:
-
-
-allarm: $(PROGRAM_DIRS) $(PROGRAM)
-
-
-debugallarm: | debugarm allarm
-
-
-debugarm:
-	$(eval ASFLAGS:=$(ASFLAGS) -g)
-	@:
-
-
-runallarm:
-	@if [ ! -d "./$(ABID)" ]; then \
-		echo $(RUN_MESSAGE) $(ABID); \
-	else \
-		$(RUN) ./$(ABID)/* $(ARGS); \
-	fi
-	@:
-
-
-cleanarm:
-	$(RM) $(ABUD)
-	@:
-
-
-cleanallarm:
-	$(RM) $(ABUD) $(ABID)
-	@:
-
-
-allcc: $(CPROGRAM_DIRS) $(CPROGRAM)
-
-
-debugallcc: | debugcc allcc
-
-
-debugcc:
-	$(eval CCFLAGS:=$(CCFLAGS) -g)
-	@:
-
-
-runallcc:
-	@if [ ! -d "./$(CBID)" ]; then \
-		echo $(RUN_MESSAGE) $(CBID); \
-	else \
-		$(RUN) ./$(CBID)/* $(ARGS); \
-	fi
-	@:
-
-
-cleancc:
-	$(RM) $(CBUD)
-	@:
-
-
-cleanallcc:
-	$(RM) $(CBUD) $(CBID)
 	@:

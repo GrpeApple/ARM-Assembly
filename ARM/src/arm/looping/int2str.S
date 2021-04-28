@@ -1,1 +1,1 @@
-../../deps/arm/int2str.S
+../../deps/int2str.S

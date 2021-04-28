@@ -103,7 +103,7 @@ Assembly programs
 												<code>int2str.S</code>
 											</td>
 											<td>
-												A symlink to <code>../../deps/arm/int2str.S</code>
+												A symlink to <code>../../deps/int2str.S</code>
 											</td>
 										</tr>
 									</tbody>
@@ -138,7 +138,7 @@ Assembly programs
 												<code>int2str.S</code>
 											</td>
 											<td>
-												A symlink to <code>../../deps/arm/int2str.S</code>
+												A symlink to <code>../../deps/int2str.S</code>
 											</td>
 										</tr>
 									</tbody>
@@ -196,7 +196,7 @@ Assembly programs
 												<code>flush.S</code>
 											</td>
 											<td>
-												A symlink to <code>../../deps/arm/flush.S</code>
+												A symlink to <code>../../deps/flush.S</code>
 											</td>
 										</tr>
 									</tbody>
@@ -265,7 +265,7 @@ Assembly programs
 												<code>int2str.S</code>
 											</td>
 											<td>
-												A symlink to <code>../../deps/arm/int2str.S</code>
+												A symlink to <code>../../deps/int2str.S</code>
 											</td>
 										</tr>
 									</tbody>
@@ -352,7 +352,7 @@ Assembly programs
 												<code>int2str.S</code>
 											</td>
 											<td>
-												A symlink to <code>../../deps/arm/str2ascii/int2str.S</code>
+												A symlink to <code>../../deps/str2ascii/int2str.S</code>
 											</td>
 										</tr>
 									</tbody>
@@ -368,36 +368,6 @@ Assembly programs
 									For example: <code>echo 'Help me, please. Please help...' | ./uppercase</code>
 								</td>
 								<td>Uppercases a string.</td>
-								<td></td>
-							</tr>
-						</tbody>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<code>cc/</code>
-					</td>
-					<td>Programs that depend on C (Libraries, functions, etc...)</td>
-					<td>
-						<table>
-						<thead>
-							<tr>
-								<th>Program</th>
-								<th>Usage</th>
-								<th>Description</th>
-								<th>Files</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<code>printf.S</code>
-								</td>
-								<td></td>
-								<td>
-									Depends on printf, prints <code>Hello, World!</code>
-								</td>
 								<td></td>
 							</tr>
 						</tbody>
@@ -505,32 +475,6 @@ See [int2str.S](examples/int2str.S)
 									</table>
 								</td>
 							</tr>
-							<tr>
-								<td>
-									<code>cc/</code>
-								</td>
-								<td>Dependencies that depend on C (Libraries, functions, etc...) for programs</td>
-								<td>
-									<table>
-									<thead>
-										<tr>
-											<th>Program</th>
-											<th>Usage</th>
-											<th>Description</th>
-											<th>Files</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td></td>
-											<td></td>
-											<td></td>
-											<td></td>
-										</tr>
-									</tbody>
-									</table>
-								</td>
-							</tr>
 						</tbody>
 						</table>
 					</td>
@@ -596,36 +540,6 @@ See [int2str.S](examples/int2str.S)
 				</tr>
 				<tr>
 					<td>
-						<code>cc/</code>
-					</td>
-					<td>Programs that depend on C (Libraries, functions, etc...)</td>
-					<td>
-						<table>
-						<thead>
-							<tr>
-								<th>Program</th>
-								<th>Usage</th>
-								<th>Description</th>
-								<th>Files</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<code>printf.S</code>
-								</td>
-								<td></td>
-								<td>
-									Depends on printf, prints <code>Hello, World!</code>
-								</td>
-								<td></td>
-							</tr>
-						</tbody>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
 						<code>deps/</code>
 					</td>
 					<td>Global Dependencies for programs, they are usually symlinked to here.</td>
@@ -665,11 +579,156 @@ See [int2str.S](examples/int2str.S)
 									</table>
 								</td>
 							</tr>
+						</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<td>C</td>
+			<td>
+				Assembly programs that uses <code>C</code>
+			</td>
+		</td>
+		<td>
+			<table>
+			<thead>
+				<tr>
+					<th>Source</th>
+					<th>Description</th>
+					<th>Files</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>
+						<code>ARM</code>
+					</td>
+					<td>C programs for ARM</td>
+					<td>
+						<table>
+						<thead>
+							<tr>
+								<th>Source</th>
+								<th>Description</th>
+								<th>Files</th>
+							</tr>
+						</thead>
+						<tbody>
 							<tr>
 								<td>
-									<code>cc/</code>
+									<code>c/</code>
 								</td>
-								<td>Dependencies that depend on C (Libraries, functions, etc...) for programs</td>
+								<td>Programs that are compiled and linked.</td>
+								<td>
+									<table>
+									<thead>
+										<tr>
+											<th>Program</th>
+											<th>Usage</th>
+											<th>Description</th>
+											<th>Files</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<code>hello.S</code>
+											</td>
+											<td></td>
+											<td>
+												Uses <code>printf</code>; printf <code>Hello, World!</code>
+											</td>
+											<td></td>
+										</tr>
+									</tbody>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<code>deps/</code>
+								</td>
+								<td>Global Dependencies for programs, they are usually symlinked to here.</td>
+								<td>
+									<table>
+									<thead>
+										<tr>
+											<th>Program</th>
+											<th>Usage</th>
+											<th>Description</th>
+											<th>Files</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+										</tr>
+									</tbody>
+									</table>
+								</td>
+							</tr>
+						</tbody>
+						</table>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<code>AArch64</code>
+					</td>
+					<td>C programs for AArch64</td>
+					<td>
+						<table>
+						<thead>
+							<tr>
+								<th>Source</th>
+								<th>Description</th>
+								<th>Files</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>
+									<code>c/</code>
+								</td>
+								<td>Programs that are compiled and linked.</td>
+								<td>
+									<table>
+									<thead>
+										<tr>
+											<th>Program</th>
+											<th>Usage</th>
+											<th>Description</th>
+											<th>Files</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												<code>hello.S</code>
+											</td>
+											<td></td>
+											<td>
+												Uses <code>printf</code>; printf <code>Hello, World!</code>
+											</td>
+											<td></td>
+										</tr>
+									</tbody>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<code>deps/</code>
+								</td>
+								<td>Global Dependencies for programs, they are usually symlinked to here.</td>
 								<td>
 									<table>
 									<thead>

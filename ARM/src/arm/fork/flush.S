@@ -1,1 +1,1 @@
-../../deps/arm/flush.S
+../../deps/flush.S
