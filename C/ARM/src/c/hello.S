@@ -1,3 +1,4 @@
+.code 32 // arm
 .syntax unified
 .extern printf
 
