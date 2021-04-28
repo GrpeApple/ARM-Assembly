@@ -653,7 +653,7 @@ See [int2str.S](examples/ARM/deps/int2str.S)
 											</td>
 											<td></td>
 											<td>
-												Uses <code>printf</code>; outputs <code>Hello, World!</code>
+												Uses <code>puts</code>; outputs <code>Hello, World!</code>
 											</td>
 											<td></td>
 										</tr>
@@ -728,7 +728,7 @@ See [int2str.S](examples/ARM/deps/int2str.S)
 											</td>
 											<td></td>
 											<td>
-												Uses <code>printf</code>; outputs <code>Hello, World!</code>
+												Uses <code>puts</code>; outputs <code>Hello, World!</code>
 											</td>
 											<td></td>
 										</tr>

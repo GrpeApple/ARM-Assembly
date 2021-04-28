@@ -4,7 +4,7 @@
 
 .section .data
 	.balign 0x08
-	string: .asciz "Hello, World!\n"
+	string: .asciz "Hello, World!"
 
 .section .text
 
@@ -13,6 +13,6 @@
 		push {lr}
 
 		ldr r0, =string
-		bl printf
+		bl puts
 
 		pop {pc}
