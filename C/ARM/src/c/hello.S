@@ -15,4 +15,5 @@
 		ldr r0, =string
 		bl puts
 
+		mov r0, #0x00 // exit status
 		pop {pc}

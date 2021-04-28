@@ -11,4 +11,5 @@
 		bl puts
 
 		ldp x24, x30, [sp], #0x10 // 16; link register
+		mov w0, wzr // exit status
 		ret // return from link register
