@@ -639,6 +639,16 @@ See [int2str.S](examples/ARM/deps/int2str.S)
 									<tbody>
 										<tr>
 											<td>
+												<code>E.S</code>
+											</td>
+											<td></td>
+											<td>
+												Uses <code>putchar</code>; outputs <code>E</code> infinitely
+											</td>
+											<td></td>
+										</tr>
+										<tr>
+											<td>
 												<code>hello.S</code>
 											</td>
 											<td></td>
