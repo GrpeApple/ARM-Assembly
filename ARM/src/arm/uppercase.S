@@ -8,6 +8,7 @@
 .syntax unified
 
 .section .data
+
 	.balign 0x10 // 16
 	input_msg: .asciz "Input a string to uppercase on: "
 	.balign 0x08

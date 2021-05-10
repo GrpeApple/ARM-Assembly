@@ -6,12 +6,15 @@
 .syntax unified
 
 .section .data
+
 	.balign 0x08
 	argv_string: .asciz "Argument Value: "
 	.balign 0x08
 	argc_string: .asciz "Argument Count: "
+
 	.balign 0x10 // 16
 	error_string: .asciz "Error: Unknown.\nTerminating....\n"
+
 	.balign 0x02
 	separator: .asciz "\n"
 	.balign 0x02

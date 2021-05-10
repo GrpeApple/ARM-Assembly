@@ -2,13 +2,16 @@
 .syntax unified
 
 .section .data
+
 	.balign 0x08
 	prompt: .asciz "Enter anything: "
 	.balign 0x08
 	flush_prompt: .asciz "Flushed buffer.\n"
 
 .section .bss
-	buffer: .space 1
+
+	.balign 0x01
+	buffer: .space 0x01
 
 .section .text
 

@@ -8,6 +8,7 @@
 .syntax unified
 
 .section .data
+
 	.balign 0x02
 	for_string: .asciz "Loop: "
 

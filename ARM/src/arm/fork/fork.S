@@ -6,6 +6,7 @@
 .syntax unified
 
 .section .data
+
 	/* I spent my time making the length fit. (Including this comment.) */
 	confirm:
 	.balign 0x10 // 16
@@ -27,6 +28,7 @@
 	fork: .asciz "Initializing fork bomb.........\n"
 
 .section .bss
+
 	.balign 0x01
 	input: .space 0x01
 

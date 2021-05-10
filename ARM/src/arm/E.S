@@ -2,6 +2,7 @@
 .syntax unified
 
 .section .data
+
 	.balign 0x01
 	string: .asciz "E"
 

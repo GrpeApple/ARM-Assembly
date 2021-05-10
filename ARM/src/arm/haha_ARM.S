@@ -2,6 +2,7 @@
 .syntax unified
 
 .section .data
+
 	.balign 0x08
 	string: .asciz "haha, ARM.\n"
 
