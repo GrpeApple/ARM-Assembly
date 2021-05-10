@@ -1,6 +1,6 @@
 # Contribute
 ## Questions
-* Why was this `CONTRIBUTE.md` file created, and why?
+* Why was this `CONTRIBUTING.md` file created, and why?
   * To contribute to the main repository obviously; why not?
 ## Branches
 <table>
@@ -39,3 +39,20 @@
 3. If you are ready, pull request on the main repository (`test`) from your forked repository branch (`test`).
 4. Wait, you need some patience.
 5. Your modified program is now on the main repo (`test`)
+
+## Formatting
+
+*I have still more work on discussing this, but you can ask to format.*
+
+<table>
+<thead>
+	<tr>
+		<th>Assembly</th>
+		<th></th>
+	</tr>
+</thead>
+<tbody>
+	<tr>
+		<td></td>
+	</tr>
+</tbody>
