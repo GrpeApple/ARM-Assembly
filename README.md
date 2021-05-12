@@ -295,6 +295,14 @@ Assembly programs
 							</tr>
 							<tr>
 								<td>
+									<code>open.S</code>
+								</td>
+								<td></td>
+								<td>Read and output the binary of itself.</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>
 									<code>rm.S</code>
 								</td>
 								<td>
