@@ -19,7 +19,7 @@
 	_read:
 		mov r7, #0x03 // read syscall
 		mov r0, r3 // file descriptor
-		mov r1, sp // buffer; A stack can only contain a word (4 bytes).
+		mov r1, sp // buffer; stack is 4 byte aligned.
 		mov r2, #0x04 // buffer count
 		swi #0x00 // execute syscall
 
